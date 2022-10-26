@@ -1,5 +1,22 @@
 # ninja log v5
-1	563	6884075377542267	CMakeFiles/MegabyteStore.dir/main.cpp.obj	1ddb812dd90cecb8
-565	818	6884075380038972	MegabyteStore.exe	b248f6c3c59b9635
-4	458	6884075746847600	CMakeFiles/MegabyteStore.dir/main.cpp.obj	1ddb812dd90cecb8
-459	649	6884075748964067	MegabyteStore.exe	b248f6c3c59b9635
+4	600	6885053578431281	CMakeFiles/MegabyteStore.dir/Internals/MenuSystem/MenuInfoItem.cpp.obj	f85d8a9585d0dff1
+12	805	6885053580521019	CMakeFiles/MegabyteStore.dir/main.cpp.obj	45625509866fa103
+1	264	6885053605183035	build.ninja	26fd57ecebe52a8e
+16	764	6885053580107568	CMakeFiles/MegabyteStore.dir/Internals/MenuSystem/MenuBuilder.cpp.obj	d3d626cb2d35d3db
+752	1074	6884954743611677	MegabyteStore.exe	d4cc39b96bfb61a0
+21	641	6885053578872657	CMakeFiles/MegabyteStore.dir/MenuCommands/MenuCommand1.cpp.obj	3c9e26ddae7c2359
+25	165	6884954734568691	CMakeFiles/MegabyteStore.dir/Internals/MenuSystem/Menu.cpp.obj	3805c83e3be16c56
+13	613	6884954739046224	CMakeFiles/MegabyteStore.dir/Internals/MenuSystem/MenuInfo.cpp.obj	65eba32e8839e7a2
+5	687	6885053922708963	CMakeFiles/MegabyteStore.dir/Internals/MenuSystem/MenuBuilder.cpp.obj	d3d626cb2d35d3db
+12	704	6885053922944258	CMakeFiles/MegabyteStore.dir/main.cpp.obj	45625509866fa103
+9	641	6885056563487195	CMakeFiles/MegabyteStore.dir/main.cpp.obj	45625509866fa103
+12	662	6885056563725593	CMakeFiles/MegabyteStore.dir/Internals/MenuSystem/Menu.cpp.obj	3f34d94f4ab34272
+4	705	6885056564164949	CMakeFiles/MegabyteStore.dir/Internals/MenuSystem/MenuBuilder.cpp.obj	d3d626cb2d35d3db
+705	905	6885056566129360	MegabyteStore.exe	1881676dbd6695bb
+4	642	6885059466029894	CMakeFiles/MegabyteStore.dir/main.cpp.obj	45625509866fa103
+8	699	6885059466612501	CMakeFiles/MegabyteStore.dir/Internals/MenuSystem/Menu.cpp.obj	3f34d94f4ab34272
+700	873	6885059468313840	MegabyteStore.exe	1881676dbd6695bb
+7	560	6885059587898183	CMakeFiles/MegabyteStore.dir/Internals/MenuSystem/Menu.cpp.obj	3f34d94f4ab34272
+561	696	6885059589231621	MegabyteStore.exe	1881676dbd6695bb
+4	480	6885061262165788	CMakeFiles/MegabyteStore.dir/main.cpp.obj	45625509866fa103
+480	665	6885061263959676	MegabyteStore.exe	1881676dbd6695bb
