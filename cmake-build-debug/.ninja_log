@@ -1,5 +1,17 @@
 # ninja log v5
-1	563	6884075377542267	CMakeFiles/MegabyteStore.dir/main.cpp.obj	1ddb812dd90cecb8
-565	818	6884075380038972	MegabyteStore.exe	b248f6c3c59b9635
-4	458	6884075746847600	CMakeFiles/MegabyteStore.dir/main.cpp.obj	1ddb812dd90cecb8
-459	649	6884075748964067	MegabyteStore.exe	b248f6c3c59b9635
+3	290	6885883123863941	CMakeFiles/MegabyteStore.dir/main.cpp.obj	1e7e821167aed3f7
+3	356	6885846540870048	CMakeFiles/MegabyteStore.dir/Models/Hardware.cpp.obj	4bfe3fa5d9baf181
+290	381	6885883124749856	MegabyteStore.exe	39315465144b5fa2
+1	59	6885759358527946	CMakeFiles/MegabyteStore.dir/Models/Produto.cpp.obj	d27ddf4c50facce
+5	312	6885849440535297	CMakeFiles/MegabyteStore.dir/Models/PlacaMae.cpp.obj	efc398e0e2d3a3a3
+24	126	6885932282251892	CMakeFiles/MegabyteStore.dir/Models/CPU.cpp.obj	be7c2ea8d3037433
+31	563	6885932286622053	CMakeFiles/MegabyteStore.dir/Models/Socket.cpp.obj	61b7e6e0cac45934
+19	621	6885932287211363	CMakeFiles/MegabyteStore.dir/Models/Hardware.cpp.obj	4bfe3fa5d9baf181
+10	662	6885932287283330	CMakeFiles/MegabyteStore.dir/main.cpp.obj	1e7e821167aed3f7
+41	663	6885932287464848	CMakeFiles/MegabyteStore.dir/Models/PlacaMae.cpp.obj	efc398e0e2d3a3a3
+663	875	6885932289663085	MegabyteStore.exe	8c298ee4be4b9d49
+6	573	6885935976221612	CMakeFiles/MegabyteStore.dir/main.cpp.obj	1e7e821167aed3f7
+574	756	6885935978016605	MegabyteStore.exe	8c298ee4be4b9d49
+8	303	6886006209054907	CMakeFiles/MegabyteStore.dir/Models/CPU.cpp.obj	be7c2ea8d3037433
+4	307	6886006209085508	CMakeFiles/MegabyteStore.dir/main.cpp.obj	1e7e821167aed3f7
+307	412	6886006210121866	MegabyteStore.exe	8c298ee4be4b9d49

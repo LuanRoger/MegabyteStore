@@ -1,21 +1,26 @@
 #include <iostream>
-
+#include "Models/Produto.h"
+#include "Models/Hardware.h"
+#include "Models/PlacaMae.h"
+#include "Models/CPU.h"
 using namespace std;
 
 void OP1() {
-    cout << "Opção 1" << endl;
+    cout << "Opcao 1" << endl;
+
+    CPU *Cpu1 = new CPU("AM4", 6, 12, 3.7, 4.6, "AMD", "100-100000065BOX", 65, 1, 60, 1199.99);
+    Cpu1->View();
+
 }
 void OP2() {
-    cout << "Opção 2" << endl;
+    cout << "Opcao 2" << endl;
 }
 void OP3() {
-    cout << "Opção 3" << endl;
+    cout << "Opcao 3" << endl;
 }
 
 int main() {
-    cout << "╔══════════════════╗" << endl;
-    cout << "║  Megabyte Store  ║" << endl;
-    cout << "╚══════════════════╝" << endl;
+    cout << "  Megabyte Store  " << endl;
 
     bool running = true;
     while (running) {

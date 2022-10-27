@@ -39,7 +39,7 @@
 				{
 					"directoryIndex" : 0,
 					"id" : "MegabyteStore::@6890427a1f51a3e7e1df",
-					"jsonFile" : "target-MegabyteStore-Debug-649fde0ec5eba0461a03.json",
+					"jsonFile" : "target-MegabyteStore-Debug-d7d82f4451b1b85de966.json",
 					"name" : "MegabyteStore",
 					"projectIndex" : 0
 				}
@@ -49,8 +49,8 @@
 	"kind" : "codemodel",
 	"paths" : 
 	{
-		"build" : "C:/Users/luanr/Documents/Jobs/cpp/MegabyteStore/cmake-build-debug",
-		"source" : "C:/Users/luanr/Documents/Jobs/cpp/MegabyteStore"
+		"build" : "C:/Users/Vinicius/Desktop/MegabyteStore/cmake-build-debug",
+		"source" : "C:/Users/Vinicius/Desktop/MegabyteStore"
 	},
 	"version" : 
 	{
