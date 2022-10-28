@@ -3,13 +3,22 @@
 #include "Models/Hardware.h"
 #include "Models/PlacaMae.h"
 #include "Models/CPU.h"
+#include "Models/RAMMemory.h"
+#include "Models/GPU.h"
 using namespace std;
 
 void OP1() {
     cout << "Opcao 1" << endl;
 
-    CPU *Cpu1 = new CPU("AM4", 6, 12, 3.7, 4.6, "AMD", "100-100000065BOX", 65, 1, 60, 1199.99);
+    CPU *Cpu1 = new CPU("AM4", 6, 12, 3.7, 4.6, "AMD", "100-100000065BOX", 1, 60, 1199.99);
     Cpu1->View();
+    cout << "-------" << endl;
+    RAMMemory *RAM1 = new RAMMemory("DDR4", 3200, 8, "HyperX", "KF432C16BBA/8", 2, 45, 259.99);
+    RAM1->View();
+    cout << "-------" << endl;
+    GPU *GPU1 = new GPU("NVIDIA GeForce RTX 3060 Ti", 4864, 8, "GDDR6", 14, "MSI", "912-V397-234", 2, 10, 3799.99);
+    GPU1->View();
+    cout << "-------" << endl;
 
 }
 void OP2() {

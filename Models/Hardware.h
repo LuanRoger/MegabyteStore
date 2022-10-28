@@ -14,18 +14,14 @@ class Hardware : public Produto{
 protected:
     string marca;
     string modelo;
-    double tdp;
 public:
-    Hardware(string marca, string modelo, double tdp, int id, int quantidade, double valor);
+    Hardware(string marca, string modelo, int id, int quantidade, double valor);
 
     string getMarca();
     void setMarca(string novaMarca);
 
     string getModelo();
     void setModelo(string novoModelo);
-
-    double getTdp();
-    void setTdp(double novoTdp);
 
     virtual void View();
 };

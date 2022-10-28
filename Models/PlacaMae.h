@@ -16,7 +16,7 @@ private:
     string memorySupport;
 
 public:
-    PlacaMae(string socket, string chipset, string memorySupport, string marca, string modelo, double tdp, int id, int quantidade, double valor);
+    PlacaMae(string socket, string chipset, string memorySupport, string marca, string modelo, int id, int quantidade, double valor);
 
     string getChipset();
     void setChipset(string novoChipset);

@@ -4,10 +4,9 @@
 
 #include "Hardware.h"
 
-Hardware::Hardware(string marca, string modelo, double tdp, int id, int quantidade, double valor) : Produto(id, quantidade, valor){
+Hardware::Hardware(string marca, string modelo, int id, int quantidade, double valor) : Produto(id, quantidade, valor){
     setMarca(marca);
     setModelo(modelo);
-    setTdp(tdp);
 }
 
 string Hardware::getMarca() {
@@ -26,13 +25,6 @@ void Hardware::setModelo(string novoModelo) {
     modelo = novoModelo;
 }
 
-double Hardware::getTdp() {
-    return tdp;
-}
-
-void Hardware::setTdp(double novoTdp) {
-    tdp = novoTdp;
-}
 
 void Hardware::View() {
     cout << "ID:" << id << endl;
@@ -40,5 +32,4 @@ void Hardware::View() {
     cout << "Valor:" << valor << endl;
     cout << "Marca:" << marca << endl;
     cout << "Modelo:" << modelo << endl;
-    cout << "Tdp:" << tdp << endl;
 }

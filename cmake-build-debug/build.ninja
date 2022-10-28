@@ -85,6 +85,18 @@ build CMakeFiles/MegabyteStore.dir/Models/Socket.cpp.obj: CXX_COMPILER__Megabyte
   OBJECT_DIR = CMakeFiles\MegabyteStore.dir
   OBJECT_FILE_DIR = CMakeFiles\MegabyteStore.dir\Models
 
+build CMakeFiles/MegabyteStore.dir/Models/RAMMemory.cpp.obj: CXX_COMPILER__MegabyteStore_Debug C$:/Users/Vinicius/Desktop/MegabyteStore/Models/RAMMemory.cpp || cmake_object_order_depends_target_MegabyteStore
+  DEP_FILE = CMakeFiles\MegabyteStore.dir\Models\RAMMemory.cpp.obj.d
+  FLAGS = -g -std=gnu++14
+  OBJECT_DIR = CMakeFiles\MegabyteStore.dir
+  OBJECT_FILE_DIR = CMakeFiles\MegabyteStore.dir\Models
+
+build CMakeFiles/MegabyteStore.dir/Models/GPU.cpp.obj: CXX_COMPILER__MegabyteStore_Debug C$:/Users/Vinicius/Desktop/MegabyteStore/Models/GPU.cpp || cmake_object_order_depends_target_MegabyteStore
+  DEP_FILE = CMakeFiles\MegabyteStore.dir\Models\GPU.cpp.obj.d
+  FLAGS = -g -std=gnu++14
+  OBJECT_DIR = CMakeFiles\MegabyteStore.dir
+  OBJECT_FILE_DIR = CMakeFiles\MegabyteStore.dir\Models
+
 
 # =============================================================================
 # Link build statements for EXECUTABLE target MegabyteStore
@@ -93,7 +105,7 @@ build CMakeFiles/MegabyteStore.dir/Models/Socket.cpp.obj: CXX_COMPILER__Megabyte
 #############################################
 # Link the executable MegabyteStore.exe
 
-build MegabyteStore.exe: CXX_EXECUTABLE_LINKER__MegabyteStore_Debug CMakeFiles/MegabyteStore.dir/main.cpp.obj CMakeFiles/MegabyteStore.dir/Models/Produto.cpp.obj CMakeFiles/MegabyteStore.dir/Models/Hardware.cpp.obj CMakeFiles/MegabyteStore.dir/Models/PlacaMae.cpp.obj CMakeFiles/MegabyteStore.dir/Models/CPU.cpp.obj CMakeFiles/MegabyteStore.dir/Models/Socket.cpp.obj
+build MegabyteStore.exe: CXX_EXECUTABLE_LINKER__MegabyteStore_Debug CMakeFiles/MegabyteStore.dir/main.cpp.obj CMakeFiles/MegabyteStore.dir/Models/Produto.cpp.obj CMakeFiles/MegabyteStore.dir/Models/Hardware.cpp.obj CMakeFiles/MegabyteStore.dir/Models/PlacaMae.cpp.obj CMakeFiles/MegabyteStore.dir/Models/CPU.cpp.obj CMakeFiles/MegabyteStore.dir/Models/Socket.cpp.obj CMakeFiles/MegabyteStore.dir/Models/RAMMemory.cpp.obj CMakeFiles/MegabyteStore.dir/Models/GPU.cpp.obj
   FLAGS = -g
   LINK_LIBRARIES = -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32
   OBJECT_DIR = CMakeFiles\MegabyteStore.dir

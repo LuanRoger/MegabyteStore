@@ -18,19 +18,24 @@ private:
     double boostMaximumClock;
 
 public:
-    CPU(string socket, int cores, int threads, double basicClock, double boostMaximumClock, string marca, string modelo, double tdp, int id, int quantidade, double valor);
+    CPU(string socket, int cores, int threads, double basicClock, double boostMaximumClock, string marca, string modelo, int id, int quantidade, double valor);
 
     string getSocket();
+    void setSocket(string newSocket);
 
     int getCores();
+    void setCores(int newCores);
 
     int getThreads();
+    void setThreads(int newThreads);
 
     double getBasicClock();
+    void setBasicClock(double newBasicClock);
 
     double getBoostMaximumClock();
+    void setBoostMaximumClock(double newBoostMaximumClock);
 
-    virtual void View();
+    void View() override;
 
 };
 
