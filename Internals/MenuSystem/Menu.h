@@ -6,26 +6,32 @@
 #define MEGABYTESTORE_MENU_H
 
 #include "string"
-#include "map"
+#include "vector"
 #include "string"
 #include "iostream"
 #include "MenuInfoItem.h"
 
-namespace MenuSystem {
-    //TODO: Made only one. There is another one in MenuBuilder.h
-    typedef std::map<int, MenuInfoItem *> MenuMapping;
+using namespace std;
 
+namespace MenuSystem {
     class Menu {
     private:
         std::string* header;
-        MenuMapping* menuMapping;
+        vector<MenuInfoItem*>* menuMapping;
         bool running;
+        int escapeOptionIndex;
 
         void RunMenu();
         void PrintOptions();
 
+        void InjectCommandOnEscapeOption();
+
     public:
-        Menu(MenuMapping *menuMapping, std::string *header);
+        Menu(std::string *header);
+
+        void SetHeader(std::string* header);
+        void AddMenu(MenuInfoItem* menuInfo);
+        void AddEscapeOption(MenuInfoItem* menuInfo);
 
         void Start();
         void Stop();

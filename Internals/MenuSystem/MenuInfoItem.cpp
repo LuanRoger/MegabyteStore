@@ -6,16 +6,15 @@
 
 namespace MenuSystem {
 
-    MenuInfoItem::MenuInfoItem(std::string *text, MenuSystem::IMenuCommand *menuCommand) {
+    MenuInfoItem::MenuInfoItem(int optionNumber, std::string *text, MenuSystem::IMenuCommand *menuCommand, bool escapeOption) {
+        this->optionNumber = optionNumber;
         this->text = text;
         this->menuCommand = menuCommand;
-    }
-    MenuInfoItem::~MenuInfoItem() {
-        delete text;
+        this->escapeOption = escapeOption;
     }
 
-    void MenuInfoItem::SetSubMenu(MenuSystem::MenuInfoItem *subMenu) {
-
+    int MenuInfoItem::getOptionNumber() {
+        return optionNumber;
     }
 
     std::string MenuInfoItem::getText() {
@@ -24,5 +23,11 @@ namespace MenuSystem {
 
     IMenuCommand* MenuInfoItem::getCommand() {
         return menuCommand;
+    }
+    void MenuInfoItem::setCommand(IMenuCommand* command) {
+        this->menuCommand = command;
+    }
+    bool MenuInfoItem::isEscapeOption() const {
+        return escapeOption;
     }
 } // MenuSystem
