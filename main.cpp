@@ -1,20 +1,21 @@
 #include <iostream>
 
-using namespace std;
-
-#include "Internals/MenuSystem/MenuBuilder.h"
 #include "MenuCommands/MenuCommand1.h"
+#include "Internals/MenuSystem/Menu.h"
 
+using namespace std;
 using namespace MenuSystem;
 using namespace MenuCommand;
 
 int main() {
-    MenuBuilder* menuBuilder = new MenuBuilder();
-    menuBuilder->SetHeader(new std::string("Megabyte Store"));
-    menuBuilder->AddMenu(1, new MenuInfoItem(new std::string("Opção 1"), new MenuCommand1()));
-
-    Menu* menu = menuBuilder->Build();
-    delete menuBuilder;
+    Menu* menu = new Menu(new string("MegabyteStore"));
+    menu->AddMenu(new MenuInfoItem(1,
+                                   new string("Opcao 1"),
+                                   new MenuCommand1()));
+    menu->AddEscapeOption(new MenuInfoItem(0,
+                                           new string("Sair"),
+                                           nullptr,
+                                           true));
 
     menu->Start();
 
