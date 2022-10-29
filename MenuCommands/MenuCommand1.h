@@ -5,7 +5,7 @@
 #ifndef MEGABYTESTORE_MENUCOMMAND1_H
 #define MEGABYTESTORE_MENUCOMMAND1_H
 
-#include "../Internals/MenuSystem/IMenuCommand.h"
+#include "../Internals/MenuSystem/Commands/IMenuCommand.h"
 
 namespace MenuCommand {
     class MenuCommand1 : public MenuSystem::IMenuCommand {

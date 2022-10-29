@@ -6,7 +6,7 @@
 #define MEGABYTESTORE_EXITMENUCOMMAND_H
 
 #include "IMenuCommand.h"
-#include "Menu.h"
+#include "../Menu.h"
 
 namespace MenuSystem {
 

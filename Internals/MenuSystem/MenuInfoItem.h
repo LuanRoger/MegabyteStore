@@ -2,7 +2,7 @@
 #define MEGABYTESTORE_MENUINFOITEM_H
 
 #include "string"
-#include "IMenuCommand.h"
+#include "Commands/IMenuCommand.h"
 
 namespace MenuSystem {
 

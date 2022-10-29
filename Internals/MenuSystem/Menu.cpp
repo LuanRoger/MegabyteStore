@@ -3,7 +3,7 @@
 //
 
 #include "Menu.h"
-#include "ExitMenuCommand.h"
+#include "Commands/ExitMenuCommand.h"
 
 namespace MenuSystem {
     Menu::Menu(std::string* header) {

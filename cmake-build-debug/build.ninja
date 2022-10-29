@@ -73,11 +73,17 @@ build CMakeFiles/MegabyteStore.dir/MenuCommands/MenuCommand1.cpp.obj: CXX_COMPIL
   OBJECT_DIR = CMakeFiles\MegabyteStore.dir
   OBJECT_FILE_DIR = CMakeFiles\MegabyteStore.dir\MenuCommands
 
-build CMakeFiles/MegabyteStore.dir/Internals/MenuSystem/ExitMenuCommand.cpp.obj: CXX_COMPILER__MegabyteStore_Debug C$:/Users/luanr/Documents/Jobs/cpp/MegabyteStore/Internals/MenuSystem/ExitMenuCommand.cpp || cmake_object_order_depends_target_MegabyteStore
-  DEP_FILE = CMakeFiles\MegabyteStore.dir\Internals\MenuSystem\ExitMenuCommand.cpp.obj.d
+build CMakeFiles/MegabyteStore.dir/Internals/MenuSystem/Commands/ExitMenuCommand.cpp.obj: CXX_COMPILER__MegabyteStore_Debug C$:/Users/luanr/Documents/Jobs/cpp/MegabyteStore/Internals/MenuSystem/Commands/ExitMenuCommand.cpp || cmake_object_order_depends_target_MegabyteStore
+  DEP_FILE = CMakeFiles\MegabyteStore.dir\Internals\MenuSystem\Commands\ExitMenuCommand.cpp.obj.d
   FLAGS = -g
   OBJECT_DIR = CMakeFiles\MegabyteStore.dir
-  OBJECT_FILE_DIR = CMakeFiles\MegabyteStore.dir\Internals\MenuSystem
+  OBJECT_FILE_DIR = CMakeFiles\MegabyteStore.dir\Internals\MenuSystem\Commands
+
+build CMakeFiles/MegabyteStore.dir/Internals/MenuSystem/Commands/OpenSubmenuCommand.cpp.obj: CXX_COMPILER__MegabyteStore_Debug C$:/Users/luanr/Documents/Jobs/cpp/MegabyteStore/Internals/MenuSystem/Commands/OpenSubmenuCommand.cpp || cmake_object_order_depends_target_MegabyteStore
+  DEP_FILE = CMakeFiles\MegabyteStore.dir\Internals\MenuSystem\Commands\OpenSubmenuCommand.cpp.obj.d
+  FLAGS = -g
+  OBJECT_DIR = CMakeFiles\MegabyteStore.dir
+  OBJECT_FILE_DIR = CMakeFiles\MegabyteStore.dir\Internals\MenuSystem\Commands
 
 
 # =============================================================================
@@ -87,7 +93,7 @@ build CMakeFiles/MegabyteStore.dir/Internals/MenuSystem/ExitMenuCommand.cpp.obj:
 #############################################
 # Link the executable MegabyteStore.exe
 
-build MegabyteStore.exe: CXX_EXECUTABLE_LINKER__MegabyteStore_Debug CMakeFiles/MegabyteStore.dir/main.cpp.obj CMakeFiles/MegabyteStore.dir/Internals/MenuSystem/MenuInfoItem.cpp.obj CMakeFiles/MegabyteStore.dir/Internals/MenuSystem/Menu.cpp.obj CMakeFiles/MegabyteStore.dir/MenuCommands/MenuCommand1.cpp.obj CMakeFiles/MegabyteStore.dir/Internals/MenuSystem/ExitMenuCommand.cpp.obj
+build MegabyteStore.exe: CXX_EXECUTABLE_LINKER__MegabyteStore_Debug CMakeFiles/MegabyteStore.dir/main.cpp.obj CMakeFiles/MegabyteStore.dir/Internals/MenuSystem/MenuInfoItem.cpp.obj CMakeFiles/MegabyteStore.dir/Internals/MenuSystem/Menu.cpp.obj CMakeFiles/MegabyteStore.dir/MenuCommands/MenuCommand1.cpp.obj CMakeFiles/MegabyteStore.dir/Internals/MenuSystem/Commands/ExitMenuCommand.cpp.obj CMakeFiles/MegabyteStore.dir/Internals/MenuSystem/Commands/OpenSubmenuCommand.cpp.obj
   FLAGS = -g
   LINK_LIBRARIES = -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32
   OBJECT_DIR = CMakeFiles\MegabyteStore.dir
