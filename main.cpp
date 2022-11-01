@@ -1,45 +1,33 @@
 #include <iostream>
 
-using namespace std;
+#include "MenuCommands/MenuCommand1.h"
+#include "Internals/MenuSystem/Menu.h"
+#include "Internals/MenuSystem/Commands/OpenSubmenuCommand.h"
 
-void OP1() {
-    cout << "Opção 1" << endl;
-}
-void OP2() {
-    cout << "Opção 2" << endl;
-}
-void OP3() {
-    cout << "Opção 3" << endl;
-}
+using namespace std;
+using namespace MenuSystem;
+using namespace MenuCommand;
 
 int main() {
-    cout << "╔══════════════════╗" << endl;
-    cout << "║  Megabyte Store  ║" << endl;
-    cout << "╚══════════════════╝" << endl;
+    Menu* menu = new Menu(new string("MegabyteStore"));
 
-    bool running = true;
-    while (running) {
-        int choice;
-        cout << "[ 1 ] - Ver catalogo." << endl;
-        cout << "[ 2 ] - Ver carrinho." << endl;
-        cout << "[ 0 ] - Sair." << endl;
+    menu->AddMenu(new MenuInfoItem(1,
+                                   new string("Opcao 1"),
+                                   new MenuCommand1()));
 
-        cin >> choice;
+    Menu* submenu1 = new Menu(new string("Submenu"));
+    submenu1->AddEscapeOption(new MenuInfoItem(0, new string("Voltar"),
+                                               nullptr, true));
+    menu->AddMenu(new MenuInfoItem(2,
+                                   new string("Abrir submenu"),
+                                   new OpenSubmenuCommand(submenu1)));
 
-        switch (choice) {
-            case 1:
-                OP1();
-                break;
-            case 2:
-                OP2();
-                break;
-            case 0:
-                running = false;
-                break;
-            default:
-                cout << "Está não é uma opção valida." << endl;
-        }
-    }
+    menu->AddEscapeOption(new MenuInfoItem(0,
+                                           new string("Sair"),
+                                           nullptr,
+                                           true));
+
+    menu->Start();
 
     return 0;
 }
