@@ -7,26 +7,37 @@
 
 namespace MenuSystem {
     Menu::Menu(std::string* header) {
-        this->menuMapping = new std::vector<MenuInfoItem*>;
+        this->menuMapping = new vector<MenuInfoItem*>;
         this->header = header;
     }
+    Menu::Menu(string* header, string* content) {
+        this->menuMapping = new vector<MenuInfoItem*>;
+        this->header = header;
+        this->content = content;
+    }
 
+    void Menu::PrintHeaderContent() {
+        cout << *header << endl;
+
+        if(content != nullptr)
+            cout << *content << endl;
+    }
     void Menu::PrintOptions() {
         for (MenuInfoItem* menuInfoItem : *menuMapping) {
-            std::string menuOption =  "[ " + std::to_string(menuInfoItem->getOptionNumber()) + " ] - " +
+            string menuOption =  "[ " + std::to_string(menuInfoItem->getOptionNumber()) + " ] - " +
                     menuInfoItem->getText();
-            std::cout << menuOption << std::endl;
+            cout << menuOption << endl;
         }
     }
     void Menu::RunMenu() {
-        std::cout << *header << std::endl;
+        PrintHeaderContent();
 
         while (running) {
             int choice;
 
             PrintOptions();
 
-            std::cin >> choice;
+            cin >> choice;
 
             IMenuCommand* menuCommand = nullptr;
             for(MenuInfoItem* menuInfoItem : *menuMapping) {
@@ -60,6 +71,9 @@ namespace MenuSystem {
 
     void Menu::SetHeader(std::string *header) {
         this->header = header;
+    }
+    void Menu::SetContent(string* content) {
+        this->content = content;
     }
 
     void Menu::Start() {

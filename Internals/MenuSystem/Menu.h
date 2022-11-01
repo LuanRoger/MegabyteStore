@@ -16,20 +16,24 @@ using namespace std;
 namespace MenuSystem {
     class Menu {
     private:
-        std::string* header;
+        string* header;
+        string* content = nullptr;
         vector<MenuInfoItem*>* menuMapping;
         bool running;
         int escapeOptionIndex;
 
         void RunMenu();
+        void PrintHeaderContent();
         void PrintOptions();
 
         void InjectCommandOnEscapeOption();
 
     public:
-        Menu(std::string *header);
+        Menu(string* header);
+        Menu(string* header, string* content);
 
-        void SetHeader(std::string* header);
+        void SetHeader(string* header);
+        void SetContent(string* content);
         void AddMenu(MenuInfoItem* menuInfo);
         void AddEscapeOption(MenuInfoItem* menuInfo);
 
