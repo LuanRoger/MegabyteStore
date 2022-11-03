@@ -16,9 +16,9 @@ private:
     int cudaCores;
     int VRAMCapacity;
     string VRAMType;
-    int VRAMVelocity;
+    int VRAMSpeed;
 public:
-    GPU(string chipset, int cudaCores, int VRAMCapacity, string VRAMType, int VRAMVelocity, string marca, string modelo, int id, int quantidade, double valor);
+    GPU(string chipset, int cudaCores, int VRAMCapacity, string VRAMType, int VRAMSpeed, string marca, string modelo, int id, int quantidade, double valor);
 
     string getChipset();
     void setChipset(string newChipset);
@@ -32,10 +32,10 @@ public:
     string getVRAMType();
     void setVRAMType(string newVRAMType);
 
-    int getVRAMVelocity();
-    void setVRAMVelocity(int newVRAMVelocity);
+    int getVRAMSpeed();
+    void setVRAMSpeed(int newVRAMSpeed);
 
-    virtual void View();
+    void View() override;
 
 };
 

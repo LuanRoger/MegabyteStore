@@ -5,6 +5,7 @@
 #include "Models/CPU.h"
 #include "Models/RAMMemory.h"
 #include "Models/GPU.h"
+#include "Models/StorageUnit.h"
 using namespace std;
 
 void OP1() {
@@ -19,6 +20,9 @@ void OP1() {
     GPU *GPU1 = new GPU("NVIDIA GeForce RTX 3060 Ti", 4864, 8, "GDDR6", 14, "MSI", "912-V397-234", 2, 10, 3799.99);
     GPU1->View();
     cout << "-------" << endl;
+
+    StorageUnit *Storage1 = new StorageUnit(HDD, 350, 350, "Kingston", "A400", 1, 45, 300.00);
+    Storage1->View();
 
 }
 void OP2() {

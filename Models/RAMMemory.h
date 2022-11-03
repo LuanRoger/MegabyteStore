@@ -26,7 +26,7 @@ public:
     int getCapacity();
     void setCapacity(int newCapacity);
 
-    virtual void View();
+    void View() override;
 };
 
 

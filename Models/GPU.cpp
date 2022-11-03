@@ -4,13 +4,13 @@
 
 #include "GPU.h"
 
-GPU::GPU(string chipset, int cudaCores, int VRAMCapacity, string VRAMType, int VRAMVelocity, string marca, string modelo, int id,
+GPU::GPU(string chipset, int cudaCores, int VRAMCapacity, string VRAMType, int VRAMSpeed, string marca, string modelo, int id,
          int quantidade, double valor) : Hardware(marca, modelo, id, quantidade, valor){
     setChipset(chipset);
     setCudaCores(cudaCores);
     setVRAMCapacity(VRAMCapacity);
     setVRAMType(VRAMType);
-    setVRAMVelocity(VRAMVelocity);
+    setVRAMSpeed(VRAMSpeed);
 }
 
 string GPU::getChipset() {
@@ -45,12 +45,12 @@ void GPU::setVRAMType(string newVRAMType) {
     VRAMType = newVRAMType;
 }
 
-int GPU::getVRAMVelocity() {
-    return VRAMVelocity;
+int GPU::getVRAMSpeed() {
+    return VRAMSpeed;
 }
 
-void GPU::setVRAMVelocity(int newVRAMVelocity) {
-    VRAMVelocity = newVRAMVelocity;
+void GPU::setVRAMSpeed(int newVRAMSpeed) {
+    VRAMSpeed = newVRAMSpeed;
 }
 
 void GPU::View() {
@@ -63,7 +63,7 @@ void GPU::View() {
     cout << "Nucleos Cuda: " << cudaCores << endl;
     cout << "Tipo VRAM: " << VRAMType << endl;
     cout << "Capacidade VRAM: " << VRAMCapacity << endl;
-    cout << "Velocidade VRAM: " << VRAMVelocity << endl;
+    cout << "Velocidade VRAM: " << VRAMSpeed << endl;
 }
 
 
