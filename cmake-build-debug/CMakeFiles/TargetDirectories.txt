@@ -1,3 +1,0 @@
-C:/Users/Vinicius/Desktop/MegabyteStore/cmake-build-debug/CMakeFiles/MegabyteStore.dir
-C:/Users/Vinicius/Desktop/MegabyteStore/cmake-build-debug/CMakeFiles/edit_cache.dir
-C:/Users/Vinicius/Desktop/MegabyteStore/cmake-build-debug/CMakeFiles/rebuild_cache.dir
