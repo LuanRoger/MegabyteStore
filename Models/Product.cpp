@@ -4,33 +4,34 @@
 
 #include "Product.h"
 
-Product::Product(int id, int quantidade, double valor) {
-    setId(id);
-    setQuantidade(quantidade);
-    setValor(valor);
-}
+namespace Models {
+    Product::Product(int id, int quantidade, double valor) {
+        setId(id);
+        setQuantidade(quantidade);
+        setValor(valor);
+    }
 
-int Product::getId() {
-    return id;
-}
+    int Product::getId() {
+        return id;
+    }
 
-void Product::setId(int novoId) {
-    id = novoId;
-}
+    void Product::setId(int novoId) {
+        id = novoId;
+    }
 
-int Product::getQuantidade() {
-    return quantidade;
-}
+    int Product::getQuantidade() {
+        return quantidade;
+    }
 
-void Product::setQuantidade(int novaQuantidade) {
-    quantidade = novaQuantidade;
-}
+    void Product::setQuantidade(int novaQuantidade) {
+        quantidade = novaQuantidade;
+    }
 
-double Product::getValor() {
-    return valor;
-}
+    double Product::getValor() {
+        return valor;
+    }
 
-void Product::setValor(double novoValor) {
-    valor = novoValor;
+    void Product::setValor(double novoValor) {
+        valor = novoValor;
+    }
 }
-

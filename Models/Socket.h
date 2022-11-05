@@ -8,16 +8,16 @@
 #include "string"
 
 using namespace std;
+namespace Models {
+    class Socket{
+    protected:
+        string type;
 
-class Socket{
-protected:
-    string type;
-
-public:
-    Socket(string type);
-    string getType();
-    void setType(string newType);
-};
-
+    public:
+        Socket(string type);
+        string getType();
+        void setType(string newType);
+    };
+}
 
 #endif //MEGABYTESTORE_SOCKET_H

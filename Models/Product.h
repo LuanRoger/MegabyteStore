@@ -5,24 +5,24 @@
 #ifndef MEGABYTESTORE_PRODUCT_H
 #define MEGABYTESTORE_PRODUCT_H
 
+namespace Models {
+    class Product {
+    protected:
+        int id, quantidade;
+        double valor;
+    public:
+        Product(int id, int quantidade, double valor);
 
-class Product {
-protected:
-    int id, quantidade;
-    double valor;
-public:
-    Product(int id, int quantidade, double valor);
+        int getId();
+        void setId(int novoId);
 
-    int getId();
-    void setId(int novoId);
-
-    int getQuantidade();
-    void setQuantidade(int novaQuantidade);
+        int getQuantidade();
+        void setQuantidade(int novaQuantidade);
 
 
-    double getValor();
-    void setValor(double novoValor);
-};
-
+        double getValor();
+        void setValor(double novoValor);
+    };
+}
 
 #endif //MEGABYTESTORE_PRODUCT_H

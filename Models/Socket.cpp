@@ -4,17 +4,16 @@
 
 #include "Socket.h"
 
-Socket::Socket(string type) {
-    setType(type);
+namespace Models {
+    Socket::Socket(string type) {
+        setType(type);
+    }
+
+    string Socket::getType() {
+        return type;
+    }
+
+    void Socket::setType(string newType) {
+        type = newType;
+    }
 }
-
-string Socket::getType() {
-    return type;
-}
-
-void Socket::setType(string newType) {
-    type = newType;
-}
-
-
-

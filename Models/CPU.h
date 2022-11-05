@@ -8,35 +8,36 @@
 #include "Socket.h"
 #include "string"
 
-class CPU : public Hardware, public Socket{
-private:
-    string socket;
-    int cores;
-    int threads;
-    double basicClock;
-    double boostMaximumClock;
+namespace Models {
+    class CPU : public Hardware, public Socket{
+    private:
+        string socket;
+        int cores;
+        int threads;
+        double basicClock;
+        double boostMaximumClock;
 
-public:
-    CPU(string socket, int cores, int threads, double basicClock, double boostMaximumClock, string marca, string modelo, int id, int quantidade, double valor);
+    public:
+        CPU(string socket, int cores, int threads, double basicClock, double boostMaximumClock, string marca, string modelo, int id, int quantidade, double valor);
 
-    string getSocket();
-    void setSocket(string newSocket);
+        string getSocket();
+        void setSocket(string newSocket);
 
-    int getCores();
-    void setCores(int newCores);
+        int getCores();
+        void setCores(int newCores);
 
-    int getThreads();
-    void setThreads(int newThreads);
+        int getThreads();
+        void setThreads(int newThreads);
 
-    double getBasicClock();
-    void setBasicClock(double newBasicClock);
+        double getBasicClock();
+        void setBasicClock(double newBasicClock);
 
-    double getBoostMaximumClock();
-    void setBoostMaximumClock(double newBoostMaximumClock);
+        double getBoostMaximumClock();
+        void setBoostMaximumClock(double newBoostMaximumClock);
 
-    void View() override;
+        void View() override;
 
-};
-
+    };
+}
 
 #endif //MEGABYTESTORE_CPU_H

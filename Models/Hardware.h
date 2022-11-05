@@ -9,22 +9,22 @@
 #include "iostream"
 
 using namespace std;
+namespace Models {
+    class Hardware : public Product{
+    protected:
+        string marca;
+        string modelo;
+    public:
+        Hardware(string marca, string modelo, int id, int quantidade, double valor);
 
-class Hardware : public Product{
-protected:
-    string marca;
-    string modelo;
-public:
-    Hardware(string marca, string modelo, int id, int quantidade, double valor);
+        string getMarca();
+        void setMarca(string novaMarca);
 
-    string getMarca();
-    void setMarca(string novaMarca);
+        string getModelo();
+        void setModelo(string novoModelo);
 
-    string getModelo();
-    void setModelo(string novoModelo);
-
-    virtual void View();
-};
-
+        virtual void View();
+    };
+}
 
 #endif //MEGABYTESTORE_HARDWARE_H

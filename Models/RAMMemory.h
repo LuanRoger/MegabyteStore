@@ -8,26 +8,26 @@
 #include "string"
 
 using namespace std;
+namespace Models {
+    class RAMMemory : Hardware{
+    private:
+        string memoryType;
+        int frequency;
+        int capacity;
+    public:
+        RAMMemory(string memoryType, int frequency, int capacity, string marca, string modelo, int id, int quantidade, double valor);
 
-class RAMMemory : Hardware{
-private:
-    string memoryType;
-    int frequency;
-    int capacity;
-public:
-    RAMMemory(string memoryType, int frequency, int capacity, string marca, string modelo, int id, int quantidade, double valor);
+        string getMemoryType();
+        void setType(string newMemoryType);
 
-    string getMemoryType();
-    void setType(string newMemoryType);
+        int getFrequency();
+        void setFrequency(int newFrequency);
 
-    int getFrequency();
-    void setFrequency(int newFrequency);
+        int getCapacity();
+        void setCapacity(int newCapacity);
 
-    int getCapacity();
-    void setCapacity(int newCapacity);
-
-    void View() override;
-};
-
+        void View() override;
+    };
+}
 
 #endif //MEGABYTESTORE_RAMMEMORY_H

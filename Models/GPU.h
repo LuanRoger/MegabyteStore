@@ -9,35 +9,35 @@
 
 using namespace std;
 
+namespace Models {
+    class GPU : Hardware{
+    private:
+        string chipset;
+        int cudaCores;
+        int VRAMCapacity;
+        string VRAMType;
+        int VRAMSpeed;
+    public:
+        GPU(string chipset, int cudaCores, int VRAMCapacity, string VRAMType, int VRAMSpeed, string marca, string modelo, int id, int quantidade, double valor);
 
-class GPU : Hardware{
-private:
-    string chipset;
-    int cudaCores;
-    int VRAMCapacity;
-    string VRAMType;
-    int VRAMSpeed;
-public:
-    GPU(string chipset, int cudaCores, int VRAMCapacity, string VRAMType, int VRAMSpeed, string marca, string modelo, int id, int quantidade, double valor);
+        string getChipset();
+        void setChipset(string newChipset);
 
-    string getChipset();
-    void setChipset(string newChipset);
+        int getCudaCores();
+        void setCudaCores(int newCudaCores);
 
-    int getCudaCores();
-    void setCudaCores(int newCudaCores);
+        int getVRAMCapacity();
+        void setVRAMCapacity(int newVRAMCapacity);
 
-    int getVRAMCapacity();
-    void setVRAMCapacity(int newVRAMCapacity);
+        string getVRAMType();
+        void setVRAMType(string newVRAMType);
 
-    string getVRAMType();
-    void setVRAMType(string newVRAMType);
+        int getVRAMSpeed();
+        void setVRAMSpeed(int newVRAMSpeed);
 
-    int getVRAMSpeed();
-    void setVRAMSpeed(int newVRAMSpeed);
+        void View() override;
 
-    void View() override;
-
-};
-
+    };
+}
 
 #endif //MEGABYTESTORE_GPU_H

@@ -9,33 +9,31 @@
 
 using namespace std;
 
-enum StorageType{HDD = 1, SSD, SSDNVME};
+namespace Models {
+    enum StorageType{HDD = 1, SSD, SSDNVME};
 
-class StorageUnit : public Hardware{
-private:
-    StorageType type;
-    int writeSpeed;
-    int readSpeed;
+    class StorageUnit : public Hardware{
+    private:
+        StorageType type;
+        int writeSpeed;
+        int readSpeed;
 
-public:
-    StorageUnit(StorageType type, int writeSpeed, int readSpeed, string marca, string modelo, int id, int quantidade, double valor);
+    public:
+        StorageUnit(StorageType type, int writeSpeed, int readSpeed, string marca, string modelo, int id, int quantidade, double valor);
 
-    StorageType getType();
-    void setType(StorageType newType);
+        StorageType getType();
+        void setType(StorageType newType);
 
-    int getWriteSpeed();
-    void setWriteSpeed(int newWriteSpeed);
+        int getWriteSpeed();
+        void setWriteSpeed(int newWriteSpeed);
 
-    int getReadSpeed();
-    void setReadSpeed(int newReadSpeed);
+        int getReadSpeed();
+        void setReadSpeed(int newReadSpeed);
 
-    string getString();
+        string getString();
 
-    void View() override;
-
-
-
-};
-
+        void View() override;
+    };
+}
 
 #endif //MEGABYTESTORE_STORAGEUNIT_H
