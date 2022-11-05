@@ -6,24 +6,22 @@
 #include "Commands/ExitMenuCommand.h"
 
 namespace MenuSystem {
-    Menu::Menu(std::string* header) {
-        this->menuMapping = new vector<MenuInfoItem*>;
+    Menu::Menu(std::string header) {
         this->header = header;
     }
-    Menu::Menu(string* header, string* content) {
-        this->menuMapping = new vector<MenuInfoItem*>;
+    Menu::Menu(string header, string content) {
         this->header = header;
         this->content = content;
     }
 
     void Menu::PrintHeaderContent() {
-        cout << *header << endl;
+        cout << header << endl;
 
-        if(content != nullptr)
-            cout << *content << endl;
+        if(!content.empty())
+            cout << content << endl;
     }
     void Menu::PrintOptions() {
-        for (MenuInfoItem* menuInfoItem : *menuMapping) {
+        for (MenuInfoItem* menuInfoItem : menuMapping) {
             string menuOption =  "[ " + std::to_string(menuInfoItem->getOptionNumber()) + " ] - " +
                     menuInfoItem->getText();
             cout << menuOption << endl;
@@ -40,7 +38,7 @@ namespace MenuSystem {
             cin >> choice;
 
             IMenuCommand* menuCommand = nullptr;
-            for(MenuInfoItem* menuInfoItem : *menuMapping) {
+            for(MenuInfoItem* menuInfoItem : menuMapping) {
                 if(menuInfoItem->getOptionNumber() == choice)
                     menuCommand = menuInfoItem->getCommand();
             }
@@ -52,27 +50,27 @@ namespace MenuSystem {
     }
 
     void Menu::InjectCommandOnEscapeOption() {
-        MenuInfoItem* menuInfo = (*menuMapping)[escapeOptionIndex];
+        MenuInfoItem* menuInfo = (menuMapping)[escapeOptionIndex];
         menuInfo->setCommand(new ExitMenuCommand(this));
     }
 
     void Menu::AddMenu(MenuInfoItem *menuInfo) {
-        menuMapping->push_back(menuInfo);
+        menuMapping.push_back(menuInfo);
     }
 
     void Menu::AddEscapeOption(MenuInfoItem *menuInfo) {
         if(!menuInfo->isEscapeOption())
             throw std::invalid_argument("MenuInfoItem is not a escape option");
 
-        escapeOptionIndex = static_cast<int>(menuMapping->size());
-        menuMapping->push_back(menuInfo);
+        escapeOptionIndex = static_cast<int>(menuMapping.size());
+        menuMapping.push_back(menuInfo);
         InjectCommandOnEscapeOption();
     }
 
-    void Menu::SetHeader(std::string *header) {
+    void Menu::SetHeader(std::string header) {
         this->header = header;
     }
-    void Menu::SetContent(string* content) {
+    void Menu::SetContent(string content) {
         this->content = content;
     }
 

@@ -9,13 +9,13 @@ namespace MenuSystem {
     class MenuInfoItem {
     private:
         int optionNumber;
-        std::string* text;
+        std::string text;
         IMenuCommand* menuCommand;
         bool escapeOption;
     public:
-        MenuInfoItem(int optionNumber, std::string* text, IMenuCommand* menuCommand, bool escapeOption = false);
+        MenuInfoItem(int optionNumber, std::string text, IMenuCommand* menuCommand, bool escapeOption = false);
 
-        int getOptionNumber();
+        int getOptionNumber() const;
         std::string getText();
         IMenuCommand* getCommand();
         void setCommand(IMenuCommand* command);

@@ -8,8 +8,7 @@
 #include "Socket.h"
 #include "string"
 
-class CPU : Hardware,
-        Socket{
+class CPU : public Hardware, public Socket{
 private:
     string socket;
     int cores;

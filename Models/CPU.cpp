@@ -5,6 +5,7 @@
 #include "CPU.h"
 
 CPU::CPU(string socket, int cores, int threads, double basicClock, double boostMaximumClock, string marca, string modelo, int id, int quantidade, double valor) : Hardware(marca, modelo, id, quantidade, valor),Socket(socket) {
+    this->socket = socket;
     setCores(cores);
     setThreads(threads);
     setBasicClock(basicClock);

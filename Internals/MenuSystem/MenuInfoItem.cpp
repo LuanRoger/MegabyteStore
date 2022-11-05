@@ -6,19 +6,19 @@
 
 namespace MenuSystem {
 
-    MenuInfoItem::MenuInfoItem(int optionNumber, std::string *text, MenuSystem::IMenuCommand *menuCommand, bool escapeOption) {
+    MenuInfoItem::MenuInfoItem(int optionNumber, std::string text, MenuSystem::IMenuCommand *menuCommand, bool escapeOption) {
         this->optionNumber = optionNumber;
         this->text = text;
         this->menuCommand = menuCommand;
         this->escapeOption = escapeOption;
     }
 
-    int MenuInfoItem::getOptionNumber() {
+    int MenuInfoItem::getOptionNumber() const {
         return optionNumber;
     }
 
     std::string MenuInfoItem::getText() {
-        return *text;
+        return text;
     }
 
     IMenuCommand* MenuInfoItem::getCommand() {

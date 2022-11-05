@@ -16,9 +16,9 @@ using namespace std;
 namespace MenuSystem {
     class Menu {
     private:
-        string* header;
-        string* content = nullptr;
-        vector<MenuInfoItem*>* menuMapping;
+        string header;
+        string content;
+        vector<MenuInfoItem*> menuMapping;
         bool running;
         int escapeOptionIndex;
 
@@ -29,11 +29,11 @@ namespace MenuSystem {
         void InjectCommandOnEscapeOption();
 
     public:
-        Menu(string* header);
-        Menu(string* header, string* content);
+        Menu(string header);
+        Menu(string header, string content);
 
-        void SetHeader(string* header);
-        void SetContent(string* content);
+        void SetHeader(string header);
+        void SetContent(string content);
         void AddMenu(MenuInfoItem* menuInfo);
         void AddEscapeOption(MenuInfoItem* menuInfo);
 

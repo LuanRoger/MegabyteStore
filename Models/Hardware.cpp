@@ -4,7 +4,7 @@
 
 #include "Hardware.h"
 
-Hardware::Hardware(string marca, string modelo, int id, int quantidade, double valor) : Produto(id, quantidade, valor){
+Hardware::Hardware(string marca, string modelo, int id, int quantidade, double valor) : Product(id, quantidade, valor){
     setMarca(marca);
     setModelo(modelo);
 }

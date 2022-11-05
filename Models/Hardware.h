@@ -4,13 +4,13 @@
 
 #ifndef MEGABYTESTORE_HARDWARE_H
 #define MEGABYTESTORE_HARDWARE_H
-#include "Produto.h"
+#include "Product.h"
 #include "string"
 #include "iostream"
 
 using namespace std;
 
-class Hardware : public Produto{
+class Hardware : public Product{
 protected:
     string marca;
     string modelo;

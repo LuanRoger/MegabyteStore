@@ -2,16 +2,16 @@
 // Created by Vinicius on 27/10/2022.
 //
 
-#ifndef MEGABYTESTORE_PRODUTO_H
-#define MEGABYTESTORE_PRODUTO_H
+#ifndef MEGABYTESTORE_PRODUCT_H
+#define MEGABYTESTORE_PRODUCT_H
 
 
-class Produto {
+class Product {
 protected:
     int id, quantidade;
     double valor;
 public:
-    Produto(int id, int quantidade, double valor);
+    Product(int id, int quantidade, double valor);
 
     int getId();
     void setId(int novoId);
@@ -25,4 +25,4 @@ public:
 };
 
 
-#endif //MEGABYTESTORE_PRODUTO_H
+#endif //MEGABYTESTORE_PRODUCT_H
