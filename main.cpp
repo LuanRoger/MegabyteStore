@@ -1,32 +1,33 @@
-#include <iostream>
-
-#include "MenuCommands/MenuCommand1.h"
+#include "MenuCommands/RegistryProductCommand.h"
 #include "Internals/MenuSystem/Menu.h"
 #include "Internals/MenuSystem/Commands/OpenSubmenuCommand.h"
+#include "MemoryStorage/ProductsStorage.h"
 
 using namespace std;
 using namespace MenuSystem;
 using namespace MenuCommand;
+using namespace MemoryStorage;
 
 int main() {
-    Menu* menu = new Menu(new string("MegabyteStore"));
+    ProductsStorage* productsStorage = new ProductsStorage();
+
+    Menu* menu = new Menu("MegabyteStore");
 
     menu->AddMenu(new MenuInfoItem(1,
-                                   new string("Opcao 1"),
-                                   new MenuCommand1()));
+                                   "Cadastrar produto.",
+                                   new RegistryProductCommand(productsStorage)));
 
-    Menu* submenu1 = new Menu(new string("Submenu"));
-    submenu1->AddEscapeOption(new MenuInfoItem(0, new string("Voltar"),
+    Menu* submenu1 = new Menu("Submenu");
+    submenu1->AddEscapeOption(new MenuInfoItem(0, "Voltar",
                                                nullptr, true));
     menu->AddMenu(new MenuInfoItem(2,
-                                   new string("Abrir submenu"),
+                                   "Abrir submenu",
                                    new OpenSubmenuCommand(submenu1)));
 
     menu->AddEscapeOption(new MenuInfoItem(0,
-                                           new string("Sair"),
+                                           "Sair",
                                            nullptr,
                                            true));
-
     menu->Start();
 
     return 0;
