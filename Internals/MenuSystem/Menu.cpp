@@ -28,6 +28,7 @@ namespace MenuSystem {
         }
     }
     void Menu::RunMenu() {
+        LineReader lineReader(ReaderOptions("Digite uma valor válido", false));
         PrintHeaderContent();
 
         while (running) {
@@ -35,7 +36,7 @@ namespace MenuSystem {
 
             PrintOptions();
 
-            cin >> choice;
+            choice = lineReader.ReadInt("Escolha uma opção: ");
 
             IMenuCommand* menuCommand = nullptr;
             for(MenuInfoItem* menuInfoItem : menuMapping) {

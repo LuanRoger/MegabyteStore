@@ -9338,7 +9338,7 @@ class binary_reader
     }
 
     /*!
-    @brief Read a BSON document element of the given @a element_type.
+    @brief ReadString a BSON document element of the given @a element_type.
     @param[in] element_type The BSON element type, c.f. http://bsonspec.org/spec.html
     @param[in] element_type_parse_position The position in the input stream,
                where the `element_type` was read.
@@ -9416,7 +9416,7 @@ class binary_reader
     }
 
     /*!
-    @brief Read a BSON element list (as specified in the BSON-spec)
+    @brief ReadString a BSON element list (as specified in the BSON-spec)
 
     The same binary layout is used for objects and arrays, hence it must be
     indicated with the argument @a is_array which one is expected
