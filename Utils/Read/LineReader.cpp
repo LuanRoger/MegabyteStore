@@ -12,21 +12,20 @@ namespace Read {
 
     std::string LineReader::ReadString(std::string text, bool loop) {
         bool running = loop;
-        std::string output;
+        std::string output = "?";
 
         do {
             std::cout << text << std::endl;
-            if(loop)
-                std::cout << "[ " << exitCommand << " ] - Sair." << std::endl;
 
             std::getline(std::cin, output);
 
             if(ValidateRead(output)) {
                 std::cout << readerOptions.getInvalidOptionText() << std::endl;
-                continue;
+                output = "?";
+
+                if(loop)
+                    continue;
             }
-            else if(output.compare(exitCommand) == 0)
-                running = false;
 
             running = false;
         } while (running);
@@ -36,22 +35,20 @@ namespace Read {
     int LineReader::ReadInt(std::string text, bool loop) {
         bool running = loop;
         int output = -1;
-        std::string buffer = "";
+        std::string buffer;
 
         do {
             std::cout << text << std::endl;
-            if(loop)
-                std::cout << "[ " << exitCommand << " ] - Sair." << std::endl;
 
             std::getline(std::cin, buffer);
 
             if(ValidateReadInt(buffer)) {
                 std::cout << readerOptions.getInvalidOptionText() << std::endl;
                 buffer = "";
-                continue;
+
+                if(loop)
+                    continue;
             }
-            else if(loop && buffer.compare(exitCommand) == 0)
-                running = false;
 
             running = false;
         } while (running);
@@ -62,23 +59,21 @@ namespace Read {
     }
     double LineReader::ReadDouble(std::string text, bool loop) {
         bool running = loop;
-        double output = -1;
-        std::string buffer = "";
+        double output = -1.0;
+        std::string buffer;
 
         do {
             std::cout << text << std::endl;
-            if(loop)
-                std::cout << "[ " << exitCommand << " ] - Sair." << std::endl;
 
             std::getline(std::cin, buffer);
 
-            if(ValidateReadFloat(buffer)) {
+            if(ValidateReadDouble(buffer)) {
                 std::cout << readerOptions.getInvalidOptionText() << std::endl;
                 buffer = "";
-                continue;
+
+                if(loop)
+                    continue;
             }
-            else if(loop && buffer.compare(exitCommand) == 0)
-                running = false;
 
             running = false;
         } while (running);
@@ -99,7 +94,7 @@ namespace Read {
         return !readerOptions.isAllowEmpty() && readedText.empty() || !isDigit;
     }
 
-    bool LineReader::ValidateReadFloat(std::string readedText) {
+    bool LineReader::ValidateReadDouble(std::string readedText) {
         bool isDoubleDigit = std::find_if(readedText.begin(),
                                           readedText.end(),
                                           [](unsigned char c) { return !std::isdigit(c) && c != '.'; }) == readedText.end();

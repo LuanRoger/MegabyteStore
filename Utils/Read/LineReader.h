@@ -18,7 +18,7 @@ namespace Read {
         /// Return if has problems.
         bool ValidateRead(std::string readedText);
         bool ValidateReadInt(std::string readedText);
-        bool ValidateReadFloat(std::string readedText);
+        bool ValidateReadDouble(std::string readedText);
     public:
         LineReader(ReaderOptions readerOptions);
 
