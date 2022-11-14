@@ -22,35 +22,27 @@ namespace MenuCommand {
         int quantidade;
         double valor;
 
-        cout << "Digite o ID" << endl;
-        cin >> id;
+        LineReader lineReader(ReaderOptions("Entre com uma opcao valida.", false));
 
-        cout << "Digite o socket" << endl;
-        cin >> socket;
+        id = lineReader.ReadInt("Digite o ID");
 
-        cout << "Digite a quantidade de cores" << endl;
-        cin >> cores;
+        socket = lineReader.ReadString("Digite o socket");
 
-        cout << "Digite a quantidade de threads" << endl;
-        cin >> threads;
+        cores = lineReader.ReadInt("Digite a quantidade de cores");
 
-        cout << "Digite o clock base" << endl;
-        cin >> basicClock;
+        threads = lineReader.ReadInt("Digite a quantidade de threads");
 
-        cout << "Digite o clock maximo" << endl;
-        cin >> boostMaximumClock;
+        basicClock = lineReader.ReadDouble("Digite o clock base");
 
-        cout << "Digite a marca" << endl;
-        cin >> marca;
+        boostMaximumClock = lineReader.ReadDouble("Digite o clock maximo");
 
-        cout << "Digite o modelo" << endl;
-        cin >> modelo;
+        marca = lineReader.ReadString("Digite a marca");
 
-        cout << "Digite o quantidade" << endl;
-        cin >> quantidade;
+        modelo = lineReader.ReadString("Digite o modelo");
 
-        cout << "Digite o valor" << endl;
-        cin >> valor;
+        quantidade = lineReader.ReadInt("Digite o quantidade");
+
+        valor = lineReader.ReadDouble("Digite o valor");
 
         return new Models::CPU(socket, cores, threads, basicClock,
                        boostMaximumClock, marca, modelo,
@@ -58,14 +50,14 @@ namespace MenuCommand {
     }
 
     void RegistryProductCommand::Execute() {
+        LineReader lineReader(ReaderOptions("Entre com uma opcao valida.", false));
         Models::Product* newProduct = nullptr;
 
-        cout << "Digite qual tipo de produto deseja cadastrar:" << endl;
         cout << "[ 1 ] - CPU" << endl;
         cout << "[ 0 ] - Voltar" << endl;
         int choice;
 
-        cin >> choice;
+        choice = lineReader.ReadInt("Digite qual tipo de produto deseja cadastrar:");
 
         switch (choice) {
             case 1:
