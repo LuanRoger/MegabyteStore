@@ -12,7 +12,7 @@ namespace Read {
 
     std::string LineReader::ReadString(std::string text, bool loop) {
         bool running = loop;
-        std::string output = NULL;
+        std::string output;
 
         do {
             std::cout << text << std::endl;
@@ -60,6 +60,33 @@ namespace Read {
             output = std::stoi(buffer);
         return output;
     }
+    double LineReader::ReadDouble(std::string text, bool loop) {
+        bool running = loop;
+        double output = -1;
+        std::string buffer = "";
+
+        do {
+            std::cout << text << std::endl;
+            if(loop)
+                std::cout << "[ " << exitCommand << " ] - Sair." << std::endl;
+
+            std::getline(std::cin, buffer);
+
+            if(ValidateReadFloat(buffer)) {
+                std::cout << readerOptions.getInvalidOptionText() << std::endl;
+                buffer = "";
+                continue;
+            }
+            else if(loop && buffer.compare(exitCommand) == 0)
+                running = false;
+
+            running = false;
+        } while (running);
+
+        if(!buffer.empty())
+            output = std::stod(buffer);
+        return output;
+    }
 
     bool LineReader::ValidateRead(std::string readedText) {
         return !readerOptions.isAllowEmpty() && readedText.empty();
@@ -70,5 +97,12 @@ namespace Read {
                                     readedText.end(),
                                     [](unsigned char c) { return !std::isdigit(c); }) == readedText.end();
         return !readerOptions.isAllowEmpty() && readedText.empty() || !isDigit;
+    }
+
+    bool LineReader::ValidateReadFloat(std::string readedText) {
+        bool isDoubleDigit = std::find_if(readedText.begin(),
+                                          readedText.end(),
+                                          [](unsigned char c) { return !std::isdigit(c) && c != '.'; }) == readedText.end();
+        return !readerOptions.isAllowEmpty() && readedText.empty() || !isDoubleDigit;
     }
 }

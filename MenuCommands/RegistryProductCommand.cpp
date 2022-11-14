@@ -32,11 +32,9 @@ namespace MenuCommand {
 
         threads = lineReader.ReadInt("Digite a quantidade de threads");
 
-        cout << "Digite o clock base" << endl;
-        cin >> basicClock;
+        basicClock = lineReader.ReadDouble("Digite o clock base");
 
-        cout << "Digite o clock maximo" << endl;
-        cin >> boostMaximumClock;
+        boostMaximumClock = lineReader.ReadDouble("Digite o clock maximo");
 
         marca = lineReader.ReadString("Digite a marca");
 
@@ -44,8 +42,7 @@ namespace MenuCommand {
 
         quantidade = lineReader.ReadInt("Digite o quantidade");
 
-        cout << "Digite o valor" << endl;
-        cin >> valor;
+        valor = lineReader.ReadDouble("Digite o valor");
 
         return new Models::CPU(socket, cores, threads, basicClock,
                        boostMaximumClock, marca, modelo,
