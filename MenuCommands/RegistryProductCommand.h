@@ -15,9 +15,12 @@
 #include "../Models/RAMMemory.h"
 #include "../Models/StorageUnit.h"
 #include "../Models/Product.h"
+#include "../Utils/Read/LineReader.h"
+#include "../Utils/Read/ReaderOptions.h"
 
 using namespace Models;
 using namespace std;
+using namespace Read;
 
 namespace MenuCommand {
     class RegistryProductCommand : public MenuSystem::IMenuCommand {

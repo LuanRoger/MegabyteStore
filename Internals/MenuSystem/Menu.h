@@ -10,8 +10,11 @@
 #include "string"
 #include "iostream"
 #include "MenuInfoItem.h"
+#include "../../Utils/Read/LineReader.h"
+#include "../../Utils/Read/ReaderOptions.h"
 
 using namespace std;
+using namespace Read;
 
 namespace MenuSystem {
     class Menu {
