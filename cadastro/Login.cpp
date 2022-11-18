@@ -7,29 +7,29 @@
 
 using namespace std;
 
-Conta Login::getUser () {
+Account Login::getUser () {
     return User;
 }
 
-void Login::setUser (Conta User, string senha) {
-    User.setSenha(senha);
+void Login::setUser (Account User, string senha) {
+    User.setPassword(senha);
 }
 
 void Login::Logar() {
-    string usuario, senha;
+    string username, password;
 
     cout << "Digite seu usuario: " << endl;
-    cin >> usuario;
+    cin >> username;
     cout << "Digite sua senha: " << endl;
-    cin >> senha;
+    cin >> password;
 
-    if(validaUsuario(usuario, senha) == true) {
+    if(valideUser(username, password) == true) {
         cout << "Logado" << endl;
-        if(usuario == "admin"){
+        if(username == "admin"){
             Admin adm;
             adm.chooseOption();
         }
-    } else if(validaUsuario(usuario, senha) != true) {
+    } else if(valideUser(username, password) != true) {
         cout << "Usuario ou senha incorretos!" << endl;
     }
 }

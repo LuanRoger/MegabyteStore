@@ -8,7 +8,6 @@
 #include <iostream>
 
 #include "Login.h"
-#include "Cadastro.h"
 #include "Client.h"
 
 class Session {

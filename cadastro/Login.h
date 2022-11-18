@@ -5,15 +5,15 @@
 #ifndef CADASTRO_LOGIN_H
 #define CADASTRO_LOGIN_H
 
-#include "Conta.h"
+#include "Account.h"
 #include "Admin.h"
 
-class Login : public Conta {
+class Login : public Account {
 private:
-    Conta User;
+    Account User;
 public:
-    Conta getUser ();
-    void setUser (Conta User, string senha);
+    Account getUser ();
+    void setUser (Account User, string senha);
     void Logar();
 
 };

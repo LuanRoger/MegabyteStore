@@ -13,15 +13,6 @@ Client::Client() {
     cout << "Digite se deseja se cadastrar ou realizar login: " << endl;
 }
 
-void Client::realizarCadastro() {
-    Cadastro newClient;
-    newClient.formularInscricao();
-}
-
-void Client::realizarLogin() {
-    Login client;
-    client.Logar();
-}
 
 void Client::chooseOption() {
     cin >> option;
@@ -36,4 +27,14 @@ void Client::valideOption(int option) {
     } else {
         cout << "Opcao inexistente!";
     }
+}
+
+void Client::realizarCadastro() {
+    Register newClient;
+    newClient.signUp();
+}
+
+void Client::realizarLogin() {
+    Login client;
+    client.Logar();
 }

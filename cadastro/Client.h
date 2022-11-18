@@ -7,7 +7,7 @@
 
 #include <iostream>
 
-#include "Cadastro.h"
+#include "Register.h"
 #include "Login.h"
 
 class Client {
@@ -16,9 +16,9 @@ private:
 public:
     Client();
     void chooseOption();
+    void valideOption(int option);
     void realizarCadastro();
     void realizarLogin();
-    void valideOption(int option);
 };
 
 
