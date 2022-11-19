@@ -10,7 +10,7 @@
 using namespace std;
 
 namespace Models {
-    class GPU : Hardware{
+    class GPU : public Hardware{
     private:
         string chipset;
         int cudaCores;
@@ -18,7 +18,7 @@ namespace Models {
         string VRAMType;
         int VRAMSpeed;
     public:
-        GPU(string chipset, int cudaCores, int VRAMCapacity, string VRAMType, int VRAMSpeed, string marca, string modelo, int id, int quantidade, double valor);
+        GPU(string chipset, int cudaCores, int VRAMCapacity, string VRAMType, int VRAMSpeed, string brand, string model, int id, int quantity, double value);
 
         string getChipset();
         void setChipset(string newChipset);

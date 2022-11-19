@@ -8,20 +8,20 @@
 namespace Models {
     class Product {
     protected:
-        int id, quantidade;
-        double valor;
+        int id, quantity;
+        double value;
     public:
-        Product(int id, int quantidade, double valor);
+        Product(int id, int quantity, double value);
 
         int getId();
-        void setId(int novoId);
+        void setId(int newId);
 
-        int getQuantidade();
-        void setQuantidade(int novaQuantidade);
+        int getQuantity();
+        void setQuantity(int newQuantity);
 
 
-        double getValor();
-        void setValor(double novoValor);
+        double getValue();
+        void setValue(double newValue);
     };
 }
 

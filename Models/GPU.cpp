@@ -4,8 +4,8 @@
 
 #include "GPU.h"
 namespace Models {
-    GPU::GPU(string chipset, int cudaCores, int VRAMCapacity, string VRAMType, int VRAMSpeed, string marca, string modelo, int id,
-             int quantidade, double valor) : Hardware(marca, modelo, id, quantidade, valor){
+    GPU::GPU(string chipset, int cudaCores, int VRAMCapacity, string VRAMType, int VRAMSpeed, string brand, string model, int id,
+             int quantity, double value) : Hardware(brand, model, id, quantity, value){
         setChipset(chipset);
         setCudaCores(cudaCores);
         setVRAMCapacity(VRAMCapacity);
@@ -55,10 +55,10 @@ namespace Models {
 
     void GPU::View() {
         cout << "ID: " << id << endl;
-        cout << "Quantidade: " << quantidade << endl;
-        cout << "Valor: " << valor << endl;
-        cout << "Marca: " << marca << endl;
-        cout << "Modelo: " << modelo << endl;
+        cout << "Quantidade: " << quantity << endl;
+        cout << "Valor: " << value << endl;
+        cout << "Marca: " << brand << endl;
+        cout << "Modelo: " << model << endl;
         cout << "Chipset: " << chipset << endl;
         cout << "Nucleos Cuda: " << cudaCores << endl;
         cout << "Tipo VRAM: " << VRAMType << endl;

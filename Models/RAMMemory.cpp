@@ -5,8 +5,8 @@
 #include "RAMMemory.h"
 
 namespace Models {
-    RAMMemory::RAMMemory(string memoryType, int frequency, int capacity, string marca, string modelo, int id,
-                         int quantidade, double valor) : Hardware(marca, modelo, id, quantidade, valor){
+    RAMMemory::RAMMemory(string memoryType, int frequency, int capacity, string brand, string model, int id,
+                         int quantity, double value) : Hardware(brand, model, id, quantity, value){
         this->memoryType = memoryType;
         this->frequency = frequency;
         this->capacity = capacity;
@@ -38,10 +38,10 @@ namespace Models {
 
     void RAMMemory::View() {
         cout << "ID: " << id << endl;
-        cout << "Quantidade: " << quantidade << endl;
-        cout << "Valor: " << valor << endl;
-        cout << "Marca: " << marca << endl;
-        cout << "Modelo: " << modelo << endl;
+        cout << "Quantidade: " << quantity << endl;
+        cout << "Valor: " << value << endl;
+        cout << "Marca: " << brand << endl;
+        cout << "Modelo: " << model << endl;
         cout << "Tipo: " << memoryType << endl;
         cout << "Frequencia: " << frequency << endl;
         cout << "Capacidade: " << capacity << endl;

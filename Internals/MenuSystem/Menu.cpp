@@ -28,7 +28,7 @@ namespace MenuSystem {
         }
     }
     void Menu::RunMenu() {
-        LineReader lineReader(ReaderOptions("Digite uma valor válido", false));
+        LineReader lineReader(ReaderOptions("Digite uma value válido", false));
         PrintHeaderContent();
 
         while (running) {

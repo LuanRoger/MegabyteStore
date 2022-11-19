@@ -5,7 +5,7 @@
 #include "Motherboard.h"
 
 namespace Models {
-    Motherboard::Motherboard(string socket, string chipset, string memorySupport, string marca, string modelo, int id, int quantidade, double valor) : Hardware(marca, modelo, id, quantidade, valor), Socket(socket){
+    Motherboard::Motherboard(string socket, string chipset, string memorySupport, string brand, string model, int id, int quantity, double value) : Hardware(brand, model, id, quantity, value), Socket(socket){
         setChipset(chipset);
         setMemorySupport(memorySupport);
     }
@@ -15,8 +15,8 @@ namespace Models {
         return chipset;
     }
 
-    void Motherboard::setChipset(string novoChipset) {
-        chipset = novoChipset;
+    void Motherboard::setChipset(string newChipset) {
+        chipset = newChipset;
     }
 
     string Motherboard::getMemorySupport() {
@@ -29,10 +29,10 @@ namespace Models {
 
     void Motherboard::View(){
         cout << "ID: " << id << endl;
-        cout << "Quantidade: " << quantidade << endl;
-        cout << "Valor: " << valor << endl;
-        cout << "Marca: " << marca << endl;
-        cout << "Modelo: " << modelo << endl;
+        cout << "Quantidade: " << quantity << endl;
+        cout << "Valor: " << value << endl;
+        cout << "Marca: " << brand << endl;
+        cout << "Modelo: " << model << endl;
         cout << "Chipset: " << chipset << endl;
         cout << "Socket: " << type << endl;
         cout << "Suporte de Memoria: " << memorySupport << endl;

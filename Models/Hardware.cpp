@@ -4,33 +4,33 @@
 
 #include "Hardware.h"
 namespace Models {
-    Hardware::Hardware(string marca, string modelo, int id, int quantidade, double valor) : Product(id, quantidade, valor){
-        setMarca(marca);
-        setModelo(modelo);
+    Hardware::Hardware(string brand, string model, int id, int quantity, double value) : Product(id, quantity, value){
+        setBrand(brand);
+        setModel(model);
     }
 
-    string Hardware::getMarca() {
-        return modelo;
+    string Hardware::getBrand() {
+        return brand;
     }
 
-    void Hardware::setMarca(string novaMarca) {
-        marca = novaMarca;
+    void Hardware::setBrand(string newBrand) {
+        brand = newBrand;
     }
 
-    string Hardware::getModelo() {
-        return modelo;
+    string Hardware::getModel() {
+        return model;
     }
 
-    void Hardware::setModelo(string novoModelo) {
-        modelo = novoModelo;
+    void Hardware::setModel(string newModel) {
+        model = newModel;
     }
 
 
     void Hardware::View() {
         cout << "ID:" << id << endl;
-        cout << "Quantidade:" << quantidade << endl;
-        cout << "Valor:" << valor << endl;
-        cout << "Marca:" << marca << endl;
-        cout << "Modelo:" << modelo << endl;
+        cout << "Quantidade:" << quantity << endl;
+        cout << "Valor:" << value << endl;
+        cout << "Marca:" << brand << endl;
+        cout << "Modelo:" << model << endl;
     }
 }

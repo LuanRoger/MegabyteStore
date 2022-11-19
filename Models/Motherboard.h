@@ -17,10 +17,10 @@ namespace Models {
         string memorySupport;
 
     public:
-        Motherboard(string socket, string chipset, string memorySupport, string marca, string modelo, int id, int quantidade, double valor);
+        Motherboard(string socket, string chipset, string memorySupport, string brand, string model, int id, int quantity, double value);
 
         string getChipset();
-        void setChipset(string novoChipset);
+        void setChipset(string newChipset);
 
         string getMemorySupport();
         void setMemorySupport(string newMemorySupport);

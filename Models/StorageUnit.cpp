@@ -5,7 +5,7 @@
 #include "StorageUnit.h"
 
 namespace Models {
-    StorageUnit::StorageUnit(StorageType type, int writeSpeed, int readSpeed, string marca, string modelo, int id, int quantidade, double valor) : Hardware(marca, modelo, id, quantidade, valor){
+    StorageUnit::StorageUnit(StorageType type, int writeSpeed, int readSpeed, string brand, string model, int id, int quantity, double value) : Hardware(brand, model, id, quantity, value){
         setType(type);
         setWriteSpeed(writeSpeed);
         setReadSpeed(readSpeed);
@@ -38,10 +38,10 @@ namespace Models {
 
     void StorageUnit::View() {
         cout << "ID: " << id << endl;
-        cout << "Quantidade: " << quantidade << endl;
-        cout << "Valor: " << valor << endl;
-        cout << "Marca: " << marca << endl;
-        cout << "Modelo: " << modelo << endl;
+        cout << "Quantidade: " << quantity << endl;
+        cout << "Valor: " << value << endl;
+        cout << "Marca: " << brand << endl;
+        cout << "Modelo: " << model << endl;
         cout << "Tipo: " <<  getString() << endl;
         cout << "Velocidade de escrita: " << writeSpeed << endl;
         cout << "Velocidade de leitura: " << readSpeed << endl;
