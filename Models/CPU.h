@@ -18,7 +18,7 @@ namespace Models {
         double boostMaximumClock;
 
     public:
-        CPU(string socket, int cores, int threads, double basicClock, double boostMaximumClock, string marca, string modelo, int id, int quantidade, double valor);
+        CPU(string socket, int cores, int threads, double basicClock, double boostMaximumClock, string brand, string model, int id, int quantity, double value);
 
         string getSocket();
         void setSocket(string newSocket);

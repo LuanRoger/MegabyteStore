@@ -5,10 +5,10 @@
 #include "Product.h"
 
 namespace Models {
-    Product::Product(int id, int quantidade, double valor) {
+    Product::Product(int id, int quantity, double value) {
         setId(id);
-        setQuantidade(quantidade);
-        setValor(valor);
+        setQuantity(quantity);
+        setValue(value);
     }
 
     int Product::getId() {
@@ -19,19 +19,19 @@ namespace Models {
         id = novoId;
     }
 
-    int Product::getQuantidade() {
-        return quantidade;
+    int Product::getQuantity() {
+        return quantity;
     }
 
-    void Product::setQuantidade(int novaQuantidade) {
-        quantidade = novaQuantidade;
+    void Product::setQuantity(int newQuantity) {
+        quantity = newQuantity;
     }
 
-    double Product::getValor() {
-        return valor;
+    double Product::getValue() {
+        return value;
     }
 
-    void Product::setValor(double novoValor) {
-        valor = novoValor;
+    void Product::setValue(double newValue) {
+        value = newValue;
     }
 }

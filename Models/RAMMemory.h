@@ -9,13 +9,13 @@
 
 using namespace std;
 namespace Models {
-    class RAMMemory : Hardware{
+    class RAMMemory : public Hardware{
     private:
         string memoryType;
         int frequency;
         int capacity;
     public:
-        RAMMemory(string memoryType, int frequency, int capacity, string marca, string modelo, int id, int quantidade, double valor);
+        RAMMemory(string memoryType, int frequency, int capacity, string brand, string model, int id, int quantity, double value);
 
         string getMemoryType();
         void setType(string newMemoryType);

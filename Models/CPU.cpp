@@ -4,8 +4,8 @@
 
 #include "CPU.h"
 namespace Models {
-    CPU::CPU(string socket, int cores, int threads, double basicClock, double boostMaximumClock, string marca, string modelo, int id, int quantidade, double valor) : Hardware(marca, modelo, id, quantidade, valor),Socket(socket) {
-        this->socket = socket;
+    CPU::CPU(string socket, int cores, int threads, double basicClock, double boostMaximumClock, string brand, string model, int id, int quantity, double value) : Hardware(brand, model, id, quantity, value), Socket(socket) {
+        setSocket(socket);
         setCores(cores);
         setThreads(threads);
         setBasicClock(basicClock);
@@ -55,10 +55,10 @@ namespace Models {
 
     void CPU::View() {
         cout << "ID: " << id << endl;
-        cout << "Quantidade: " << quantidade << endl;
-        cout << "Valor: " << valor << endl;
-        cout << "Marca: " << marca << endl;
-        cout << "Modelo: " << modelo << endl;
+        cout << "Quantidade: " << quantity << endl;
+        cout << "Valor: " << value << endl;
+        cout << "Marca: " << brand << endl;
+        cout << "Modelo: " << model << endl;
         cout << "Socket: " << type << endl;
         cout << "Nucleos: " << cores << endl;
         cout << "Threads: " << threads << endl;

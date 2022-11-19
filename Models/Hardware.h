@@ -12,16 +12,16 @@ using namespace std;
 namespace Models {
     class Hardware : public Product{
     protected:
-        string marca;
-        string modelo;
+        string brand;
+        string model;
     public:
-        Hardware(string marca, string modelo, int id, int quantidade, double valor);
+        Hardware(string brand, string model, int id, int quantity, double value);
 
-        string getMarca();
-        void setMarca(string novaMarca);
+        string getBrand();
+        void setBrand(string newBrand);
 
-        string getModelo();
-        void setModelo(string novoModelo);
+        string getModel();
+        void setModel(string newModel);
 
         virtual void View();
     };

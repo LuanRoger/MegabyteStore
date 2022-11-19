@@ -10,7 +10,7 @@
 using namespace std;
 
 namespace Models {
-    class PowerSupply : Hardware{
+    class PowerSupply : public Hardware{
     private:
         string outputCapacity;
         string inputVoltage;

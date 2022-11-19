@@ -47,13 +47,13 @@ namespace Models {
 
     void PowerSupply::View() {
         cout << "ID: " << id << endl;
-        cout << "Quantidade: " << quantidade << endl;
-        cout << "Valor: " << valor << endl;
-        cout << "Marca: " << marca << endl;
-        cout << "Modelo: " << modelo << endl;
+        cout << "Quantidade: " << quantity << endl;
+        cout << "Valor: " << value << endl;
+        cout << "Marca: " << brand << endl;
+        cout << "Modelo: " << model << endl;
         cout << "Capacidade de saida: " << outputCapacity << endl;
         cout << "Voltagem da entrada: " << inputVoltage << endl;
-        cout << "PFC ativo: " << (PFC ? "Sim" : "Não") << endl;
+        cout << "PFC ativo: " << (PFC ? "S" : "Não") << endl;
         cout << "Certificação 80 plus: " << (eightyPlusCertification ? "Sim" : "Não") << endl;
     }
 }

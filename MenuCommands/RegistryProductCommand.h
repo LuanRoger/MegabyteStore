@@ -27,8 +27,8 @@ namespace MenuCommand {
     private:
         MemoryStorage::ProductsStorage* productStorage;
 
-        Models::CPU* RegistryCPU();
-        Models::GPU* RegistryGPC();
+        static Models::CPU* RegistryCPU();
+        Models::GPU* RegistryGPU();
         Models::Motherboard* RegistryMotherboard();
         Models::PowerSupply* RegistryPowerSupply();
         Models::RAMMemory* RegistryRAMMemory();
