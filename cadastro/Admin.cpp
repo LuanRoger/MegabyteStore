@@ -7,7 +7,7 @@
 Admin::Admin() {
     cout << "-- ENTRAR --" << endl;
     cout << "Ver usuarios registrados [0]" << endl;
-    cout << "Deseja acessar como: " << endl;
+    cout << "Digite a opcao desejada: " << endl;
 }
 
 void Admin::chooseOption() {
@@ -17,20 +17,20 @@ void Admin::chooseOption() {
 
 void Admin::valideOption(int option) {
     if (option == 0) {
-        impressao();
+        retriveUsers();
     } else {
         cout << "Opcao inexistente!" << endl;
     }
 }
 
-void Admin::print_lista(Conta p){
-    cout << "---Name: " << p.getUsuario() << " \n---Username:  " << p.getSenha() << endl;
+void Admin::printList(Account User){
+    cout << "---Name: " << User.getUsername() << " \n---Username:  " << User.getPassword() << endl;
     cout << endl;
 }
 
-void Admin::impressao() {
+void Admin::retriveUsers() {
     cout<<" Usuarios registrados:\n"<<endl;
-    for (int i = 0; i<listaUsuarios.size(); i++) {
-        print_lista(listaUsuarios[i]);
+    for (int i = 0; i<listOfUsers.size(); i++) {
+        printList(listOfUsers[i]);
     }
 }

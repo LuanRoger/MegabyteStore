@@ -5,17 +5,17 @@
 #ifndef CADASTRO_ADMIN_H
 #define CADASTRO_ADMIN_H
 
-#include "Conta.h"
+#include "Account.h"
 
-class Admin : Conta{
+class Admin : Account{
 private:
     int option;
 public:
     Admin();
     void chooseOption();
     void valideOption(int option);
-    void print_lista(Conta p);
-    void impressao();
+    void printList(Account User);
+    void retriveUsers();
 
 };
 

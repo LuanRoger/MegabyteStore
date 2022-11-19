@@ -1,6 +1,6 @@
 
 #include <iostream>
-#include "Cadastro.h"
+#include "Register.h"
 #include "Login.h"
 #include "Session.h"
 
@@ -45,12 +45,12 @@ int main() {
                 cout << "Está não é uma opção valida." << endl;
         }
     }*/
-    Cadastro admin;
+    Register admin;
     admin.cadastroAdmin();
     Session session;
     session.chooseOption();
-    Cadastro usuario;
-    usuario.formularInscricao();
+    Register usuario;
+    usuario.signUp();
 
     Login b; b.Logar();
 
