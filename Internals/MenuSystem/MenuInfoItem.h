@@ -1,8 +1,8 @@
 #ifndef MEGABYTESTORE_MENUINFOITEM_H
 #define MEGABYTESTORE_MENUINFOITEM_H
 
-#include "string"
-#include "Commands/IMenuCommand.h"
+#include <string>
+#include <functional>
 
 namespace MenuSystem {
 
@@ -10,15 +10,15 @@ namespace MenuSystem {
     private:
         int optionNumber;
         std::string text;
-        IMenuCommand* menuCommand;
+        std::function<void()> action;
         bool escapeOption;
     public:
-        MenuInfoItem(int optionNumber, std::string text, IMenuCommand* menuCommand, bool escapeOption = false);
+        MenuInfoItem(int optionNumber, std::string text, std::function<void()> action, bool escapeOption = false);
 
         int getOptionNumber() const;
         std::string getText();
-        IMenuCommand* getCommand();
-        void setCommand(IMenuCommand* command);
+        std::function<void()> getAction();
+        void setAction(std::function<void()> action);
         bool isEscapeOption() const;
     };
 

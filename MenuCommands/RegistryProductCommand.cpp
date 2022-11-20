@@ -3,13 +3,8 @@
 //
 
 #include "RegistryProductCommand.h"
-#include "iostream"
 
 namespace MenuCommand {
-    RegistryProductCommand::RegistryProductCommand(MemoryStorage::ProductsStorage *productsStorage) {
-        this->productStorage = productsStorage;
-    }
-
     Models::CPU *RegistryProductCommand::RegistryCPU() {
         int id;
         string socket;
@@ -238,9 +233,9 @@ namespace MenuCommand {
     }
 
 
-    void RegistryProductCommand::Execute() {
+    Product* RegistryProductCommand::Execute() {
         LineReader lineReader(ReaderOptions("Entre com uma opcao valida.", false));
-        Models::Product* newProduct = nullptr;
+        Product* newProduct = nullptr;
 
         cout << "[ 1 ] - CPU" << endl;
         cout << "[ 2 ] - GPU" << endl;
@@ -274,7 +269,6 @@ namespace MenuCommand {
                 break;
         }
 
-        if(choice != 0)
-            productStorage->AddProduct(newProduct);
+        return newProduct;
     }
 }

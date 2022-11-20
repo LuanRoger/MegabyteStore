@@ -5,6 +5,7 @@
 #ifndef MEGABYTESTORE_MENU_H
 #define MEGABYTESTORE_MENU_H
 
+#include <functional>
 #include "string"
 #include "vector"
 #include "string"
@@ -17,15 +18,18 @@ using namespace std;
 using namespace Read;
 
 namespace MenuSystem {
+    typedef function<bool()> MenuPredictor;
+
     class Menu {
     private:
         string header;
         string content;
-        vector<MenuInfoItem*> menuMapping;
+        vector<MenuInfoItem> menuMapping;
         bool running;
         int escapeOptionIndex;
 
         void RunMenu();
+        void RunMenu(MenuPredictor menuPredictor);
         void PrintHeaderContent();
         void PrintOptions();
 
@@ -37,9 +41,10 @@ namespace MenuSystem {
 
         void SetHeader(string header);
         void SetContent(string content);
-        void AddMenu(MenuInfoItem* menuInfo);
-        void AddEscapeOption(MenuInfoItem* menuInfo);
+        void AddMenu(MenuInfoItem menuInfo);
+        void AddEscapeOption(MenuInfoItem menuInfo);
 
+        void Start(MenuPredictor menuPredictor);
         void Start();
         void Stop();
     };

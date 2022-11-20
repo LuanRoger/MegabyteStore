@@ -6,7 +6,6 @@
 #define MEGABYTESTORE_REGISTRYPRODUCTCOMMAND_H
 
 #include <iostream>
-#include "../Internals/MenuSystem/Commands/IMenuCommand.h"
 #include "../MemoryStorage/ProductsStorage.h"
 #include "../Models/CPU.h"
 #include "../Models/GPU.h"
@@ -23,10 +22,7 @@ using namespace std;
 using namespace Read;
 
 namespace MenuCommand {
-    class RegistryProductCommand : public MenuSystem::IMenuCommand {
-    private:
-        MemoryStorage::ProductsStorage* productStorage;
-
+    class RegistryProductCommand {
         static Models::CPU* RegistryCPU();
         Models::GPU* RegistryGPU();
         Models::Motherboard* RegistryMotherboard();
@@ -35,8 +31,7 @@ namespace MenuCommand {
         Models::StorageUnit* RegistryStorageUnit();
 
     public:
-        RegistryProductCommand(MemoryStorage::ProductsStorage* productsStorage);
-        virtual void Execute();
+        Product* Execute();
     };
 }
 

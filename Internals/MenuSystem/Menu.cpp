@@ -3,7 +3,6 @@
 //
 
 #include "Menu.h"
-#include "Commands/ExitMenuCommand.h"
 
 namespace MenuSystem {
     Menu::Menu(std::string header) {
@@ -21,11 +20,36 @@ namespace MenuSystem {
             cout << content << endl;
     }
     void Menu::PrintOptions() {
-        for (MenuInfoItem* menuInfoItem : menuMapping) {
-            string menuOption =  "[ " + std::to_string(menuInfoItem->getOptionNumber()) + " ] - " +
-                    menuInfoItem->getText();
+        for (MenuInfoItem menuInfoItem : menuMapping) {
+            string menuOption =  "[ " + std::to_string(menuInfoItem.getOptionNumber()) + " ] - " +
+                    menuInfoItem.getText();
             cout << menuOption << endl;
         }
+    }
+    void Menu::RunMenu(MenuPredictor menuPredictor) {
+        LineReader lineReader(ReaderOptions("Digite uma value válido", false));
+        PrintHeaderContent();
+
+        do {
+            int choice;
+
+            PrintOptions();
+
+            choice = lineReader.ReadInt("Escolha uma opção: ");
+
+            std::function<void()> menuCommand = nullptr;
+            for(MenuInfoItem menuInfoItem : menuMapping) {
+                if(menuInfoItem.getOptionNumber() == choice)
+                    menuCommand = menuInfoItem.getAction();
+            }
+
+            if(menuCommand == nullptr) continue;
+
+            menuCommand();
+
+            running = menuPredictor();
+        }
+        while (running);
     }
     void Menu::RunMenu() {
         LineReader lineReader(ReaderOptions("Digite uma value válido", false));
@@ -38,29 +62,31 @@ namespace MenuSystem {
 
             choice = lineReader.ReadInt("Escolha uma opção: ");
 
-            IMenuCommand* menuCommand = nullptr;
-            for(MenuInfoItem* menuInfoItem : menuMapping) {
-                if(menuInfoItem->getOptionNumber() == choice)
-                    menuCommand = menuInfoItem->getCommand();
+            std::function<void()> menuCommand = nullptr;
+            for(MenuInfoItem menuInfoItem : menuMapping) {
+                if(menuInfoItem.getOptionNumber() == choice)
+                    menuCommand = menuInfoItem.getAction();
             }
 
             if(menuCommand == nullptr) continue;
 
-            menuCommand->Execute();
+            menuCommand();
         }
     }
 
     void Menu::InjectCommandOnEscapeOption() {
-        MenuInfoItem* menuInfo = (menuMapping)[escapeOptionIndex];
-        menuInfo->setCommand(new ExitMenuCommand(this));
+        MenuInfoItem menuInfo = (menuMapping)[escapeOptionIndex];
+        menuInfo.setAction([this]() {
+            this->Stop();
+        });
     }
 
-    void Menu::AddMenu(MenuInfoItem *menuInfo) {
+    void Menu::AddMenu(MenuInfoItem menuInfo) {
         menuMapping.push_back(menuInfo);
     }
 
-    void Menu::AddEscapeOption(MenuInfoItem *menuInfo) {
-        if(!menuInfo->isEscapeOption())
+    void Menu::AddEscapeOption(MenuInfoItem menuInfo) {
+        if(!menuInfo.isEscapeOption())
             throw std::invalid_argument("MenuInfoItem is not a escape option");
 
         escapeOptionIndex = static_cast<int>(menuMapping.size());
@@ -75,8 +101,10 @@ namespace MenuSystem {
         this->content = content;
     }
 
+    void Menu::Start(MenuPredictor menuPredictor) {
+        RunMenu(menuPredictor);
+    }
     void Menu::Start() {
-        running = true;
         RunMenu();
     }
 
