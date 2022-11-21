@@ -32,12 +32,5 @@ void Account::setPassword (string password) {
     this->password = password;
 }
 
-bool Account::valideUser(string username, string password){
-    for (int i = 0; i<listOfUsers.size(); i++) {
-        if(listOfUsers[i].getUsername()==username && listOfUsers[i].getPassword() == password) {
-            return true;
-        }
-    }
-    return false;
-}
+
 vector <Account> Account::listOfUsers;
