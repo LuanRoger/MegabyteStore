@@ -19,12 +19,14 @@ namespace Read {
         bool ValidateRead(std::string readedText);
         bool ValidateReadInt(std::string readedText);
         bool ValidateReadDouble(std::string readedText);
+        bool ValidadeReadBool(std::string readedText);
     public:
         LineReader(ReaderOptions readerOptions);
 
         std::string ReadString(std::string text, bool loop = false);
         int ReadInt(std::string text, bool loop = false);
         double ReadDouble(std::string text, bool loop = false);
+        bool ReadBool(std::string text, bool loop = false);
     };
 }
 

@@ -20,17 +20,7 @@ Account::Account (string name, string username, string password) {
 string Account::getUsername () {
     return username;
 }
-void Account::setUsername (string username) {
-    this->username = username;
-}
 
 string Account::getPassword () {
     return password;
 }
-
-void Account::setPassword (string password) {
-    this->password = password;
-}
-
-
-vector <Account> Account::listOfUsers;

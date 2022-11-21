@@ -124,8 +124,8 @@ namespace MenuCommand {
     Models::PowerSupply *RegistryProductCommand::RegistryPowerSupply() {
         string outputCapacity;
         string inputVoltage;
-        string PFC;
-        string eightyPlusCertification;
+        bool PFC;
+        bool eightyPlusCertification;
         int id;
         string brand;
         string model;
@@ -136,15 +136,15 @@ namespace MenuCommand {
 
         LineReader lineReader(ReaderOptions("Entre com uma opcao valida.", false));
 
-        id = lineReader.ReadInt("Digite o ID");
+        id = lineReader.ReadInt("Digite o ID", true);
 
         outputCapacity = lineReader.ReadString("Digite a Capacidade: ");
 
         inputVoltage = lineReader.ReadString("Digite a Voltagem: ");
 
-        PFC = lineReader.ReadString("PFC ativo (S/N): ");
+        PFC = lineReader.ReadBool("PFC ativo (s/n): ", true);
 
-        eightyPlusCertification = lineReader.ReadString("Certificado 80 plus (S/N): ");
+        eightyPlusCertification = lineReader.ReadBool("Certificado 80 plus (s/n): ", true);
 
         brand = lineReader.ReadString("Digite a brand");
 
@@ -156,11 +156,7 @@ namespace MenuCommand {
 
         cout << "OPERACAO REALIZADA COM SUCESSO" << endl;
 
-
-        option1 = (PFC == "N") ? false : true;
-        option2 = (eightyPlusCertification == "N") ? false : true;
-
-        return new Models::PowerSupply(outputCapacity, inputVoltage, option1, option2, brand,
+        return new Models::PowerSupply(outputCapacity, inputVoltage, PFC, eightyPlusCertification, brand,
                                        model, id, quantity, value);
     }
 
