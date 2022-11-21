@@ -74,24 +74,8 @@ namespace MenuSystem {
         }
     }
 
-    void Menu::InjectCommandOnEscapeOption() {
-        MenuInfoItem menuInfo = (menuMapping)[escapeOptionIndex];
-        menuInfo.setAction([this]() {
-            this->Stop();
-        });
-    }
-
     void Menu::AddMenu(MenuInfoItem menuInfo) {
         menuMapping.push_back(menuInfo);
-    }
-
-    void Menu::AddEscapeOption(MenuInfoItem menuInfo) {
-        if(!menuInfo.isEscapeOption())
-            throw std::invalid_argument("MenuInfoItem is not a escape option");
-
-        escapeOptionIndex = static_cast<int>(menuMapping.size());
-        menuMapping.push_back(menuInfo);
-        InjectCommandOnEscapeOption();
     }
 
     void Menu::SetHeader(std::string header) {

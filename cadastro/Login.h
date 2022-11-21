@@ -5,7 +5,7 @@
 #ifndef CADASTRO_LOGIN_H
 #define CADASTRO_LOGIN_H
 
-#include "Account.h"
+#include "../Models/Usuarios/Account.h"
 #include "Admin.h"
 
 class Login : public Account {

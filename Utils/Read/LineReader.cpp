@@ -82,6 +82,31 @@ namespace Read {
             output = std::stod(buffer);
         return output;
     }
+    bool LineReader::ReadBool(std::string text, bool loop) {
+        bool running = loop;
+        bool output = false;
+        std::string buffer;
+
+        do {
+            std::cout << text << std::endl;
+
+            std::getline(std::cin, buffer);
+
+            if(ValidadeReadBool(buffer)) {
+                std::cout << readerOptions.getInvalidOptionText() << std::endl;
+                buffer = "";
+
+                if(loop)
+                    continue;
+            }
+
+            running = false;
+        } while (running);
+
+        if(!buffer.empty())
+            output = buffer[0] == 's';
+        return output;
+    }
 
     bool LineReader::ValidateRead(std::string readedText) {
         return !readerOptions.isAllowEmpty() && readedText.empty();
@@ -99,5 +124,11 @@ namespace Read {
                                           readedText.end(),
                                           [](unsigned char c) { return !std::isdigit(c) && c != '.'; }) == readedText.end();
         return !readerOptions.isAllowEmpty() && readedText.empty() || !isDoubleDigit;
+    }
+
+    bool LineReader::ValidadeReadBool(std::string readedText) {
+        if(readedText.empty()) return true;
+
+        return readedText[0] != 's' && readedText[0] != 'n';
     }
 }

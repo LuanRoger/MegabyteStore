@@ -5,7 +5,7 @@
 #ifndef CADASTRO_ADMIN_H
 #define CADASTRO_ADMIN_H
 
-#include "Account.h"
+#include "../Models/Usuarios/Account.h"
 
 class Admin : Account{
 private:

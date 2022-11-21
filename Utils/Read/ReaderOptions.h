@@ -13,9 +13,12 @@ namespace Read {
     private:
         std::string invalidOptionText;
         bool allowEmpty;
+        char positiveAweser = 's';
+        char negativeAweser = 'n';
 
     public:
         ReaderOptions(std::string invalidOptionText, bool allowEmpty);
+        ReaderOptions(std::string invalidOptionText, bool allowEmpty, char positiveAweser, char negativeAweser);
 
         std::string getInvalidOptionText() const;
 

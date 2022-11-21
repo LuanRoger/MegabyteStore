@@ -23,13 +23,13 @@ void Login::Logar() {
     cout << "Digite sua senha: " << endl;
     cin >> password;
 
-    if(valideUser(username, password) == true) {
+    if(valideUser(username, password)) {
         cout << "Logado" << endl;
         if(username == "admin"){
             Admin adm;
             adm.chooseOption();
         }
-    } else if(valideUser(username, password) != true) {
+    } else if(!valideUser(username, password)) {
         cout << "Usuario ou senha incorretos!" << endl;
     }
 }

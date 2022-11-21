@@ -5,7 +5,7 @@
 #ifndef MEGABYTESTORE_REGISTER_H
 #define MEGABYTESTORE_REGISTER_H
 
-#include "Account.h"
+#include "../Models/Usuarios/Account.h"
 
 class Register : public Account {
 public:

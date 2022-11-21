@@ -5,9 +5,19 @@
 #ifndef MEGABYTESTORE_LOGINCLIENTCOMMAND_H
 #define MEGABYTESTORE_LOGINCLIENTCOMMAND_H
 
+#include "../MemoryStorage/AccountStorage.h"
+#include "../Utils/Read/LineReader.h"
+#include "../Utils/Read/ReaderOptions.h"
+
+using namespace Read;
+
 class LoginClientCommand {
+private:
+    AccountStorage* accountStorage;
+
 public:
-    void Execute();
+    LoginClientCommand(AccountStorage* accountStorage);
+    Account* Execute();
 };
 
 
