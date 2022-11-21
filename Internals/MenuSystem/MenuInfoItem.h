@@ -11,15 +11,12 @@ namespace MenuSystem {
         int optionNumber;
         std::string text;
         std::function<void()> action;
-        bool escapeOption;
     public:
-        MenuInfoItem(int optionNumber, std::string text, std::function<void()> action, bool escapeOption = false);
+        MenuInfoItem(int optionNumber, std::string text, std::function<void()> action);
 
         int getOptionNumber() const;
         std::string getText();
         std::function<void()> getAction();
-        void setAction(std::function<void()> action);
-        bool isEscapeOption() const;
     };
 
 } // MenuSystem

@@ -6,10 +6,7 @@
 using namespace std;
 
 Session::Session() {
-    cout << "-- ENTRAR --" << endl;
-    cout << "Admin [0]" << endl;
-    cout << "Client [1]" << endl;
-    cout << "Deseja acessar como: " << endl;
+
 }
 
 void Session::chooseOption() {

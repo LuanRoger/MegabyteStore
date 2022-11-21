@@ -33,8 +33,6 @@ namespace MenuSystem {
         void PrintHeaderContent();
         void PrintOptions();
 
-        void InjectCommandOnEscapeOption();
-
     public:
         Menu(string header);
         Menu(string header, string content);
@@ -42,7 +40,6 @@ namespace MenuSystem {
         void SetHeader(string header);
         void SetContent(string content);
         void AddMenu(MenuInfoItem menuInfo);
-        void AddEscapeOption(MenuInfoItem menuInfo);
 
         void Start(MenuPredictor menuPredictor);
         void Start();
