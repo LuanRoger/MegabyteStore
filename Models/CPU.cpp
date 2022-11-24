@@ -66,4 +66,37 @@ namespace Models {
         cout << "Clock maximo com boost: " << boostMaximumClock << endl;
 
     }
+
+    std::string CPU::ToJson() {
+        json jsonCpu;
+        jsonCpu = {
+                { "id", id },
+                {"quantity", quantity},
+                {"value", value},
+                {"brand", brand},
+                {"model", model},
+                {"socket", socket},
+                {"cores", cores},
+                {"threads", threads},
+                {"basic_clock", basicClock},
+                {"boost_clock", boostMaximumClock}
+        };
+        return jsonCpu.dump();
+    }
+
+    CPU* CPU::FromJson(std::string jsonText) {
+        json j = json::parse(jsonText);
+        CPU* cpu = new CPU(j["socket"],
+                           j["cores"],
+                           j["threads"],
+                           j["basic_clock"],
+                           j["boost_clock"],
+                           j["brand"],
+                           j["model"],
+                           j["id"],
+                           j["quantity"],
+                           j["value"]);
+
+        return cpu;
+    }
 }

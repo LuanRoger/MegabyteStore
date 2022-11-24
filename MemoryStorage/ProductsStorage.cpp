@@ -11,6 +11,7 @@ namespace MemoryStorage {
 
     void ProductsStorage::AddProduct(Models::Product *product) {
         products.push_back(product);
+        SaveProducts();
     }
 
     void ProductsStorage::RemoveProduct(int index) {
@@ -30,6 +31,18 @@ namespace MemoryStorage {
 
     std::vector<Models::Product*> ProductsStorage::getProducts() const {
         return products;
+    }
+
+    void ProductsStorage::SaveProducts() {
+        json productsArray = json::array();
+        for (Models::Product* product : products) {
+            productsArray.push_back(product->ToJson());
+        }
+
+        FileWriter fileWriter(PRODUCTS_JSON_FILE);
+        fileWriter.Start();
+        fileWriter.Write(productsArray.dump(4));
+        fileWriter.Flush();
     }
 
 

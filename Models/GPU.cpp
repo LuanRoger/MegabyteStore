@@ -65,4 +65,12 @@ namespace Models {
         cout << "Capacidade VRAM: " << VRAMCapacity << endl;
         cout << "Velocidade VRAM: " << VRAMSpeed << endl;
     }
+
+    std::string GPU::ToJson() {
+        return "afsdf";
+    }
+
+    GPU* GPU::FromJson(std::string jsonText) {
+
+    }
 }

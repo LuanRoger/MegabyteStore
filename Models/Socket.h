@@ -9,14 +9,12 @@
 
 using namespace std;
 namespace Models {
-    class Socket{
+    class Socket {
     protected:
         string type;
 
     public:
         Socket(string type);
-        string getType();
-        void setType(string newType);
     };
 }
 

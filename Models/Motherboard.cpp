@@ -37,4 +37,12 @@ namespace Models {
         cout << "Socket: " << type << endl;
         cout << "Suporte de Memoria: " << memorySupport << endl;
     }
+
+    std::string Motherboard::ToJson() {
+        return "afsf";
+    }
+
+    Motherboard* Motherboard::FromJson(std::string jsonText) {
+
+    }
 }

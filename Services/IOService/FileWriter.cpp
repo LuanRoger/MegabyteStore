@@ -20,6 +20,11 @@ namespace IOService {
 
         fileHandler << text;
     }
+    void FileWriter::WriteLine(std::string text) {
+        if(!open) return;
+
+        fileHandler << text + '\n';
+    }
 
     void FileWriter::Flush() {
         fileHandler.close();

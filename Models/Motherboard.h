@@ -26,6 +26,9 @@ namespace Models {
         void setMemorySupport(string newMemorySupport);
 
         void View() override;
+
+        std::string ToJson() override;
+        static Motherboard* FromJson(std::string jsonText);
     };
 }
 

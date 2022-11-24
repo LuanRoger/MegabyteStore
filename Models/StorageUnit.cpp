@@ -59,4 +59,12 @@ namespace Models {
                 return "GENERICO";
         }
     }
+
+    std::string StorageUnit::ToJson() {
+        return "adfsf";
+    }
+
+    StorageUnit *StorageUnit::FromJson(std::string jsonText) {
+
+    }
 }

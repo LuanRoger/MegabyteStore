@@ -5,8 +5,12 @@
 #ifndef MEGABYTESTORE_PRODUCT_H
 #define MEGABYTESTORE_PRODUCT_H
 
+#include "../Utils/Json/JsonSerializable.h"
+
+using namespace JsonUtils;
+
 namespace Models {
-    class Product {
+    class Product : public JsonSerializable {
     protected:
         int id, quantity;
         double value;
@@ -22,6 +26,8 @@ namespace Models {
 
         double getValue();
         void setValue(double newValue);
+
+        std::string ToJson() override = 0;
     };
 }
 

@@ -53,8 +53,9 @@ int main() {
     menu->AddMenu(MenuInfoItem(2,
                                    "Abrir submenu", [&submenu1]() { submenu1->Start(); }));
 
-    menu->AddMenu(MenuInfoItem(0, "Sair", [menu]()
+    menu->AddMenu(MenuInfoItem(0, "Sair", [menu, productsStorage]()
     {
+        productsStorage->SaveProducts();
         menu->Stop();
     }));
     menu->Start();

@@ -10,7 +10,7 @@
 using namespace std;
 
 namespace Models {
-    class PowerSupply : public Hardware{
+    class PowerSupply : public Hardware {
     private:
         string outputCapacity;
         string inputVoltage;
@@ -32,7 +32,10 @@ namespace Models {
         bool getEightyPlusCertification();
         void setEightyPlusCertification(bool newEightyPlusCertification);
 
-        virtual void View();
+        void View() override;
+
+        std::string ToJson() override;
+        static PowerSupply* FromJson(std::string jsonText);
     };
 }
 

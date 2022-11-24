@@ -12,7 +12,7 @@ using namespace std;
 namespace Models {
     enum StorageType{HDD = 1, SSD, SSDNVME};
 
-    class StorageUnit : public Hardware{
+    class StorageUnit : public Hardware {
     private:
         StorageType type;
         int writeSpeed;
@@ -33,6 +33,9 @@ namespace Models {
         string getString();
 
         void View() override;
+
+        std::string ToJson() override;
+        static StorageUnit* FromJson(std::string jsonText);
     };
 }
 

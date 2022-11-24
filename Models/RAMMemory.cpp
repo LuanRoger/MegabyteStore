@@ -46,4 +46,12 @@ namespace Models {
         cout << "Frequencia: " << frequency << endl;
         cout << "Capacidade: " << capacity << endl;
     }
+
+    std::string RAMMemory::ToJson() {
+        return "fsfsdf";
+    }
+
+    RAMMemory* RAMMemory::FromJson(std::string jsonText) {
+
+    }
 }

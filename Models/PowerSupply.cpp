@@ -56,4 +56,12 @@ namespace Models {
         cout << "PFC ativo: " << (PFC ? "S" : "Não") << endl;
         cout << "Certificação 80 plus: " << (eightyPlusCertification ? "Sim" : "Não") << endl;
     }
+
+    std::string PowerSupply::ToJson() {
+        return "fsdf";
+    }
+
+    PowerSupply* PowerSupply::FromJson(std::string jsonText) {
+
+    }
 }

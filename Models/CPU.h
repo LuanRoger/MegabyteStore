@@ -7,9 +7,12 @@
 #include "Hardware.h"
 #include "Socket.h"
 #include "string"
+#include "../Utils/Json/json.hpp"
+
+using namespace nlohmann;
 
 namespace Models {
-    class CPU : public Hardware, public Socket{
+    class CPU : public Hardware, public Socket {
     private:
         string socket;
         int cores;
@@ -37,6 +40,8 @@ namespace Models {
 
         void View() override;
 
+        std::string ToJson() override;
+        static CPU* FromJson(std::string jsonText);
     };
 }
 

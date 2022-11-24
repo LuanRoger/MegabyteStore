@@ -22,6 +22,7 @@ namespace IOService {
 
         void Start();
         void Write(std::string text);
+        void WriteLine(std::string text);
         void Flush();
     };
 

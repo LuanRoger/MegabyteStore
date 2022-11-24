@@ -7,6 +7,12 @@
 
 #include "vector"
 #include "../Models/Product.h"
+#include "../Services/IOService/FileWriter.h"
+#include "../Consts.h"
+#include "../Utils/Json/json.hpp"
+
+using namespace IOService;
+using namespace nlohmann;
 
 namespace MemoryStorage {
 
@@ -21,6 +27,7 @@ namespace MemoryStorage {
         void AddProduct(Models::Product* product);
         void RemoveProduct(int index);
         void Clear();
+        void SaveProducts();
 
         std::vector<Models::Product*> getProducts() const;
     };

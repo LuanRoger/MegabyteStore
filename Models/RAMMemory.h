@@ -27,6 +27,9 @@ namespace Models {
         void setCapacity(int newCapacity);
 
         void View() override;
+
+        std::string ToJson() override;
+        static RAMMemory* FromJson(std::string jsonText);
     };
 }
 
