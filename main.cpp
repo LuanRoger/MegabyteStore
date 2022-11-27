@@ -4,17 +4,19 @@
 #include "MenuCommands/RegisterClientCommand.h"
 #include "MenuCommands/LoginClientCommand.h"
 #include "MemoryStorage/AccountStorage.h"
+#include "Utils/InfoLoders/AccountsLoader.h"
 
 using namespace std;
 using namespace MenuSystem;
 using namespace MenuCommand;
 using namespace MemoryStorage;
+using namespace Loaders;
 
 Account* LoginMenu(AccountStorage* accountStorage) {
     Account* currentSessionAccount = nullptr;
 
     Menu* loginMenu = new Menu("-- LOGIN --", "O que deseja fazer:");
-    loginMenu->AddMenu(MenuInfoItem(1, "Entrar", [&accountStorage, &currentSessionAccount]() mutable
+    loginMenu->AddMenu(MenuInfoItem(1, "Entrar", [accountStorage, &currentSessionAccount]() mutable
     {
         LoginClientCommand command(accountStorage);
         Account* tempHolder = command.Execute();
@@ -22,10 +24,11 @@ Account* LoginMenu(AccountStorage* accountStorage) {
             currentSessionAccount = tempHolder;
         else cout << "Nome de usuario ou senha inválidos." << endl;
     }));
-    loginMenu->AddMenu(MenuInfoItem(2, "Cadastrar cliente", [&currentSessionAccount]() mutable
+    loginMenu->AddMenu(MenuInfoItem(2, "Cadastrar cliente", [accountStorage, &currentSessionAccount]() mutable
     {
         RegisterClientCommand command;
         currentSessionAccount = command.Execute();
+        accountStorage->AddAccount(currentSessionAccount);
     }));
 
     loginMenu->Start([&currentSessionAccount]() -> bool {
@@ -63,7 +66,7 @@ Menu* BuildAdmMenu(ProductsStorage* productsStorage) {
 }
 Menu* BuildClientMenu(ProductsStorage productsStorage, Account currentAccount) {
     Menu* menu = new Menu("==MegabyteStore==");
-    menu->SetContent("Bem-vindo(a), " + currentAccount.getUsername());
+    menu->SetContent("Bem-vindo(a), " + currentAccount.getUsername() + ".");
 
     menu->AddMenu(MenuInfoItem(1, "Iniciar compra",
                                []() {
@@ -78,8 +81,10 @@ Menu* BuildClientMenu(ProductsStorage productsStorage, Account currentAccount) {
 }
 
 int main() {
+    vector<Account*> loadedAccounts = AccountsLoader::Load();
+
     auto* productsStorage = new ProductsStorage();
-    auto* accountStorage = new AccountStorage();
+    auto* accountStorage = new AccountStorage(loadedAccounts);
     Account* currentAccount = LoginMenu(accountStorage);
 
     Menu* mainMenu = currentAccount->getUsername() == "admin" ?

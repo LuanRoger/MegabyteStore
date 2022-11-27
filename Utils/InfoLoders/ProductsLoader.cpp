@@ -5,16 +5,18 @@
 #include "ProductsLoader.h"
 
 namespace Loaders {
-    ProductsLoader::ProductsLoader(std::string filepath) {
-        this->filepath = filepath;
-    }
-
-    std::vector<Models::Product *> ProductsLoader::Load() {
+    std::vector<Models::Product*> ProductsLoader::Load() {
         FileReader fileReader(PRODUCTS_JSON_FILE);
         std::string jsonText = fileReader.ReadAll();
 
         nlohmann::json j;
-        j.parse(jsonText);
-        //TODO: Check whats return
+        json productsFile = json::parse(jsonText);
+
+        std::vector<Models::Product*> accounts;
+        for (const auto& jsonProducts : productsFile) {
+            //TODO: Create a product based on her type
+        }
+
+        return accounts;
     }
 } // Loaders
