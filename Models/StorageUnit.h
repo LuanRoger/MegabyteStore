@@ -6,12 +6,11 @@
 #define MEGABYTESTORE_STORAGEUNIT_H
 #include "Hardware.h"
 #include "string"
+#include "Enums/StorageType.h"
 
 using namespace std;
 
 namespace Models {
-    enum StorageType{HDD = 1, SSD, SSDNVME};
-
     class StorageUnit : public Hardware {
     private:
         StorageType type;
