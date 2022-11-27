@@ -1,0 +1,8 @@
+//
+// Created by luanr on 26/11/2022.
+//
+
+#ifndef MEGABYTESTORE_STORAGETYPE_H
+#define MEGABYTESTORE_STORAGETYPE_H
+
+#endif //MEGABYTESTORE_STORAGETYPE_H

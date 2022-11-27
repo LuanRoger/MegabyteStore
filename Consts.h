@@ -6,5 +6,6 @@
 #define MEGABYTESTORE_CONSTS_H
 
 #define PRODUCTS_JSON_FILE "products.json"
+#define ACCOUNTS_JSON_FILE "accounts.json"
 
 #endif //MEGABYTESTORE_CONSTS_H

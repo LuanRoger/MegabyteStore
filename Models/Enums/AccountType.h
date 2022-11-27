@@ -1,0 +1,8 @@
+//
+// Created by luanr on 26/11/2022.
+//
+
+#ifndef MEGABYTESTORE_ACCOUNTTYPE_H
+#define MEGABYTESTORE_ACCOUNTTYPE_H
+
+#endif //MEGABYTESTORE_ACCOUNTTYPE_H
