@@ -27,8 +27,8 @@ namespace Models {
 
         void View() override;
 
-        std::string ToJson() override;
-        static Motherboard* FromJson(std::string jsonText);
+        json ToJson() override;
+        static Motherboard* FromJson(json jsonObject);
     };
 }
 

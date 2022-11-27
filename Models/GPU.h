@@ -37,8 +37,8 @@ namespace Models {
 
         void View() override;
 
-        std::string ToJson() override;
-        static GPU* FromJson(std::string jsonText);
+        json ToJson() override;
+        static GPU* FromJson(json jsonObject);
     };
 }
 

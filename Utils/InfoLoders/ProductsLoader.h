@@ -17,13 +17,8 @@ using namespace IOService;
 namespace Loaders {
 
     class ProductsLoader {
-    private:
-        std::string filepath;
-
     public:
-        ProductsLoader(std::string filepath);
-
-        std::vector<Models::Product*> Load();
+        static std::vector<Models::Product*> Load();
     };
 
 } // Loaders

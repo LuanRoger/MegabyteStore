@@ -8,14 +8,14 @@ LoginClientCommand::LoginClientCommand(AccountStorage* accountStorage) {
     this->accountStorage = accountStorage;
 }
 
-Account* LoginClientCommand::Execute() {
+Models::Account* LoginClientCommand::Execute() {
     string username, password;
     LineReader lineReader(ReaderOptions("Digite um valor valido.", false));
 
     username = lineReader.ReadString("Digite seu usuario:");
     password = lineReader.ReadString("Digite sua senha: ");
 
-    Account* validatedUser = accountStorage->ValideUser(username, password);
+    Models::Account* validatedUser = accountStorage->ValideUser(username, password);
 
     return validatedUser;
 }

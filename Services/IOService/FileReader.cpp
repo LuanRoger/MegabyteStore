@@ -2,6 +2,7 @@
 // Created by luanr on 23/11/2022.
 //
 
+#include <sstream>
 #include "FileReader.h"
 
 namespace IOService {
@@ -10,14 +11,14 @@ namespace IOService {
     }
 
     std::string FileReader::ReadAll() {
-        std::string buffer;
+        std::stringstream fileText;
         std::ifstream readStream;
 
-        readStream.open(filepath);
-        while (readStream.eof()) {
-            readStream >> buffer;
-        }
+        readStream.open(filepath, std::ios::in);
+        std::string fileLineBuffer;
+        while (std::getline(readStream, fileLineBuffer))
+            fileText << fileLineBuffer;
 
-        return buffer;
+        return fileText.str();
     }
 } // IOService

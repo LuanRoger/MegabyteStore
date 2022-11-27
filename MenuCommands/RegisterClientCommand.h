@@ -15,7 +15,7 @@ using namespace Read;
 
 class RegisterClientCommand {
 public:
-    Account* Execute();
+    Models::Account* Execute();
 };
 
 

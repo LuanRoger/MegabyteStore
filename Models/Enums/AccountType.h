@@ -1,0 +1,10 @@
+//
+// Created by luanr on 26/11/2022.
+//
+
+#ifndef MEGABYTESTORE_ACCOUNTTYPE_H
+#define MEGABYTESTORE_ACCOUNTTYPE_H
+
+enum AccountType { ADM = 0, CLIENT };
+
+#endif //MEGABYTESTORE_ACCOUNTTYPE_H

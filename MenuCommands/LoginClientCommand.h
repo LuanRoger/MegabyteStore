@@ -17,7 +17,7 @@ private:
 
 public:
     LoginClientCommand(AccountStorage* accountStorage);
-    Account* Execute();
+    Models::Account* Execute();
 };
 
 

@@ -38,11 +38,11 @@ namespace Models {
         cout << "Suporte de Memoria: " << memorySupport << endl;
     }
 
-    std::string Motherboard::ToJson() {
-        return "afsf";
+    json Motherboard::ToJson() {
+
     }
 
-    Motherboard* Motherboard::FromJson(std::string jsonText) {
+    Motherboard* Motherboard::FromJson(json jsonObject) {
 
     }
 }

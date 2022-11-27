@@ -34,8 +34,8 @@ namespace Models {
 
         void View() override;
 
-        std::string ToJson() override;
-        static PowerSupply* FromJson(std::string jsonText);
+        json ToJson() override;
+        static PowerSupply* FromJson(json jsonObject);
     };
 }
 
