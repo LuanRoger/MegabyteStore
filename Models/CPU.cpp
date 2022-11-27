@@ -67,7 +67,7 @@ namespace Models {
 
     }
 
-    std::string CPU::ToJson() {
+    json CPU::ToJson() {
         json jsonCpu;
         jsonCpu = {
                 { "id", id },
@@ -81,21 +81,20 @@ namespace Models {
                 {"basic_clock", basicClock},
                 {"boost_clock", boostMaximumClock}
         };
-        return jsonCpu.dump();
+        return jsonCpu;
     }
 
-    CPU* CPU::FromJson(std::string jsonText) {
-        json j = json::parse(jsonText);
-        CPU* cpu = new CPU(j["socket"],
-                           j["cores"],
-                           j["threads"],
-                           j["basic_clock"],
-                           j["boost_clock"],
-                           j["brand"],
-                           j["model"],
-                           j["id"],
-                           j["quantity"],
-                           j["value"]);
+    CPU* CPU::FromJson(json jsonObject) {
+        CPU* cpu = new CPU(jsonObject["socket"],
+                           jsonObject["cores"],
+                           jsonObject["threads"],
+                           jsonObject["basic_clock"],
+                           jsonObject["boost_clock"],
+                           jsonObject["brand"],
+                           jsonObject["model"],
+                           jsonObject["id"],
+                           jsonObject["quantity"],
+                           jsonObject["value"]);
 
         return cpu;
     }

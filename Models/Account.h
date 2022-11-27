@@ -29,8 +29,8 @@ namespace Models {
         string getUsername ();
         string getPassword ();
 
-        std::string ToJson() override;
-        static Account* FromJson(std::string jsonText);
+        json ToJson() override;
+        static Account* FromJson(json jsonObject);
     };
 }
 

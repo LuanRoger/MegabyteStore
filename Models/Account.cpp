@@ -26,7 +26,7 @@ namespace Models {
         return password;
     }
 
-    std::string Account::ToJson() {
+    json Account::ToJson() {
         json jsonAccount;
         jsonAccount = {
                 {"name", name},
@@ -35,12 +35,11 @@ namespace Models {
                 {"type", accountType}
         };
 
-        return jsonAccount.dump();
+        return jsonAccount;
     }
 
-    Account* Account::FromJson(std::string jsonText) {
-        json j = json::parse(jsonText);
-        Account* account = new Account(j["name"], j["username"], j["password"], j["type"]);
+    Account* Account::FromJson(json jsonObject) {
+        auto* account = new Account(jsonObject["name"], jsonObject["username"], jsonObject["password"], jsonObject["type"]);
 
         return account;
     }

@@ -28,8 +28,8 @@ namespace Models {
 
         void View() override;
 
-        std::string ToJson() override;
-        static RAMMemory* FromJson(std::string jsonText);
+        json ToJson() override;
+        static RAMMemory* FromJson(json jsonObject);
     };
 }
 

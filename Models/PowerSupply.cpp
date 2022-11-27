@@ -57,11 +57,11 @@ namespace Models {
         cout << "Certificação 80 plus: " << (eightyPlusCertification ? "Sim" : "Não") << endl;
     }
 
-    std::string PowerSupply::ToJson() {
-        return "fsdf";
+    json PowerSupply::ToJson() {
+
     }
 
-    PowerSupply* PowerSupply::FromJson(std::string jsonText) {
+    PowerSupply* PowerSupply::FromJson(json jsonObject) {
 
     }
 }

@@ -33,8 +33,8 @@ namespace Models {
 
         void View() override;
 
-        std::string ToJson() override;
-        static StorageUnit* FromJson(std::string jsonText);
+        json ToJson() override;
+        static StorageUnit* FromJson(json jsonObject);
     };
 }
 

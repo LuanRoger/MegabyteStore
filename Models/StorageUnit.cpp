@@ -60,11 +60,11 @@ namespace Models {
         }
     }
 
-    std::string StorageUnit::ToJson() {
-        return "adfsf";
+    json StorageUnit::ToJson() {
+
     }
 
-    StorageUnit *StorageUnit::FromJson(std::string jsonText) {
+    StorageUnit *StorageUnit::FromJson(json jsonObject) {
 
     }
 }

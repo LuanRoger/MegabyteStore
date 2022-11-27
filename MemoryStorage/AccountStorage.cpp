@@ -9,7 +9,11 @@ AccountStorage::AccountStorage(std::vector<Models::Account*> loadedAccount) {
 }
 
 void AccountStorage::AddAccount(Models::Account* account) {
+    if(ValideUser(account->getUsername(), account->getPassword()) != nullptr)
+        return;
+
     accounts.push_back(account);
+    SaveAccounts();
 }
 
 Models::Account* AccountStorage::ValideUser(string username, string password) {
@@ -24,10 +28,12 @@ Models::Account* AccountStorage::ValideUser(string username, string password) {
 void AccountStorage::SaveAccounts() {
     json productsArray = json::array();
     for (Models::Account* accounts : accounts) {
-        productsArray.push_back(accounts->ToJson());
+        json accountJsonObject = accounts->ToJson();
+
+        productsArray.push_back(accountJsonObject);
     }
 
-    FileWriter fileWriter(PRODUCTS_JSON_FILE);
+    FileWriter fileWriter(ACCOUNTS_JSON_FILE);
     fileWriter.Start();
     fileWriter.Write(productsArray.dump(4));
     fileWriter.Flush();

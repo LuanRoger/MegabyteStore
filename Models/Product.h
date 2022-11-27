@@ -27,7 +27,7 @@ namespace Models {
         double getValue();
         void setValue(double newValue);
 
-        std::string ToJson() override = 0;
+        json ToJson() override = 0;
     };
 }
 
