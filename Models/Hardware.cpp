@@ -4,7 +4,7 @@
 
 #include "Hardware.h"
 namespace Models {
-    Hardware::Hardware(string brand, string model, int id, int quantity, double value) : Product(id, quantity, value){
+    Hardware::Hardware(string brand, string model, int id, int quantity, double value, int productType) : Product(id, quantity, value, productType){
         setBrand(brand);
         setModel(model);
     }

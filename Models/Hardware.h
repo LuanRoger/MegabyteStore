@@ -15,7 +15,7 @@ namespace Models {
         string brand;
         string model;
     public:
-        Hardware(string brand, string model, int id, int quantity, double value);
+        Hardware(string brand, string model, int id, int quantity, double value, int productType);
 
         string getBrand();
         void setBrand(string newBrand);

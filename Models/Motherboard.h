@@ -17,7 +17,7 @@ namespace Models {
         string memorySupport;
 
     public:
-        Motherboard(string socket, string chipset, string memorySupport, string brand, string model, int id, int quantity, double value);
+        Motherboard(string socket, string chipset, string memorySupport, string brand, string model, int id, int quantity, double value, int productType);
 
         string getChipset();
         void setChipset(string newChipset);
