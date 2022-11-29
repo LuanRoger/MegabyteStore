@@ -6,16 +6,17 @@
 #define MEGABYTESTORE_PRODUCT_H
 
 #include "../Utils/Json/JsonSerializable.h"
+#include "Enums/ProductType.h"
 
 using namespace JsonUtils;
 
 namespace Models {
     class Product : public JsonSerializable {
     protected:
-        int id, quantity;
+        int id, quantity, productType;
         double value;
     public:
-        Product(int id, int quantity, double value);
+        Product(int id, int quantity, double value, int productType);
 
         int getId();
         void setId(int newId);

@@ -5,7 +5,8 @@
 #include "Product.h"
 
 namespace Models {
-    Product::Product(int id, int quantity, double value) {
+    Product::Product(int id, int quantity, double value, int productType) {
+        this->productType = productType;
         setId(id);
         setQuantity(quantity);
         setValue(value);

@@ -5,7 +5,7 @@
 #include "Motherboard.h"
 
 namespace Models {
-    Motherboard::Motherboard(string socket, string chipset, string memorySupport, string brand, string model, int id, int quantity, double value) : Hardware(brand, model, id, quantity, value), Socket(socket){
+    Motherboard::Motherboard(string socket, string chipset, string memorySupport, string brand, string model, int id, int quantity, double value, int productType) : Hardware(brand, model, id, quantity, value, MOTHERBOARDTYPE), Socket(socket){
         setChipset(chipset);
         setMemorySupport(memorySupport);
     }

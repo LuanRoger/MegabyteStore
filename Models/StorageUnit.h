@@ -18,7 +18,7 @@ namespace Models {
         int readSpeed;
 
     public:
-        StorageUnit(StorageType type, int writeSpeed, int readSpeed, string brand, string model, int id, int quantity, double value);
+        StorageUnit(StorageType type, int writeSpeed, int readSpeed, string brand, string model, int id, int quantity, double value, int productType);
 
         StorageType getType();
         void setType(StorageType newType);
