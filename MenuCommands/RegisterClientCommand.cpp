@@ -2,10 +2,9 @@
 // Created by luanr on 19/11/2022.
 //
 
-
 #include "RegisterClientCommand.h"
 
-Account* RegisterClientCommand::Execute() {
+Models::Account* RegisterClientCommand::Execute() {
     std::string name, username, password;
 
     LineReader lineReader(ReaderOptions("Digite valores validos.", false));
@@ -14,7 +13,7 @@ Account* RegisterClientCommand::Execute() {
     username = lineReader.ReadString("Digite seu usuario: ");
     password = lineReader.ReadString("Digite sua senha: ");
 
-    Account* newAccount = new Account(name, username, password);
+    Models::Account* newAccount = new Models::Account(name, username, password, AccountType::CLIENT);
     return newAccount;
 
 }

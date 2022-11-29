@@ -84,6 +84,9 @@ namespace MenuSystem {
     void Menu::SetContent(string content) {
         this->content = content;
     }
+    void Menu::SetOnMenuStop(function<void()> onMenuStop) {
+        this->onMenuStop = onMenuStop;
+    }
 
     void Menu::Start(MenuPredictor menuPredictor) {
         RunMenu(menuPredictor);
@@ -93,6 +96,9 @@ namespace MenuSystem {
     }
 
     void Menu::Stop() {
+        if(onMenuStop != nullptr)
+            onMenuStop();
+
         running = false;
     }
 

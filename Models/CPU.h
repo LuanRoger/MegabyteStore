@@ -40,8 +40,8 @@ namespace Models {
 
         void View() override;
 
-        std::string ToJson() override;
-        static CPU* FromJson(std::string jsonText);
+        json ToJson() override;
+        static CPU* FromJson(json jsonObject);
     };
 }
 

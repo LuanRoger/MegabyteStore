@@ -26,7 +26,7 @@ namespace MenuSystem {
         string content;
         vector<MenuInfoItem> menuMapping;
         bool running;
-        int escapeOptionIndex;
+        function<void()> onMenuStop;
 
         void RunMenu();
         void RunMenu(MenuPredictor menuPredictor);
@@ -39,6 +39,7 @@ namespace MenuSystem {
 
         void SetHeader(string header);
         void SetContent(string content);
+        void SetOnMenuStop(function<void()> onMenuStop);
         void AddMenu(MenuInfoItem menuInfo);
 
         void Start(MenuPredictor menuPredictor);
