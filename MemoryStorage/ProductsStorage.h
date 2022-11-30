@@ -30,6 +30,7 @@ namespace MemoryStorage {
         void SaveProducts();
 
         std::vector<Models::Product*> getProducts() const;
+        Models::Product* getById(int id) const;
     };
 
 } // MemoryStorage

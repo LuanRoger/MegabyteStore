@@ -5,6 +5,7 @@
 #include "MenuCommands/LoginClientCommand.h"
 #include "MemoryStorage/AccountStorage.h"
 #include "Utils/InfoLoders/AccountsLoader.h"
+#include "MenuCommands/ProductBuyCommand.h"
 
 using namespace std;
 using namespace MenuSystem;
@@ -69,8 +70,9 @@ Menu* BuildClientMenu(ProductsStorage productsStorage, Account currentAccount) {
     menu->SetContent("Bem-vindo(a), " + currentAccount.getUsername() + ".");
 
     menu->AddMenu(MenuInfoItem(1, "Iniciar compra",
-                               []() {
-        cout << "Não implementado ainda." << endl;
+                               [&productsStorage]() {
+        ProductBuyCommand command(productsStorage);
+        command.Execute();
     }));
     menu->AddMenu(MenuInfoItem(0, "Sair", [menu]()
     {
