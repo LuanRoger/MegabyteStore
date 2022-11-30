@@ -6,7 +6,7 @@
 
 namespace Models {
     RAMMemory::RAMMemory(string memoryType, int frequency, int capacity, string brand, string model, int id,
-                         int quantity, double value, int productType) : Hardware(brand, model, id, quantity, value, RAMMEMORYTYPE){
+                         int quantity, double value) : Hardware(brand, model, id, quantity, value, RAMMEMORYTYPE){
         this->memoryType = memoryType;
         this->frequency = frequency;
         this->capacity = capacity;

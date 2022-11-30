@@ -5,7 +5,7 @@
 #include "StorageUnit.h"
 
 namespace Models {
-    StorageUnit::StorageUnit(StorageType type, int writeSpeed, int readSpeed, string brand, string model, int id, int quantity, double value, int productType) : Hardware(brand, model, id, quantity, value, STORAGEUNITTYPE){
+    StorageUnit::StorageUnit(StorageType type, int writeSpeed, int readSpeed, string brand, string model, int id, int quantity, double value) : Hardware(brand, model, id, quantity, value, STORAGEUNITTYPE){
         setType(type);
         setWriteSpeed(writeSpeed);
         setReadSpeed(readSpeed);

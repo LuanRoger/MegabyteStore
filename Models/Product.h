@@ -24,10 +24,10 @@ namespace Models {
         int getQuantity();
         void setQuantity(int newQuantity);
 
-
         double getValue();
         void setValue(double newValue);
 
+        virtual std::string ToString() = 0;
         json ToJson() override = 0;
     };
 }

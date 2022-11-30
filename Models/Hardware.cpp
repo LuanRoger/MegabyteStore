@@ -4,7 +4,7 @@
 
 #include "Hardware.h"
 namespace Models {
-    Hardware::Hardware(string brand, string model, int id, int quantity, double value, int productType) : Product(id, quantity, value, productType){
+    Hardware::Hardware(string brand, string model, int id, int quantity, double value, ProductType productType) : Product(id, quantity, value, productType){
         setBrand(brand);
         setModel(model);
     }
@@ -32,5 +32,9 @@ namespace Models {
         cout << "Valor:" << value << endl;
         cout << "Marca:" << brand << endl;
         cout << "Modelo:" << model << endl;
+    }
+
+    std::string Hardware::ToString() {
+        return "[ " + to_string(id) + " ] - " + model + " " + brand;
     }
 }

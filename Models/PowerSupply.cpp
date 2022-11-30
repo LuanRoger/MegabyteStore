@@ -6,7 +6,7 @@
 
 namespace Models {
     PowerSupply::PowerSupply(string outputCapacity, string inputVoltage, bool PFC, bool eightyPlusCertification,
-                             string brand, string model, int id, int quantity, double value, int productType) : Hardware(brand, model, id, quantity, value, POWERSUPPLYTYPE){
+                             string brand, string model, int id, int quantity, double value) : Hardware(brand, model, id, quantity, value, POWERSUPPLYTYPE){
         setOutputCapacity(outputCapacity);
         setInputVoltage(inputVoltage);
         setPFC(PFC);

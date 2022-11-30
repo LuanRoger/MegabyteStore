@@ -5,7 +5,7 @@
 #include "GPU.h"
 namespace Models {
     GPU::GPU(string chipset, int cudaCores, int VRAMCapacity, string VRAMType, int VRAMSpeed, string brand, string model, int id,
-             int quantity, double value, int productType) : Hardware(brand, model, id, quantity, value, GPUTYPE){
+             int quantity, double value) : Hardware(brand, model, id, quantity, value, GPUTYPE){
         setChipset(chipset);
         setCudaCores(cudaCores);
         setVRAMCapacity(VRAMCapacity);
