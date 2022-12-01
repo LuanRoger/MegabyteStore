@@ -6,7 +6,7 @@
 
 namespace Models {
     RAMMemory::RAMMemory(string memoryType, int frequency, int capacity, string brand, string model, int id,
-                         int quantity, double value, int productType) : Hardware(brand, model, id, quantity, value, RAMMEMORYTYPE){
+                         int quantity, double value) : Hardware(brand, model, id, quantity, value, RAMMEMORYTYPE){
         this->memoryType = memoryType;
         this->frequency = frequency;
         this->capacity = capacity;
@@ -48,10 +48,30 @@ namespace Models {
     }
 
     json RAMMemory::ToJson() {
-
+        json jsonRamMemory;
+        jsonRamMemory = {
+                { "id", id },
+                {"quantity", quantity},
+                {"value", value},
+                {"brand", brand},
+                {"model", model},
+                {"memory_type", memoryType},
+                {"frequency", frequency},
+                {"capacity", capacity},
+        };
+        return jsonRamMemory;
     }
 
     RAMMemory* RAMMemory::FromJson(json jsonObject) {
+        RAMMemory* ramMemoryMemory = new RAMMemory(jsonObject["memory_type"],
+                           jsonObject["frequency"],
+                           jsonObject["capacity"],
+                           jsonObject["brand"],
+                           jsonObject["model"],
+                           jsonObject["id"],
+                           jsonObject["quantity"],
+                           jsonObject["value"]);
 
+        return ramMemoryMemory;
     }
 }

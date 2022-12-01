@@ -18,7 +18,7 @@ namespace Models {
         string VRAMType;
         int VRAMSpeed;
     public:
-        GPU(string chipset, int cudaCores, int VRAMCapacity, string VRAMType, int VRAMSpeed, string brand, string model, int id, int quantity, double value, int productType);
+        GPU(string chipset, int cudaCores, int VRAMCapacity, string VRAMType, int VRAMSpeed, string brand, string model, int id, int quantity, double value);
 
         string getChipset();
         void setChipset(string newChipset);
