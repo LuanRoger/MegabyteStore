@@ -13,6 +13,7 @@
 #include "../Json/json.hpp"
 #include "../../Consts.h"
 
+using namespace Models;
 using namespace IOService;
 using namespace nlohmann;
 

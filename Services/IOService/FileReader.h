@@ -19,6 +19,7 @@ namespace IOService {
         FileReader(std::string filepath);
 
         std::string ReadAll();
+        bool Exists();
     };
 
 } // IOService
