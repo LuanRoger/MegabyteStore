@@ -67,10 +67,34 @@ namespace Models {
     }
 
     json GPU::ToJson() {
-        return "afsdf";
+        json jsonGpu;
+        jsonGpu = {
+                { "id", id },
+                {"quantity", quantity},
+                {"value", value},
+                {"brand", brand},
+                {"model", model},
+                {"vram_capacity", VRAMCapacity},
+                {"vram_speed", VRAMSpeed},
+                {"vram_type", VRAMType},
+                {"chipset", chipset},
+                {"cuda_cores", cudaCores}
+        };
+        return jsonGpu;
     }
 
     GPU* GPU::FromJson(json jsonObject) {
+        GPU* gpu = new GPU(jsonObject["chipset"],
+                           jsonObject["cuda_cores"],
+                           jsonObject["vram_capacity"],
+                           jsonObject["vram_type"],
+                           jsonObject["vram_speed"],
+                           jsonObject["brand"],
+                           jsonObject["model"],
+                           jsonObject["id"],
+                           jsonObject["quantity"],
+                           jsonObject["value"]);
 
+        return gpu;
     }
 }

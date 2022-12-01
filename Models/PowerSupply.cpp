@@ -58,10 +58,32 @@ namespace Models {
     }
 
     json PowerSupply::ToJson() {
-
+        json jsonPowerSupply;
+        jsonPowerSupply = {
+                { "id", id },
+                {"quantity", quantity},
+                {"value", value},
+                {"brand", brand},
+                {"model", model},
+                {"output_capacity", outputCapacity},
+                {"input_voltage", inputVoltage},
+                {"pfc", PFC},
+                {"eighty_plus_certification", eightyPlusCertification},
+        };
+        return jsonPowerSupply;
     }
 
     PowerSupply* PowerSupply::FromJson(json jsonObject) {
+        PowerSupply* powerSupply = new PowerSupply(jsonObject["output_capacity"],
+                           jsonObject["input_voltage"],
+                           jsonObject["pfc"],
+                           jsonObject["eighty_plus_certification"],
+                           jsonObject["brand"],
+                           jsonObject["model"],
+                           jsonObject["id"],
+                           jsonObject["quantity"],
+                           jsonObject["value"]);
 
+        return powerSupply;
     }
 }

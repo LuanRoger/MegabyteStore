@@ -61,10 +61,30 @@ namespace Models {
     }
 
     json StorageUnit::ToJson() {
-
+        json jsonStorageUnit;
+        jsonStorageUnit = {
+                { "id", id },
+                {"quantity", quantity},
+                {"value", value},
+                {"brand", brand},
+                {"model", model},
+                {"type", type},
+                {"write_speed", writeSpeed},
+                {"read_speed", readSpeed},
+        };
+        return jsonStorageUnit;
     }
 
     StorageUnit *StorageUnit::FromJson(json jsonObject) {
+        StorageUnit* storageUnit = new StorageUnit(jsonObject["type"],
+                           jsonObject["write_speed"],
+                           jsonObject["read_speed"],
+                           jsonObject["brand"],
+                           jsonObject["model"],
+                           jsonObject["id"],
+                           jsonObject["quantity"],
+                           jsonObject["value"]);
 
+        return storageUnit;
     }
 }

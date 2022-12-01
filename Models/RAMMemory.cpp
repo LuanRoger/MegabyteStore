@@ -48,10 +48,30 @@ namespace Models {
     }
 
     json RAMMemory::ToJson() {
-
+        json jsonRamMemory;
+        jsonRamMemory = {
+                { "id", id },
+                {"quantity", quantity},
+                {"value", value},
+                {"brand", brand},
+                {"model", model},
+                {"memory_type", memoryType},
+                {"frequency", frequency},
+                {"capacity", capacity},
+        };
+        return jsonRamMemory;
     }
 
     RAMMemory* RAMMemory::FromJson(json jsonObject) {
+        RAMMemory* ramMemoryMemory = new RAMMemory(jsonObject["memory_type"],
+                           jsonObject["frequency"],
+                           jsonObject["capacity"],
+                           jsonObject["brand"],
+                           jsonObject["model"],
+                           jsonObject["id"],
+                           jsonObject["quantity"],
+                           jsonObject["value"]);
 
+        return ramMemoryMemory;
     }
 }

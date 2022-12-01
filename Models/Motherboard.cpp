@@ -39,10 +39,30 @@ namespace Models {
     }
 
     json Motherboard::ToJson() {
-
+        json jsonMotherboard;
+        jsonMotherboard = {
+                { "id", id },
+                {"quantity", quantity},
+                {"value", value},
+                {"brand", brand},
+                {"model", model},
+                {"type", type},
+                {"chipset", chipset},
+                {"memory_support", memorySupport},
+        };
+        return jsonMotherboard;
     }
 
     Motherboard* Motherboard::FromJson(json jsonObject) {
+        Motherboard* motherboard = new Motherboard(jsonObject["socket"],
+                           jsonObject["chipset"],
+                           jsonObject["memory_support"],
+                           jsonObject["brand"],
+                           jsonObject["model"],
+                           jsonObject["id"],
+                           jsonObject["quantity"],
+                           jsonObject["value"]);
 
+        return motherboard;
     }
 }
