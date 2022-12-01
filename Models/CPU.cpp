@@ -4,7 +4,7 @@
 
 #include "CPU.h"
 namespace Models {
-    CPU::CPU(string socket, int cores, int threads, double basicClock, double boostMaximumClock, string brand, string model, int id, int quantity, double value, int productType) : Hardware(brand, model, id, quantity, value, CPUTYPE), Socket(socket) {
+    CPU::CPU(string socket, int cores, int threads, double basicClock, double boostMaximumClock, string brand, string model, int id, int quantity, double value) : Hardware(brand, model, id, quantity, value, CPUTYPE), Socket(socket) {
         setSocket(socket);
         setCores(cores);
         setThreads(threads);

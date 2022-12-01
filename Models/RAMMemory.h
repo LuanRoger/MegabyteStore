@@ -15,7 +15,7 @@ namespace Models {
         int frequency;
         int capacity;
     public:
-        RAMMemory(string memoryType, int frequency, int capacity, string brand, string model, int id, int quantity, double value, int productType);
+        RAMMemory(string memoryType, int frequency, int capacity, string brand, string model, int id, int quantity, double value);
 
         string getMemoryType();
         void setType(string newMemoryType);

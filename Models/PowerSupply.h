@@ -18,7 +18,7 @@ namespace Models {
         bool eightyPlusCertification;
 
     public:
-        PowerSupply(string outputCapacity, string inputVoltage, bool PFC, bool eightyPlusCertification, string marca, string modelo, int id, int quantidade, double valor, int productType);
+        PowerSupply(string outputCapacity, string inputVoltage, bool PFC, bool eightyPlusCertification, string marca, string modelo, int id, int quantidade, double valor);
 
         string getOutputCapacity();
         void setOutputCapacity(string newOutputCapacity);
