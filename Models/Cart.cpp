@@ -8,8 +8,8 @@
 namespace Models {
     double Cart::getTotal() {
         double total = 0;
-        for (Product* product : orders)
-            total += product->getValue();
+        for (Order order : orders)
+            total += order.getTotal();
 
         return total;
     }
