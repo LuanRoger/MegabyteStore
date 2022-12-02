@@ -9,7 +9,9 @@
 #include <vector>
 #include <iostream>
 #include "../../Models/Account.h"
+#include "../../Models/Enums/AccountType.h"
 #include "../../Services/IOService/FileReader.h"
+#include "../../Services/IOService/FileWriter.h"
 #include "../Json/json.hpp"
 #include "../../Consts.h"
 
@@ -20,6 +22,9 @@ using namespace nlohmann;
 namespace Loaders {
 
     class AccountsLoader {
+    private:
+        static std::vector<Models::Account*> CreateDefaultAdminAccount();
+
     public:
         static std::vector<Models::Account*> Load();
     };

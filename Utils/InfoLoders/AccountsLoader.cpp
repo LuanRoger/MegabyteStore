@@ -5,11 +5,24 @@
 #include "AccountsLoader.h"
 
 namespace Loaders {
+    std::vector<Models::Account*> AccountsLoader::CreateDefaultAdminAccount() {
+        auto* defaultAccount = new Account("admin", "admin", "admin", AccountType::ADM);
+
+        json accounts = json::array();
+        accounts.push_back(defaultAccount->ToJson());
+
+        FileWriter jsonWriter(ACCOUNTS_JSON_FILE);
+        jsonWriter.Start();
+        jsonWriter.Write(accounts.dump(4));
+        jsonWriter.Flush();
+
+        return std::vector<Models::Account*> { defaultAccount };
+    }
+
     std::vector<Models::Account*> AccountsLoader::Load() {
         FileReader fileReader(ACCOUNTS_JSON_FILE);
         if(!fileReader.Exists()) {
-            std::vector<Models::Account*> emptyVector;
-            return emptyVector;
+            return CreateDefaultAdminAccount();
         }
 
         std::string jsonText = fileReader.ReadAll();

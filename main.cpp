@@ -5,6 +5,7 @@
 #include "MenuCommands/LoginClientCommand.h"
 #include "MemoryStorage/AccountStorage.h"
 #include "Utils/InfoLoders/AccountsLoader.h"
+#include "Utils/InfoLoders/ProductsLoader.h"
 #include "MenuCommands/ProductBuyCommand.h"
 
 using namespace std;
@@ -84,8 +85,9 @@ Menu* BuildClientMenu(ProductsStorage productsStorage, Account currentAccount) {
 
 int main() {
     vector<Account*> loadedAccounts = AccountsLoader::Load();
+    vector<Product*> loadedProducts = ProductsLoader::Load();
 
-    auto* productsStorage = new ProductsStorage();
+    auto* productsStorage = new ProductsStorage(loadedProducts);
     auto* accountStorage = new AccountStorage(loadedAccounts);
     Account* currentAccount = LoginMenu(accountStorage);
 

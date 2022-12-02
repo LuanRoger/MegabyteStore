@@ -7,6 +7,11 @@
 namespace Loaders {
     std::vector<Models::Product*> ProductsLoader::Load() {
         FileReader fileReader(PRODUCTS_JSON_FILE);
+        if(!fileReader.Exists()) {
+            std::vector<Models::Product*> emptyVector;
+            return emptyVector;
+        }
+
         std::string jsonText = fileReader.ReadAll();
 
         nlohmann::json j;
