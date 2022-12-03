@@ -26,7 +26,6 @@ namespace MemoryStorage {
 
         void AddProduct(Models::Product* product);
         void RemoveProduct(int index);
-        void Clear();
         void SaveProducts();
 
         std::vector<Models::Product*> getProducts() const;

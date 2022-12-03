@@ -13,7 +13,7 @@ Models::Account* RegisterClientCommand::Execute() {
     username = lineReader.ReadString("Digite seu usuario: ");
     password = lineReader.ReadString("Digite sua senha: ");
 
-    Models::Account* newAccount = new Models::Account(name, username, password, AccountType::CLIENT);
+    auto* newAccount = new Models::Account(name, username, password, AccountType::CLIENT);
     return newAccount;
 
 }

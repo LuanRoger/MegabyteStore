@@ -23,12 +23,6 @@ namespace MemoryStorage {
         products.erase(interator);
     }
 
-    void ProductsStorage::Clear() {
-        for (Models::Product* product : products)
-            delete product;
-        products.clear();
-    }
-
     void ProductsStorage::SaveProducts() {
         json productsArray = json::array();
         for (Models::Product* product : products) {

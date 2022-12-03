@@ -14,6 +14,7 @@
 #include "../Utils/Read/LineReader.h"
 #include "../Utils/Read/ReaderOptions.h"
 #include "../MemoryStorage/ProductsStorage.h"
+#include "../Consts.h"
 
 using namespace Read;
 using namespace MenuSystem;
@@ -24,6 +25,7 @@ namespace MenuCommand {
     private:
         Models::Cart cart;
         MemoryStorage::ProductsStorage productsStorage;
+        bool finish = false;
 
         void ShowAllProducts();
         void ShowCartItems();

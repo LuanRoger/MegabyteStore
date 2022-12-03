@@ -11,11 +11,11 @@ namespace MenuCommand {
     }
 
     void ProductBuyCommand::Execute() {
-        MenuSystem::Menu* buyMenu = new MenuSystem::Menu("==Comprar==");
+        auto* buyMenu = new MenuSystem::Menu("==Comprar==");
 
         stringstream contetCreator;
-        contetCreator << "Carrinho: " + to_string(cart.getAmmount());
-        contetCreator << "Total: " + to_string(cart.getTotal());
+        contetCreator << "Carrinho: " + to_string(cart.getAmmount()) + "\n";
+        contetCreator << "Total R$: " + to_string(cart.getTotal()) + "\n";
         buyMenu->SetContent(contetCreator.str());
 
         buyMenu->AddMenu(MenuInfoItem(1, "Mostrar todos.", [this]() {ShowAllProducts();}));
@@ -38,12 +38,14 @@ namespace MenuCommand {
 
             cart.AddOrder(Models::Order(productId, quantidade, productResult->getValue()));
         }));
-        buyMenu->AddMenu(MenuInfoItem(4, "Fazer checkout", [this]() {
-            Checkout();
+        buyMenu->AddMenu(MenuInfoItem(4, "Fazer checkout", [this]() { Checkout(); }));
+        buyMenu->AddMenu(MenuInfoItem(0, "Cancelar", [this]() {
+            finish = true;
         }));
-        buyMenu->AddMenu(MenuInfoItem(0, "Sair", [buyMenu]() {
-            buyMenu->Stop();
-        }));
+
+        buyMenu->Start([this]() {
+            return !finish;
+        });
     }
 
     void ProductBuyCommand::ShowAllProducts() {
@@ -60,6 +62,18 @@ namespace MenuCommand {
     }
 
     void ProductBuyCommand::Checkout() {
-        std::cout << "Não implementado ainda" << std::endl;
+        Menu* checkoutMenu = new Menu("Pagamento");
+        checkoutMenu->SetContent("Total a pagar: R$ " + to_string(cart.getTotal()));
+        checkoutMenu->AddMenu(MenuInfoItem(1, "Pix", [this, checkoutMenu]() {
+            cout << QR_CODE_PIX << endl;
+
+            finish = true;
+            checkoutMenu->Stop();
+        }));
+        checkoutMenu->AddMenu(MenuInfoItem(0, "Voltar", [checkoutMenu]() {
+            checkoutMenu->Stop();
+        }));
+
+        checkoutMenu->Start();
     }
 } // MenuCommand
