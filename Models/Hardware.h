@@ -10,12 +10,12 @@
 
 using namespace std;
 namespace Models {
-    class Hardware : public Product{
+    class Hardware : public Product {
     protected:
         string brand;
         string model;
     public:
-        Hardware(string brand, string model, int id, int quantity, double value, int productType);
+        Hardware(string brand, string model, int id, int quantity, double value, ProductType productType);
 
         string getBrand();
         void setBrand(string newBrand);
@@ -23,6 +23,7 @@ namespace Models {
         string getModel();
         void setModel(string newModel);
 
+        std::string ToString() override;
         virtual void View();
     };
 }

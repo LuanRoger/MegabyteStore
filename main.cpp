@@ -1,3 +1,4 @@
+#include <windows.h>
 #include "MenuCommands/RegistryProductCommand.h"
 #include "Internals/MenuSystem/Menu.h"
 #include "MemoryStorage/ProductsStorage.h"
@@ -5,8 +6,9 @@
 #include "MenuCommands/LoginClientCommand.h"
 #include "MemoryStorage/AccountStorage.h"
 #include "Utils/InfoLoders/AccountsLoader.h"
+#include "Utils/InfoLoders/ProductsLoader.h"
+#include "MenuCommands/ProductBuyCommand.h"
 
-using namespace std;
 using namespace MenuSystem;
 using namespace MenuCommand;
 using namespace MemoryStorage;
@@ -51,10 +53,10 @@ Menu* BuildAdmMenu(ProductsStorage* productsStorage) {
 
     Menu* manageProducts = new Menu("==Gerenciar produtos==");
     manageProducts->AddMenu(MenuInfoItem(1, "Remover produto", []() {}));
-    manageProducts->AddMenu(MenuInfoItem(1, "Alterar estoque", []() {}));
+    manageProducts->AddMenu(MenuInfoItem(2, "Alterar estoque", []() {}));
     manageProducts->AddMenu(MenuInfoItem(0, "Voltar", [manageProducts]() { manageProducts->Stop(); }));
     menu->AddMenu(MenuInfoItem(2,
-                               "Gerenciar produtos", [&manageProducts]() { manageProducts->Start(); }));
+                               "Gerenciar produtos", [manageProducts]() { manageProducts->Start(); }));
 
     menu->AddMenu(MenuInfoItem(0, "Sair", [menu, productsStorage]()
     {
@@ -69,8 +71,9 @@ Menu* BuildClientMenu(ProductsStorage productsStorage, Account currentAccount) {
     menu->SetContent("Bem-vindo(a), " + currentAccount.getUsername() + ".");
 
     menu->AddMenu(MenuInfoItem(1, "Iniciar compra",
-                               []() {
-        cout << "Não implementado ainda." << endl;
+                               [&productsStorage]() {
+        ProductBuyCommand command(productsStorage);
+        command.Execute();
     }));
     menu->AddMenu(MenuInfoItem(0, "Sair", [menu]()
     {
@@ -81,9 +84,12 @@ Menu* BuildClientMenu(ProductsStorage productsStorage, Account currentAccount) {
 }
 
 int main() {
-    vector<Account*> loadedAccounts = AccountsLoader::Load();
+    SetConsoleOutputCP(CP_UTF8);
 
-    auto* productsStorage = new ProductsStorage();
+    vector<Account*> loadedAccounts = AccountsLoader::Load();
+    vector<Product*> loadedProducts = ProductsLoader::Load();
+
+    auto* productsStorage = new ProductsStorage(loadedProducts);
     auto* accountStorage = new AccountStorage(loadedAccounts);
     Account* currentAccount = LoginMenu(accountStorage);
 

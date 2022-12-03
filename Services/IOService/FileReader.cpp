@@ -21,4 +21,13 @@ namespace IOService {
 
         return fileText.str();
     }
+
+    bool FileReader::Exists() {
+        std::ifstream existStream;
+        existStream.open(filepath, std::fstream::in);
+        bool exist = !(!existStream);
+        existStream.close();
+
+        return exist;
+    }
 } // IOService

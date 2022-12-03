@@ -23,16 +23,6 @@ namespace MemoryStorage {
         products.erase(interator);
     }
 
-    void ProductsStorage::Clear() {
-        for (Models::Product* product : products)
-            delete product;
-        products.clear();
-    }
-
-    std::vector<Models::Product*> ProductsStorage::getProducts() const {
-        return products;
-    }
-
     void ProductsStorage::SaveProducts() {
         json productsArray = json::array();
         for (Models::Product* product : products) {
@@ -45,5 +35,17 @@ namespace MemoryStorage {
         fileWriter.Flush();
     }
 
+    std::vector<Models::Product*> ProductsStorage::getProducts() const {
+        return products;
+    }
+    Models::Product *ProductsStorage::getById(int id) const {
+        Models::Product* searchResult = nullptr;
+        for (Models::Product* product : products) {
+            if(product->getId() == id)
+                searchResult = product;
+        }
+
+        return searchResult;
+    }
 
 } // MemoryStorage
