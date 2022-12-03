@@ -1,5 +1,5 @@
 #include <windows.h>
-#include "MenuCommands/RegistryProductCommand.h"
+#include "MenuCommands/RegisterProductCommand.h"
 #include "Internals/MenuSystem/Menu.h"
 #include "MemoryStorage/ProductsStorage.h"
 #include "MenuCommands/RegisterClientCommand.h"
@@ -40,15 +40,16 @@ Account* LoginMenu(AccountStorage* accountStorage) {
     return currentSessionAccount;
 }
 
-Menu* BuildAdmMenu(ProductsStorage* productsStorage) {
+Menu* BuildAdmMenu(ProductsStorage productsStorage, Account currentAccount) {
     Menu* menu = new Menu("==MegabyteStore==");
+    menu->SetContent("Bem-vindo(a), " + currentAccount.getUsername() + ".");
 
     menu->AddMenu(MenuInfoItem(1, "Cadastrar produto.",
                                [&productsStorage]() {
-                                   RegistryProductCommand command;
+                                   RegisterProductCommand command;
                                    Product* newProduct = command.Execute();
                                    if(newProduct != nullptr)
-                                       productsStorage->AddProduct(newProduct);
+                                       productsStorage.AddProduct(newProduct);
                                }));
 
     Menu* manageProducts = new Menu("==Gerenciar produtos==");
@@ -56,11 +57,11 @@ Menu* BuildAdmMenu(ProductsStorage* productsStorage) {
     manageProducts->AddMenu(MenuInfoItem(2, "Alterar estoque", []() {}));
     manageProducts->AddMenu(MenuInfoItem(0, "Voltar", [manageProducts]() { manageProducts->Stop(); }));
     menu->AddMenu(MenuInfoItem(2,
-                               "Gerenciar produtos", [manageProducts]() { manageProducts->Start(); }));
+                               "Gerenciar produtos.", [manageProducts]() { manageProducts->Start(); }));
 
-    menu->AddMenu(MenuInfoItem(0, "Sair", [menu, productsStorage]()
+    menu->AddMenu(MenuInfoItem(0, "Sair", [menu, &productsStorage]()
     {
-        productsStorage->SaveProducts();
+        productsStorage.SaveProducts();
         menu->Stop();
     }));
 
@@ -71,7 +72,7 @@ Menu* BuildClientMenu(ProductsStorage productsStorage, Account currentAccount) {
     menu->SetContent("Bem-vindo(a), " + currentAccount.getUsername() + ".");
 
     menu->AddMenu(MenuInfoItem(1, "Iniciar compra",
-                               [&productsStorage]() {
+                               [productsStorage]() {
         ProductBuyCommand command(productsStorage);
         command.Execute();
     }));
@@ -94,7 +95,7 @@ int main() {
     Account* currentAccount = LoginMenu(accountStorage);
 
     Menu* mainMenu = currentAccount->getUsername() == "admin" ?
-            BuildAdmMenu(productsStorage) :
+            BuildAdmMenu(*productsStorage, *currentAccount) :
             BuildClientMenu(*productsStorage, *currentAccount);
 
     mainMenu->Start();

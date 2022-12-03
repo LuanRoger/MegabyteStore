@@ -7,7 +7,7 @@
 
 #include <string>
 
-#define PRODUCTS_JSON_FILE "orders.json"
+#define PRODUCTS_JSON_FILE "products.json"
 #define ACCOUNTS_JSON_FILE "accounts.json"
 
 const std::string QR_CODE_PIX = " ▄▄▄▄▄▄▄  ▄  ▄▄▄▄▄▄  ▄▄▄  ▄▄▄▄ ▄ ▄▄▄▄▄▄  ▄ ▄▄▄▄▄▄  \n"

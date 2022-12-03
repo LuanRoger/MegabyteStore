@@ -2,10 +2,10 @@
 // Created by luanr on 26/10/2022.
 //
 
-#include "RegistryProductCommand.h"
+#include "RegisterProductCommand.h"
 
 namespace MenuCommand {
-    Models::CPU *RegistryProductCommand::RegistryCPU() {
+    Models::CPU *RegisterProductCommand::RegistryCPU() {
         int id;
         string socket;
         int cores;
@@ -19,25 +19,25 @@ namespace MenuCommand {
 
         LineReader lineReader(ReaderOptions("Entre com uma opcao valida.", false));
 
-        id = lineReader.ReadInt("Digite o ID");
+        id = lineReader.ReadInt("Digite o ID:");
 
-        socket = lineReader.ReadString("Digite o socket");
+        socket = lineReader.ReadString("Digite o socket:");
 
-        cores = lineReader.ReadInt("Digite a quantity de cores");
+        cores = lineReader.ReadInt("Digite a quantitade de cores:");
 
-        threads = lineReader.ReadInt("Digite a quantity de threads");
+        threads = lineReader.ReadInt("Digite a quantitdade de threads:");
 
-        basicClock = lineReader.ReadDouble("Digite o clock base");
+        basicClock = lineReader.ReadDouble("Digite o clock base:");
 
-        boostMaximumClock = lineReader.ReadDouble("Digite o clock maximo");
+        boostMaximumClock = lineReader.ReadDouble("Digite o clock maximo:");
 
-        brand = lineReader.ReadString("Digite a brand");
+        brand = lineReader.ReadString("Digite a marca:");
 
-        model = lineReader.ReadString("Digite o brand");
+        model = lineReader.ReadString("Digite o modelo:");
 
-        quantity = lineReader.ReadInt("Digite o quantity");
+        quantity = lineReader.ReadInt("Digite a quantitade em estoque:");
 
-        value = lineReader.ReadDouble("Digite o value");
+        value = lineReader.ReadDouble("Digite o valor a ser vendido:");
 
         cout << "OPERACAO REALIZADA COM SUCESSO" << endl;
 
@@ -46,7 +46,7 @@ namespace MenuCommand {
                                id, quantity, value);
     }
 
-    Models::GPU *RegistryProductCommand::RegistryGPU() {
+    Models::GPU *RegisterProductCommand::RegistryGPU() {
         int id;
         string chipset;
         int cudaCores;
@@ -87,7 +87,7 @@ namespace MenuCommand {
                                id, quantity, value);
     }
 
-    Models::Motherboard *RegistryProductCommand::RegistryMotherboard() {
+    Models::Motherboard *RegisterProductCommand::RegistryMotherboard() {
         int id;
         string chipset;
         string memorySupport;
@@ -121,7 +121,7 @@ namespace MenuCommand {
                                        id, quantity, value);
     }
 
-    Models::PowerSupply *RegistryProductCommand::RegistryPowerSupply() {
+    Models::PowerSupply *RegisterProductCommand::RegistryPowerSupply() {
         string outputCapacity;
         string inputVoltage;
         bool PFC;
@@ -160,7 +160,7 @@ namespace MenuCommand {
                                        model, id, quantity, value);
     }
 
-    Models::RAMMemory *RegistryProductCommand::RegistryRAMMemory() {
+    Models::RAMMemory *RegisterProductCommand::RegistryRAMMemory() {
         string memoryType;
         int frequency;
         int capacity;
@@ -194,7 +194,7 @@ namespace MenuCommand {
                                      model, id, quantity, value);
     }
 
-    Models::StorageUnit *RegistryProductCommand::RegistryStorageUnit() {
+    Models::StorageUnit *RegisterProductCommand::RegistryStorageUnit() {
         StorageType type;
         int writeSpeed;
         int readSpeed;
@@ -229,41 +229,35 @@ namespace MenuCommand {
     }
 
 
-    Product* RegistryProductCommand::Execute() {
-        LineReader lineReader(ReaderOptions("Entre com uma opcao valida.", false));
+    Product* RegisterProductCommand::Execute() {
         Product* newProduct = nullptr;
 
-        cout << "[ 1 ] - CPU" << endl;
-        cout << "[ 2 ] - GPU" << endl;
-        cout << "[ 3 ] - Placa Mae" << endl;
-        cout << "[ 4 ] - Fonte" << endl;
-        cout << "[ 5 ] - Memoria RAM" << endl;
-        cout << "[ 6 ] - Unidade de armazenamento" << endl;
-        cout << "[ 0 ] - Voltar" << endl;
-        int choice;
+        Menu* registerProductMenu = new Menu("==Cadastrar produto==");
+        registerProductMenu->AddMenu(MenuInfoItem(1, "CPU", [&newProduct]() {
+            newProduct = RegistryCPU();
+        }));
+        registerProductMenu->AddMenu(MenuInfoItem(2, "GPU", [&newProduct]() {
+            newProduct = RegistryGPU();
+        }));
+        registerProductMenu->AddMenu(MenuInfoItem(3, "Placa Mãe", [&newProduct]() {
+            newProduct = RegistryMotherboard();
+        }));
+        registerProductMenu->AddMenu(MenuInfoItem(4, "Fonte", [&newProduct]() {
+            newProduct = RegistryPowerSupply();
+        }));
+        registerProductMenu->AddMenu(MenuInfoItem(5, "Memoria RAM", [&newProduct]() {
+            newProduct = RegistryRAMMemory();
+        }));
+        registerProductMenu->AddMenu(MenuInfoItem(6, "Unidade de armazenamento", [&newProduct]() {
+            newProduct = RegistryStorageUnit();
+        }));
+        registerProductMenu->AddMenu(MenuInfoItem(0, "Voltar", [registerProductMenu]() {
+            registerProductMenu->Stop();
+        }));
 
-        choice = lineReader.ReadInt("Digite qual tipo de produto deseja cadastrar:");
-
-        switch (choice) {
-            case 1:
-                newProduct = RegistryCPU();
-                break;
-            case 2:
-                newProduct = RegistryGPU();
-                break;
-            case 3:
-                newProduct = RegistryMotherboard();
-                break;
-            case 4:
-                newProduct = RegistryPowerSupply();
-                break;
-            case 5:
-                newProduct = RegistryRAMMemory();
-                break;
-            case 6:
-                newProduct = RegistryStorageUnit();
-                break;
-        }
+        registerProductMenu->Start([&newProduct]() {
+            return newProduct == nullptr;
+        });
 
         return newProduct;
     }
