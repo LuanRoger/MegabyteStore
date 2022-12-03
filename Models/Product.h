@@ -13,10 +13,11 @@ using namespace JsonUtils;
 namespace Models {
     class Product : public JsonSerializable {
     protected:
-        int id, quantity, productType;
+        int id, quantity;
+        ProductType productType;
         double value;
     public:
-        Product(int id, int quantity, double value, int productType);
+        Product(int id, int quantity, double value, ProductType productType);
 
         int getId();
         void setId(int newId);

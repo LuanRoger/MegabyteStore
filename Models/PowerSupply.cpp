@@ -61,6 +61,7 @@ namespace Models {
         json jsonPowerSupply;
         jsonPowerSupply = {
                 { "id", id },
+                {"type", productType },
                 {"quantity", quantity},
                 {"value", value},
                 {"brand", brand},

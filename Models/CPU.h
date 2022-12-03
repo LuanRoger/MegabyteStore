@@ -12,19 +12,16 @@
 using namespace nlohmann;
 
 namespace Models {
-    class CPU : public Hardware, public Socket {
+    class CPU : public Hardware {
     private:
-        string socket;
+        Socket socket;
         int cores;
         int threads;
         double basicClock;
         double boostMaximumClock;
 
     public:
-        CPU(string socket, int cores, int threads, double basicClock, double boostMaximumClock, string brand, string model, int id, int quantity, double value);
-
-        string getSocket();
-        void setSocket(string newSocket);
+        CPU(Socket socket, int cores, int threads, double basicClock, double boostMaximumClock, string brand, string model, int id, int quantity, double value);
 
         int getCores();
         void setCores(int newCores);

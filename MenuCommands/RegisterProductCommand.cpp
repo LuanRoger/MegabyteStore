@@ -41,7 +41,7 @@ namespace MenuCommand {
 
         cout << "OPERACAO REALIZADA COM SUCESSO" << endl;
 
-        return new Models::CPU(socket, cores, threads, basicClock,
+        return new Models::CPU(Socket(socket), cores, threads, basicClock,
                                boostMaximumClock, brand, model,
                                id, quantity, value);
     }
@@ -117,7 +117,7 @@ namespace MenuCommand {
 
         cout << "OPERACAO REALIZADA COM SUCESSO" << endl;
 
-        return new Models::Motherboard(socket, chipset, memorySupport, brand, model,
+        return new Models::Motherboard(Socket(socket), chipset, memorySupport, brand, model,
                                        id, quantity, value);
     }
 

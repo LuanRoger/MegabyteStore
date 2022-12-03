@@ -4,17 +4,27 @@
 
 #ifndef MEGABYTESTORE_SOCKET_H
 #define MEGABYTESTORE_SOCKET_H
-#include "Hardware.h"
-#include "string"
 
-using namespace std;
+#include <string>
+#include "Hardware.h"
+#include "../Utils/Json/JsonSerializable.h"
+#include "../Utils/Json/json.hpp"
+
+using namespace nlohmann;
+using namespace JsonUtils;
+
 namespace Models {
-    class Socket {
-    protected:
-        string type;
+    class Socket : public JsonSerializable {
+    private:
+        std::string type;
 
     public:
         Socket(string type);
+
+        std::string getSocketType();
+
+        json ToJson() override;
+        static Socket FromJson(json jsonObject);
     };
 }
 

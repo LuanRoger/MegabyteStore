@@ -3,21 +3,14 @@
 //
 
 #include "CPU.h"
+
 namespace Models {
-    CPU::CPU(string socket, int cores, int threads, double basicClock, double boostMaximumClock, string brand, string model, int id, int quantity, double value) : Hardware(brand, model, id, quantity, value, CPUTYPE), Socket(socket) {
-        setSocket(socket);
+    CPU::CPU(Socket socket, int cores, int threads, double basicClock, double boostMaximumClock, string brand, string model, int id, int quantity, double value) :
+    Hardware(brand, model, id, quantity, value, ProductType::CPUTYPE), socket(socket) {
         setCores(cores);
         setThreads(threads);
         setBasicClock(basicClock);
         setBoostMaximumClock(boostMaximumClock);
-    }
-
-    string CPU::getSocket() {
-        return socket;
-    }
-
-    void CPU::setSocket(string newSocket) {
-        socket = newSocket;
     }
 
     int CPU::getCores() {
@@ -59,7 +52,7 @@ namespace Models {
         cout << "Valor: " << value << endl;
         cout << "Marca: " << brand << endl;
         cout << "Modelo: " << model << endl;
-        cout << "Socket: " << type << endl;
+        cout << "Socket: " << socket.getSocketType() << endl;
         cout << "Nucleos: " << cores << endl;
         cout << "Threads: " << threads << endl;
         cout << "Clock basico: " << basicClock << endl;
@@ -70,12 +63,13 @@ namespace Models {
     json CPU::ToJson() {
         json jsonCpu;
         jsonCpu = {
-                { "id", id },
+                {"id", id },
+                {"type", productType },
                 {"quantity", quantity},
                 {"value", value},
                 {"brand", brand},
                 {"model", model},
-                {"socket", socket},
+                {"socket", socket.ToJson()},
                 {"cores", cores},
                 {"threads", threads},
                 {"basic_clock", basicClock},
@@ -85,7 +79,7 @@ namespace Models {
     }
 
     CPU* CPU::FromJson(json jsonObject) {
-        CPU* cpu = new CPU(jsonObject["socket"],
+        CPU* cpu = new CPU(Socket::FromJson(jsonObject["socket"]),
                            jsonObject["cores"],
                            jsonObject["threads"],
                            jsonObject["basic_clock"],

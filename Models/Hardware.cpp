@@ -35,6 +35,6 @@ namespace Models {
     }
 
     std::string Hardware::ToString() {
-        return "[ " + to_string(id) + " ] - " + model + " " + brand;
+        return "{ " + to_string(id) + " } - " + model + " " + brand;
     }
 }

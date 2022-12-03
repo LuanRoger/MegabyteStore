@@ -11,13 +11,14 @@
 using namespace std;
 
 namespace Models {
-    class Motherboard : public Hardware, Socket{
+    class Motherboard : public Hardware {
     private:
+        Socket socket;
         string chipset;
         string memorySupport;
 
     public:
-        Motherboard(string socket, string chipset, string memorySupport, string brand, string model, int id, int quantity, double value);
+        Motherboard(Socket socket, string chipset, string memorySupport, string brand, string model, int id, int quantity, double value);
 
         string getChipset();
         void setChipset(string newChipset);

@@ -70,6 +70,7 @@ namespace Models {
         json jsonGpu;
         jsonGpu = {
                 { "id", id },
+                {"type", productType },
                 {"quantity", quantity},
                 {"value", value},
                 {"brand", brand},
