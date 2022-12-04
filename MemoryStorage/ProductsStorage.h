@@ -5,31 +5,33 @@
 #ifndef MEGABYTESTORE_PRODUCTSSTORAGE_H
 #define MEGABYTESTORE_PRODUCTSSTORAGE_H
 
-#include "vector"
+#include <list>
 #include "../Models/Product.h"
+#include "../Models/Order.h"
 #include "../Services/IOService/FileWriter.h"
 #include "../Consts.h"
 #include "../Utils/Json/json.hpp"
 
 using namespace IOService;
+using namespace Models;
 using namespace nlohmann;
 
 namespace MemoryStorage {
 
     class ProductsStorage {
     private:
-        std::vector<Models::Product*> products;
+        std::list<Product*> products;
 
     public:
         ProductsStorage() = default;
-        ProductsStorage(std::vector<Models::Product*> loadedProducts);
+        ProductsStorage(std::list<Product*> loadedProducts);
 
-        void AddProduct(Models::Product* product);
-        void RemoveProduct(int index);
+        void AddProduct(Product* product);
+        void RemoveByOrder(Order order);
         void SaveProducts();
 
-        std::vector<Models::Product*> getProducts() const;
-        Models::Product* getById(int id) const;
+        std::list<Product*> getProducts() const;
+        Product* getById(int id) const;
     };
 
 } // MemoryStorage

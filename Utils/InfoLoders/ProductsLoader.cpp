@@ -5,11 +5,11 @@
 #include "ProductsLoader.h"
 
 namespace Loaders {
-    std::vector<Models::Product*> ProductsLoader::Load() {
+    std::list<Models::Product*> ProductsLoader::Load() {
         FileReader fileReader(PRODUCTS_JSON_FILE);
         if(!fileReader.Exists()) {
-            std::vector<Models::Product*> emptyVector;
-            return emptyVector;
+            std::list<Models::Product*> emptyList;
+            return emptyList;
         }
 
         std::string jsonText = fileReader.ReadAll();
@@ -17,7 +17,7 @@ namespace Loaders {
         nlohmann::json j;
         json productsFile = json::parse(jsonText);
 
-        std::vector<Models::Product*> products;
+        std::list<Models::Product*> products;
         for (const auto& jsonProducts : productsFile) {
             switch ((int)jsonProducts["type"]) {
                 case ProductType::CPUTYPE:

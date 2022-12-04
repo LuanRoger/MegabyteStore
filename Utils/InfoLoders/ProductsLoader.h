@@ -6,7 +6,7 @@
 #define MEGABYTESTORE_PRODUCTSLOADER_H
 
 #include <string>
-#include <vector>
+#include <list>
 #include "../../Models/Product.h"
 #include "../../Models/CPU.h"
 #include "../../Models/GPU.h"
@@ -26,7 +26,7 @@ namespace Loaders {
 
     class ProductsLoader {
     public:
-        static std::vector<Models::Product*> Load();
+        static std::list<Models::Product*> Load();
     };
 
 } // Loaders

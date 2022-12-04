@@ -5,27 +5,38 @@
 #include "ProductsStorage.h"
 
 namespace MemoryStorage {
-    ProductsStorage::ProductsStorage(std::vector<Models::Product*> loadedProducts) {
+    ProductsStorage::ProductsStorage(std::list<Product*> loadedProducts) {
         products = loadedProducts;
     }
 
-    void ProductsStorage::AddProduct(Models::Product *product) {
+    void ProductsStorage::AddProduct(Product *product) {
         products.push_back(product);
         SaveProducts();
     }
 
-    void ProductsStorage::RemoveProduct(int index) {
-        auto interator = products.begin();
+    void ProductsStorage::RemoveByOrder(Order order) {
+        Product* toRemoveProduct = nullptr;
 
-        for (int c = 0; c < index; ++c)
-            interator++;
+        for (Product* product : products) {
+            if(product->getId() == order.getProductId()) {
+                toRemoveProduct = product;
+                break;
+            }
+        }
 
-        products.erase(interator);
+        if(toRemoveProduct == nullptr) return;
+
+        toRemoveProduct->setQuantity(toRemoveProduct->getQuantity() - order.getQuantity());
+        if(toRemoveProduct->getQuantity() <= 0) {
+            products.remove(toRemoveProduct);
+        }
+
+        SaveProducts();
     }
 
     void ProductsStorage::SaveProducts() {
         json productsArray = json::array();
-        for (Models::Product* product : products) {
+        for (Product* product : products) {
             productsArray.push_back(product->ToJson());
         }
 
@@ -35,12 +46,12 @@ namespace MemoryStorage {
         fileWriter.Flush();
     }
 
-    std::vector<Models::Product*> ProductsStorage::getProducts() const {
+    std::list<Product*> ProductsStorage::getProducts() const {
         return products;
     }
-    Models::Product *ProductsStorage::getById(int id) const {
-        Models::Product* searchResult = nullptr;
-        for (Models::Product* product : products) {
+    Product *ProductsStorage::getById(int id) const {
+        Product* searchResult = nullptr;
+        for (Product* product : products) {
             if(product->getId() == id)
                 searchResult = product;
         }

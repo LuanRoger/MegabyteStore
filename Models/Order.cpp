@@ -8,7 +8,7 @@ namespace Models {
     Order::Order(int productId, int quantity, double productBaseValue) {
         this->productId = productId;
         this->quantity = quantity;
-        this->productBaseValue;
+        this->productBaseValue = productBaseValue;
     }
 
     int Order::getProductId() {

@@ -29,9 +29,21 @@ namespace Models {
         orders.push_back(order);
     }
 
-    void Cart::RemoveProduct(int id) {
-        std::remove_if(orders.begin(), orders.end(), [&](Order item) {
-            return item.getProductId() == id;
-        });
+    bool Cart::RemoveProduct(int id) {
+        int orderIndex = -1;
+
+        int counter = 0;
+        for (Models::Order order : orders) {
+            if(id == order.getProductId()) {
+                orderIndex = counter;
+                break;
+            }
+            counter++;
+        }
+
+        if(orderIndex == -1) return false;
+
+        orders.erase(orders.begin() + counter);
+        return true;
     }
 } // Models

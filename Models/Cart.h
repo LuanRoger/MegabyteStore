@@ -16,7 +16,7 @@ namespace Models {
 
     public:
         void AddOrder(Models::Order order);
-        void RemoveProduct(int id);
+        bool RemoveProduct(int id);
 
         double getTotal();
         int getAmmount();
