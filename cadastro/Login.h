@@ -10,12 +10,12 @@
 
 class Login : public Account {
 private:
-    Account User;
+    string username;
+    string password;
 public:
-    Account getUser ();
-    void setUser (Account User, string senha);
+    void insertUser();
+    void insertPassword();
     void Logar();
-
 };
 
 

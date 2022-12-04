@@ -52,6 +52,17 @@ Menu* BuildAdmMenu(ProductsStorage* productsStorage) {
     Menu* manageProducts = new Menu("==Gerenciar produtos==");
     manageProducts->AddMenu(MenuInfoItem(1, "Remover produto", []() {}));
     manageProducts->AddMenu(MenuInfoItem(1, "Alterar estoque", []() {}));
+    manageProducts->AddMenu(MenuInfoItem(3, "Salvar no arquivo", [&productsStorage]() {
+        FileWriter fileWriter("Relatorio.txt");
+        fileWriter.Start();
+        for (Product* i: productsStorage->getProducts()) {
+            fileWriter.WriteLine("------------------------------");
+            fileWriter.WriteLine(to_string(i->getId()));
+            fileWriter.WriteLine(to_string(i->getQuantity()));
+            fileWriter.WriteLine(to_string(i->getValue()));
+        }
+        fileWriter.Flush();
+    }));
     manageProducts->AddMenu(MenuInfoItem(0, "Voltar", [manageProducts]() { manageProducts->Stop(); }));
     menu->AddMenu(MenuInfoItem(2,
                                "Gerenciar produtos", [&manageProducts]() { manageProducts->Start(); }));
