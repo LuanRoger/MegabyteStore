@@ -24,14 +24,15 @@ namespace MenuCommand {
     class ProductBuyCommand {
     private:
         Models::Cart cart;
-        MemoryStorage::ProductsStorage productsStorage;
+        MemoryStorage::ProductsStorage* productsStorage;
         bool finish = false;
 
         void ShowAllProducts();
         void ShowCartItems();
         void Checkout();
+        void UpdateStorage();
     public:
-        ProductBuyCommand(MemoryStorage::ProductsStorage productsStorage);
+        ProductBuyCommand(MemoryStorage::ProductsStorage* productsStorage);
         void Execute();
 
     };

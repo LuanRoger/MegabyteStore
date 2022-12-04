@@ -40,43 +40,46 @@ Account* LoginMenu(AccountStorage* accountStorage) {
     return currentSessionAccount;
 }
 
-Menu* BuildAdmMenu(ProductsStorage productsStorage, Account currentAccount) {
-    Menu* menu = new Menu("==MegabyteStore==");
-    menu->SetContent("Bem-vindo(a), " + currentAccount.getUsername() + ".");
-
-    menu->AddMenu(MenuInfoItem(1, "Cadastrar produto.",
-                               [&productsStorage]() {
-                                   RegisterProductCommand command;
-                                   Product* newProduct = command.Execute();
-                                   if(newProduct != nullptr)
-                                       productsStorage.AddProduct(newProduct);
-                               }));
-
+void ShowManageProductsMenu() {
     Menu* manageProducts = new Menu("==Gerenciar produtos==");
     manageProducts->AddMenu(MenuInfoItem(1, "Remover produto", []() {}));
     manageProducts->AddMenu(MenuInfoItem(2, "Alterar estoque", []() {}));
     manageProducts->AddMenu(MenuInfoItem(0, "Voltar", [manageProducts]() { manageProducts->Stop(); }));
-    menu->AddMenu(MenuInfoItem(2,
-                               "Gerenciar produtos.", [manageProducts]() { manageProducts->Start(); }));
 
-    menu->AddMenu(MenuInfoItem(0, "Sair", [menu, &productsStorage]()
+    manageProducts->Start();
+}
+Menu* BuildAdmMenu(ProductsStorage* productsStorage, Account currentAccount) {
+    Menu* menu = new Menu("==MegabyteStore==");
+    menu->SetContent("Bem-vindo(a), " + currentAccount.getUsername() + ".");
+
+    menu->AddMenu(MenuInfoItem(1, "Cadastrar produto.",
+                               [productsStorage]() {
+                                   RegisterProductCommand command;
+                                   Product* newProduct = command.Execute();
+                                   if(newProduct != nullptr)
+                                       productsStorage->AddProduct(newProduct);
+                               }));
+    menu->AddMenu(MenuInfoItem(2,
+                               "Gerenciar produtos.", []() { ShowManageProductsMenu(); }));
+
+    menu->AddMenu(MenuInfoItem(0, "Sair.", [menu]()
     {
-        productsStorage.SaveProducts();
         menu->Stop();
     }));
 
     return menu;
 }
-Menu* BuildClientMenu(ProductsStorage productsStorage, Account currentAccount) {
+
+Menu* BuildClientMenu(ProductsStorage* productsStorage, Account currentAccount) {
     Menu* menu = new Menu("==MegabyteStore==");
     menu->SetContent("Bem-vindo(a), " + currentAccount.getUsername() + ".");
 
-    menu->AddMenu(MenuInfoItem(1, "Iniciar compra",
+    menu->AddMenu(MenuInfoItem(1, "Iniciar compra.",
                                [productsStorage]() {
         ProductBuyCommand command(productsStorage);
         command.Execute();
     }));
-    menu->AddMenu(MenuInfoItem(0, "Sair", [menu]()
+    menu->AddMenu(MenuInfoItem(0, "Sair.", [menu]()
     {
         menu->Stop();
     }));
@@ -88,15 +91,15 @@ int main() {
     SetConsoleOutputCP(CP_UTF8);
 
     vector<Account*> loadedAccounts = AccountsLoader::Load();
-    vector<Product*> loadedProducts = ProductsLoader::Load();
+    list<Product*> loadedProducts = ProductsLoader::Load();
 
     auto* productsStorage = new ProductsStorage(loadedProducts);
     auto* accountStorage = new AccountStorage(loadedAccounts);
     Account* currentAccount = LoginMenu(accountStorage);
 
     Menu* mainMenu = currentAccount->getUsername() == "admin" ?
-            BuildAdmMenu(*productsStorage, *currentAccount) :
-            BuildClientMenu(*productsStorage, *currentAccount);
+            BuildAdmMenu(productsStorage, *currentAccount) :
+            BuildClientMenu(productsStorage, *currentAccount);
 
     mainMenu->Start();
 
