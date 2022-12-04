@@ -40,10 +40,35 @@ Account* LoginMenu(AccountStorage* accountStorage) {
     return currentSessionAccount;
 }
 
-void ShowManageProductsMenu() {
+void ShowManageProductsMenu(ProductsStorage* productsStorage) {
     Menu* manageProducts = new Menu("==Gerenciar produtos==");
-    manageProducts->AddMenu(MenuInfoItem(1, "Remover produto", []() {}));
-    manageProducts->AddMenu(MenuInfoItem(2, "Alterar estoque", []() {}));
+    manageProducts->AddMenu(MenuInfoItem(1, "Adicionar ao estoque", [productsStorage]() {
+        LineReader lineReader(ReaderOptions("Digite um valor valido", false));
+
+        int productId = lineReader.ReadInt("Digite o ID do produto que deseja adicionar:");
+        int addQuantity = lineReader.ReadInt("Digite quantos deseja adicionar:");
+        bool result = productsStorage->IncrementProductById(productId, addQuantity);
+
+        if(!result) {
+            cout << "Este produto não existe." << endl;
+            return;
+        }
+
+        cout << "Estoque atualizado com sucesso" << endl;
+    }));
+    manageProducts->AddMenu(MenuInfoItem(2, "Remover produto", [productsStorage]() {
+        LineReader lineReader(ReaderOptions("Digite um valor valido", false));
+
+        int productId = lineReader.ReadInt("Digite o ID do produto que deseja remover:");
+        int removeQuantity = lineReader.ReadInt("Digite quantos deseja remover:");
+        bool result = productsStorage->RemoveById(productId, removeQuantity);
+
+        if(!result) {
+            cout << "Este produto não existe." << endl;
+            return;
+        }
+        cout << "Produto removido com sucesso" << endl;
+    }));
     manageProducts->AddMenu(MenuInfoItem(0, "Voltar", [manageProducts]() { manageProducts->Stop(); }));
 
     manageProducts->Start();
@@ -60,7 +85,8 @@ Menu* BuildAdmMenu(ProductsStorage* productsStorage, Account currentAccount) {
                                        productsStorage->AddProduct(newProduct);
                                }));
     menu->AddMenu(MenuInfoItem(2,
-                               "Gerenciar produtos.", []() { ShowManageProductsMenu(); }));
+                               "Gerenciar produtos.", [productsStorage]()
+                               { ShowManageProductsMenu(productsStorage); }));
 
     menu->AddMenu(MenuInfoItem(0, "Sair.", [menu]()
     {

@@ -27,7 +27,9 @@ namespace MemoryStorage {
         ProductsStorage(std::list<Product*> loadedProducts);
 
         void AddProduct(Product* product);
-        void RemoveByOrder(Order order);
+        bool IncrementProductById(int id, int quantity);
+        bool RemoveByOrder(Order order);
+        bool RemoveById(int id, int quantity);
         void SaveProducts();
 
         std::list<Product*> getProducts() const;

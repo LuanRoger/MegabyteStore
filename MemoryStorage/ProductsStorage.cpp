@@ -13,8 +13,24 @@ namespace MemoryStorage {
         products.push_back(product);
         SaveProducts();
     }
+    bool ProductsStorage::IncrementProductById(int id, int quantity) {
+        Product* toUpdateProduct = nullptr;
 
-    void ProductsStorage::RemoveByOrder(Order order) {
+        for (Product* product : products) {
+            if(product->getId() == id) {
+                toUpdateProduct = product;
+                break;
+            }
+        }
+
+        if(toUpdateProduct == nullptr) return false;
+
+        toUpdateProduct->setQuantity(toUpdateProduct->getQuantity() + quantity);
+        SaveProducts();
+        return true;
+    }
+
+    bool ProductsStorage::RemoveByOrder(Order order) {
         Product* toRemoveProduct = nullptr;
 
         for (Product* product : products) {
@@ -24,7 +40,7 @@ namespace MemoryStorage {
             }
         }
 
-        if(toRemoveProduct == nullptr) return;
+        if(toRemoveProduct == nullptr) return false;
 
         toRemoveProduct->setQuantity(toRemoveProduct->getQuantity() - order.getQuantity());
         if(toRemoveProduct->getQuantity() <= 0) {
@@ -32,6 +48,27 @@ namespace MemoryStorage {
         }
 
         SaveProducts();
+        return true;
+    }
+    bool ProductsStorage::RemoveById(int id, int quantity) {
+        Product* toRemoveProduct = nullptr;
+
+        for (Product* product : products) {
+            if(product->getId() == id) {
+                toRemoveProduct = product;
+                break;
+            }
+        }
+
+        if(toRemoveProduct == nullptr) return false;
+
+        toRemoveProduct->setQuantity(toRemoveProduct->getQuantity() - quantity);
+        if(toRemoveProduct->getQuantity() <= 0) {
+            products.remove(toRemoveProduct);
+        }
+
+        SaveProducts();
+        return true;
     }
 
     void ProductsStorage::SaveProducts() {
