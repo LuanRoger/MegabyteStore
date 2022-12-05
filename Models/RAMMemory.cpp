@@ -51,6 +51,7 @@ namespace Models {
         json jsonRamMemory;
         jsonRamMemory = {
                 { "id", id },
+                {"type", productType },
                 {"quantity", quantity},
                 {"value", value},
                 {"brand", brand},

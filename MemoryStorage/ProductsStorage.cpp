@@ -5,37 +5,75 @@
 #include "ProductsStorage.h"
 
 namespace MemoryStorage {
-    ProductsStorage::ProductsStorage(std::vector<Models::Product*> loadedProducts) {
+    ProductsStorage::ProductsStorage(std::list<Product*> loadedProducts) {
         products = loadedProducts;
     }
 
-    void ProductsStorage::AddProduct(Models::Product *product) {
+    void ProductsStorage::AddProduct(Product *product) {
         products.push_back(product);
         SaveProducts();
     }
+    bool ProductsStorage::IncrementProductById(int id, int quantity) {
+        Product* toUpdateProduct = nullptr;
 
-    void ProductsStorage::RemoveProduct(int index) {
-        auto interator = products.begin();
+        for (Product* product : products) {
+            if(product->getId() == id) {
+                toUpdateProduct = product;
+                break;
+            }
+        }
 
-        for (int c = 0; c < index; ++c)
-            interator++;
+        if(toUpdateProduct == nullptr) return false;
 
-        products.erase(interator);
+        toUpdateProduct->setQuantity(toUpdateProduct->getQuantity() + quantity);
+        SaveProducts();
+        return true;
     }
 
-    void ProductsStorage::Clear() {
-        for (Models::Product* product : products)
-            delete product;
-        products.clear();
-    }
+    bool ProductsStorage::RemoveByOrder(Order order) {
+        Product* toRemoveProduct = nullptr;
 
-    std::vector<Models::Product*> ProductsStorage::getProducts() const {
-        return products;
+        for (Product* product : products) {
+            if(product->getId() == order.getProductId()) {
+                toRemoveProduct = product;
+                break;
+            }
+        }
+
+        if(toRemoveProduct == nullptr) return false;
+
+        toRemoveProduct->setQuantity(toRemoveProduct->getQuantity() - order.getQuantity());
+        if(toRemoveProduct->getQuantity() <= 0) {
+            products.remove(toRemoveProduct);
+        }
+
+        SaveProducts();
+        return true;
+    }
+    bool ProductsStorage::RemoveById(int id, int quantity) {
+        Product* toRemoveProduct = nullptr;
+
+        for (Product* product : products) {
+            if(product->getId() == id) {
+                toRemoveProduct = product;
+                break;
+            }
+        }
+
+        if(toRemoveProduct == nullptr) return false;
+
+        toRemoveProduct->setQuantity(toRemoveProduct->getQuantity() - quantity);
+        if(toRemoveProduct->getQuantity() <= 0) {
+            products.remove(toRemoveProduct);
+        }
+
+        SaveProducts();
+        return true;
     }
 
     void ProductsStorage::SaveProducts() {
         json productsArray = json::array();
-        for (Models::Product* product : products) {
+        for (Product* product : products) {
             productsArray.push_back(product->ToJson());
         }
 
@@ -45,5 +83,17 @@ namespace MemoryStorage {
         fileWriter.Flush();
     }
 
+    std::list<Product*> ProductsStorage::getProducts() const {
+        return products;
+    }
+    Product *ProductsStorage::getById(int id) const {
+        Product* searchResult = nullptr;
+        for (Product* product : products) {
+            if(product->getId() == id)
+                searchResult = product;
+        }
+
+        return searchResult;
+    }
 
 } // MemoryStorage

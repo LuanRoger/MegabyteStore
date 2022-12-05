@@ -1,12 +1,14 @@
-#include "MenuCommands/RegistryProductCommand.h"
+#include <windows.h>
+#include "MenuCommands/RegisterProductCommand.h"
 #include "Internals/MenuSystem/Menu.h"
 #include "MemoryStorage/ProductsStorage.h"
 #include "MenuCommands/RegisterClientCommand.h"
 #include "MenuCommands/LoginClientCommand.h"
 #include "MemoryStorage/AccountStorage.h"
 #include "Utils/InfoLoders/AccountsLoader.h"
+#include "Utils/InfoLoders/ProductsLoader.h"
+#include "MenuCommands/ProductBuyCommand.h"
 
-using namespace std;
 using namespace MenuSystem;
 using namespace MenuCommand;
 using namespace MemoryStorage;
@@ -38,12 +40,46 @@ Account* LoginMenu(AccountStorage* accountStorage) {
     return currentSessionAccount;
 }
 
-Menu* BuildAdmMenu(ProductsStorage* productsStorage) {
+void ShowManageProductsMenu(ProductsStorage* productsStorage) {
+    Menu* manageProducts = new Menu("==Gerenciar produtos==");
+    manageProducts->AddMenu(MenuInfoItem(1, "Adicionar ao estoque", [productsStorage]() {
+        LineReader lineReader(ReaderOptions("Digite um valor valido", false));
+
+        int productId = lineReader.ReadInt("Digite o ID do produto que deseja adicionar:");
+        int addQuantity = lineReader.ReadInt("Digite quantos deseja adicionar:");
+        bool result = productsStorage->IncrementProductById(productId, addQuantity);
+
+        if(!result) {
+            cout << "Este produto não existe." << endl;
+            return;
+        }
+
+        cout << "Estoque atualizado com sucesso" << endl;
+    }));
+    manageProducts->AddMenu(MenuInfoItem(2, "Remover produto", [productsStorage]() {
+        LineReader lineReader(ReaderOptions("Digite um valor valido", false));
+
+        int productId = lineReader.ReadInt("Digite o ID do produto que deseja remover:");
+        int removeQuantity = lineReader.ReadInt("Digite quantos deseja remover:");
+        bool result = productsStorage->RemoveById(productId, removeQuantity);
+
+        if(!result) {
+            cout << "Este produto não existe." << endl;
+            return;
+        }
+        cout << "Produto removido com sucesso" << endl;
+    }));
+    manageProducts->AddMenu(MenuInfoItem(0, "Voltar", [manageProducts]() { manageProducts->Stop(); }));
+
+    manageProducts->Start();
+}
+Menu* BuildAdmMenu(ProductsStorage* productsStorage, Account currentAccount) {
     Menu* menu = new Menu("==MegabyteStore==");
+    menu->SetContent("Bem-vindo(a), " + currentAccount.getUsername() + ".");
 
     menu->AddMenu(MenuInfoItem(1, "Cadastrar produto.",
-                               [&productsStorage]() {
-                                   RegistryProductCommand command;
+                               [productsStorage]() {
+                                   RegisterProductCommand command;
                                    Product* newProduct = command.Execute();
                                    if(newProduct != nullptr)
                                        productsStorage->AddProduct(newProduct);
@@ -65,25 +101,27 @@ Menu* BuildAdmMenu(ProductsStorage* productsStorage) {
     }));
     manageProducts->AddMenu(MenuInfoItem(0, "Voltar", [manageProducts]() { manageProducts->Stop(); }));
     menu->AddMenu(MenuInfoItem(2,
-                               "Gerenciar produtos", [&manageProducts]() { manageProducts->Start(); }));
+                               "Gerenciar produtos.", [productsStorage]()
+                               { ShowManageProductsMenu(productsStorage); }));
 
-    menu->AddMenu(MenuInfoItem(0, "Sair", [menu, productsStorage]()
+    menu->AddMenu(MenuInfoItem(0, "Sair.", [menu]()
     {
-        productsStorage->SaveProducts();
         menu->Stop();
     }));
 
     return menu;
 }
-Menu* BuildClientMenu(ProductsStorage productsStorage, Account currentAccount) {
+
+Menu* BuildClientMenu(ProductsStorage* productsStorage, Account currentAccount) {
     Menu* menu = new Menu("==MegabyteStore==");
     menu->SetContent("Bem-vindo(a), " + currentAccount.getUsername() + ".");
 
-    menu->AddMenu(MenuInfoItem(1, "Iniciar compra",
-                               []() {
-        cout << "Não implementado ainda." << endl;
+    menu->AddMenu(MenuInfoItem(1, "Iniciar compra.",
+                               [productsStorage]() {
+        ProductBuyCommand command(productsStorage);
+        command.Execute();
     }));
-    menu->AddMenu(MenuInfoItem(0, "Sair", [menu]()
+    menu->AddMenu(MenuInfoItem(0, "Sair.", [menu]()
     {
         menu->Stop();
     }));
@@ -92,15 +130,18 @@ Menu* BuildClientMenu(ProductsStorage productsStorage, Account currentAccount) {
 }
 
 int main() {
-    vector<Account*> loadedAccounts = AccountsLoader::Load();
+    SetConsoleOutputCP(CP_UTF8);
 
-    auto* productsStorage = new ProductsStorage();
+    vector<Account*> loadedAccounts = AccountsLoader::Load();
+    list<Product*> loadedProducts = ProductsLoader::Load();
+
+    auto* productsStorage = new ProductsStorage(loadedProducts);
     auto* accountStorage = new AccountStorage(loadedAccounts);
     Account* currentAccount = LoginMenu(accountStorage);
 
     Menu* mainMenu = currentAccount->getUsername() == "admin" ?
-            BuildAdmMenu(productsStorage) :
-            BuildClientMenu(*productsStorage, *currentAccount);
+            BuildAdmMenu(productsStorage, *currentAccount) :
+            BuildClientMenu(productsStorage, *currentAccount);
 
     mainMenu->Start();
 

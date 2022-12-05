@@ -5,7 +5,8 @@
 #include "Motherboard.h"
 
 namespace Models {
-    Motherboard::Motherboard(string socket, string chipset, string memorySupport, string brand, string model, int id, int quantity, double value) : Hardware(brand, model, id, quantity, value, MOTHERBOARDTYPE), Socket(socket){
+    Motherboard::Motherboard(Socket socket, string chipset, string memorySupport, string brand, string model, int id, int quantity, double value) :
+    Hardware(brand, model, id, quantity, value, MOTHERBOARDTYPE), socket(socket) {
         setChipset(chipset);
         setMemorySupport(memorySupport);
     }
@@ -34,7 +35,7 @@ namespace Models {
         cout << "Marca: " << brand << endl;
         cout << "Modelo: " << model << endl;
         cout << "Chipset: " << chipset << endl;
-        cout << "Socket: " << type << endl;
+        cout << "Socket: " << socket.getSocketType() << endl;
         cout << "Suporte de Memoria: " << memorySupport << endl;
     }
 
@@ -42,11 +43,12 @@ namespace Models {
         json jsonMotherboard;
         jsonMotherboard = {
                 { "id", id },
+                {"type", productType },
                 {"quantity", quantity},
                 {"value", value},
                 {"brand", brand},
                 {"model", model},
-                {"type", type},
+                {"socket", socket.ToJson()},
                 {"chipset", chipset},
                 {"memory_support", memorySupport},
         };
@@ -54,7 +56,7 @@ namespace Models {
     }
 
     Motherboard* Motherboard::FromJson(json jsonObject) {
-        Motherboard* motherboard = new Motherboard(jsonObject["socket"],
+        Motherboard* motherboard = new Motherboard(Socket::FromJson(jsonObject["socket"]),
                            jsonObject["chipset"],
                            jsonObject["memory_support"],
                            jsonObject["brand"],
