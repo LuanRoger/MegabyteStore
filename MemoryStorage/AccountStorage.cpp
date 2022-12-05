@@ -8,17 +8,21 @@ AccountStorage::AccountStorage(std::vector<Models::Account*> loadedAccount) {
     accounts = loadedAccount;
 }
 
-void AccountStorage::AddAccount(Models::Account* account) {
-    if(ValideUser(account->getUsername(), account->getPassword()) != nullptr)
-        return;
+bool AccountStorage::AddAccount(Models::Account* account) {
+    for (Models::Account* registeredAccount : accounts) {
+        if(account->getUsername() == registeredAccount->getUsername())
+            return false;
+    }
 
     accounts.push_back(account);
     SaveAccounts();
+
+    return true;
 }
 
 Models::Account* AccountStorage::ValideUser(string username, string password) {
     for (int i = 0; i<accounts.size(); i++) {
-        if(accounts[i]->getUsername()==username && accounts[i]->getPassword() == password) {
+        if(accounts[i]->getUsername() == username && accounts[i]->getPassword() == password) {
             return accounts[i];
         }
     }

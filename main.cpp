@@ -29,8 +29,16 @@ Account* LoginMenu(AccountStorage* accountStorage) {
     loginMenu->AddMenu(MenuInfoItem(2, "Cadastrar cliente", [accountStorage, &currentSessionAccount]() mutable
     {
         RegisterClientCommand command;
-        currentSessionAccount = command.Execute();
-        accountStorage->AddAccount(currentSessionAccount);
+        Account* tempHolder = command.Execute();
+        bool result = accountStorage->AddAccount(tempHolder);
+
+        if(!result) {
+            cout << "Este usuario já esta cadastrado." << endl;
+            delete tempHolder;
+            return;
+        }
+
+        currentSessionAccount = tempHolder;
     }));
 
     loginMenu->Start([&currentSessionAccount]() -> bool {
@@ -69,6 +77,16 @@ void ShowManageProductsMenu(ProductsStorage* productsStorage) {
         }
         cout << "Produto removido com sucesso" << endl;
     }));
+    manageProducts->AddMenu(MenuInfoItem(3, "Salvar no arquivo", [&productsStorage]() {
+        FileWriter fileWriter("Relatorio.txt");
+        fileWriter.Start();
+        for (Product* i: productsStorage->getProducts()) {
+            fileWriter.WriteLine("------------------------------");
+            fileWriter.WriteLine(i->ToString() + " x" + to_string(i->getQuantity()) +
+            " R$ " + to_string(i->getValue()) + "/u");
+        }
+        fileWriter.Flush();
+    }));
     manageProducts->AddMenu(MenuInfoItem(0, "Voltar", [manageProducts]() { manageProducts->Stop(); }));
 
     manageProducts->Start();
@@ -84,22 +102,6 @@ Menu* BuildAdmMenu(ProductsStorage* productsStorage, Account currentAccount) {
                                    if(newProduct != nullptr)
                                        productsStorage->AddProduct(newProduct);
                                }));
-
-    Menu* manageProducts = new Menu("==Gerenciar produtos==");
-    manageProducts->AddMenu(MenuInfoItem(1, "Remover produto", []() {}));
-    manageProducts->AddMenu(MenuInfoItem(1, "Alterar estoque", []() {}));
-    manageProducts->AddMenu(MenuInfoItem(3, "Salvar no arquivo", [&productsStorage]() {
-        FileWriter fileWriter("Relatorio.txt");
-        fileWriter.Start();
-        for (Product* i: productsStorage->getProducts()) {
-            fileWriter.WriteLine("------------------------------");
-            fileWriter.WriteLine(to_string(i->getId()));
-            fileWriter.WriteLine(to_string(i->getQuantity()));
-            fileWriter.WriteLine(to_string(i->getValue()));
-        }
-        fileWriter.Flush();
-    }));
-    manageProducts->AddMenu(MenuInfoItem(0, "Voltar", [manageProducts]() { manageProducts->Stop(); }));
     menu->AddMenu(MenuInfoItem(2,
                                "Gerenciar produtos.", [productsStorage]()
                                { ShowManageProductsMenu(productsStorage); }));

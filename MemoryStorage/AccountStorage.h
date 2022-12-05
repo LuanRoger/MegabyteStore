@@ -23,7 +23,7 @@ public:
     AccountStorage() = default;
     AccountStorage(std::vector<Models::Account*> loadedAccount);
 
-    void AddAccount(Models::Account* account);
+    bool AddAccount(Models::Account* account);
     Models::Account* ValideUser(string username, string password);
 
     void SaveAccounts();
