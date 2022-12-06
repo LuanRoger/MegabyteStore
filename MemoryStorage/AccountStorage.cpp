@@ -43,3 +43,7 @@ void AccountStorage::SaveAccounts() {
     fileWriter.Flush();
 }
 
+std::vector<Models::Account *> AccountStorage::getAccounts() const {
+    return accounts;
+}
+

@@ -8,69 +8,78 @@ namespace MenuSystem {
     Menu::Menu(std::string header) {
         this->header = header;
     }
-    Menu::Menu(string header, string content) {
+    Menu::Menu(std::string header, std::string content) {
         this->header = header;
         this->content = content;
     }
 
     void Menu::PrintHeaderContent() {
-        cout << header << endl;
+        std::cout << header << std::endl;
 
         if(!content.empty())
-            cout << content << endl;
+            std::cout << content << std::endl;
     }
     void Menu::PrintOptions() {
         for (MenuInfoItem menuInfoItem : menuMapping) {
-            string menuOption =  "[ " + std::to_string(menuInfoItem.getOptionNumber()) + " ] - " +
+            std::string menuOption =  "[ " + std::to_string(menuInfoItem.getOptionNumber()) + " ] - " +
                     menuInfoItem.getText();
-            cout << menuOption << endl;
+            std::cout << menuOption << std::endl;
         }
     }
     void Menu::RunMenu(MenuPredictor menuPredictor) {
         LineReader lineReader(ReaderOptions("Digite uma value válido", false));
-        PrintHeaderContent();
 
         do {
             int choice;
 
+            PrintHeaderContent();
             PrintOptions();
 
             choice = lineReader.ReadInt("Escolha uma opção: ");
 
-            std::function<void()> menuCommand = nullptr;
+            MenuInfoItem* menuCommandInfo = nullptr;
             for(MenuInfoItem menuInfoItem : menuMapping) {
-                if(menuInfoItem.getOptionNumber() == choice)
-                    menuCommand = menuInfoItem.getAction();
+                if(menuInfoItem.getOptionNumber() == choice) {
+                    menuCommandInfo = &menuInfoItem;
+                    break;
+                }
             }
 
-            if(menuCommand == nullptr) continue;
+            if(menuCommandInfo == nullptr) continue;
 
-            menuCommand();
+            menuCommandInfo->getAction()();
 
+            if(menuCommandInfo->getPersistResult())
+                ClearResult();
             running = menuPredictor();
         }
         while (running);
     }
     void Menu::RunMenu() {
         LineReader lineReader(ReaderOptions("Digite uma value válido", false));
-        PrintHeaderContent();
 
         while (running) {
             int choice;
 
+            PrintHeaderContent();
             PrintOptions();
 
             choice = lineReader.ReadInt("Escolha uma opção: ");
 
-            std::function<void()> menuCommand = nullptr;
+            MenuInfoItem* menuCommandInfo = nullptr;
             for(MenuInfoItem menuInfoItem : menuMapping) {
-                if(menuInfoItem.getOptionNumber() == choice)
-                    menuCommand = menuInfoItem.getAction();
+                if(menuInfoItem.getOptionNumber() == choice) {
+                    menuCommandInfo = &menuInfoItem;
+                    break;
+                }
             }
 
-            if(menuCommand == nullptr) continue;
+            if(menuCommandInfo == nullptr) continue;
 
-            menuCommand();
+            menuCommandInfo->getAction()();
+
+            if(menuCommandInfo->getPersistResult())
+                ClearResult();
         }
     }
 
@@ -81,10 +90,10 @@ namespace MenuSystem {
     void Menu::SetHeader(std::string header) {
         this->header = header;
     }
-    void Menu::SetContent(string content) {
+    void Menu::SetContent(std::string content) {
         this->content = content;
     }
-    void Menu::SetOnMenuStop(function<void()> onMenuStop) {
+    void Menu::SetOnMenuStop(std::function<void()> onMenuStop) {
         this->onMenuStop = onMenuStop;
     }
 
@@ -100,6 +109,11 @@ namespace MenuSystem {
             onMenuStop();
 
         running = false;
+    }
+
+    void Menu::ClearResult() {
+        if(system("cls") != 0)
+            system("clear");
     }
 
 } // MenuSystem

@@ -25,6 +25,8 @@ public:
     bool AddAccount(Models::Account* account);
     Models::Account* ValideUser(string username, string password);
 
+    std::vector<Models::Account*> getAccounts() const;
+
     void SaveAccounts();
 };
 

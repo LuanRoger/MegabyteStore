@@ -11,12 +11,14 @@ namespace MenuSystem {
         int optionNumber;
         std::string text;
         std::function<void()> action;
+        bool persistResult = true;
     public:
-        MenuInfoItem(int optionNumber, std::string text, std::function<void()> action);
+        MenuInfoItem(int optionNumber, std::string text, std::function<void()> action, bool persistResult = true);
 
         int getOptionNumber() const;
         std::string getText();
         std::function<void()> getAction();
+        bool getPersistResult() const;
     };
 
 } // MenuSystem

@@ -57,7 +57,7 @@ void ShowProductsMenu(ProductsStorage* productsStorage) {
                                  " R$ " + to_string(product->getValue()) + "/u" << endl;
         }
         cout << "------------------------------" << endl;
-    }));
+    }, false));
     productsMenu->AddMenu(MenuInfoItem(2, "Ver produto detalhado", [productsStorage]() {
         LineReader lineReader(ReaderOptions("Digite um valor válido.", false));
         int productId = lineReader.ReadInt("Digite o ID do produto:");
@@ -69,7 +69,7 @@ void ShowProductsMenu(ProductsStorage* productsStorage) {
         }
 
         product->View();
-    }));
+    }, false));
     productsMenu->AddMenu(MenuInfoItem(0, "Voltar.", [&productsMenu]() {  productsMenu->Stop(); }));
 
     productsMenu->Start();

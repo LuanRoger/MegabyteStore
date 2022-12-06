@@ -6,10 +6,11 @@
 
 namespace MenuSystem {
 
-    MenuInfoItem::MenuInfoItem(int optionNumber, std::string text, std::function<void()> action) {
+    MenuInfoItem::MenuInfoItem(int optionNumber, std::string text, std::function<void()> action, bool persistResult) {
         this->optionNumber = optionNumber;
         this->text = text;
         this->action = action;
+        this->persistResult = persistResult;
     }
 
     int MenuInfoItem::getOptionNumber() const {
@@ -22,5 +23,9 @@ namespace MenuSystem {
 
     std::function<void()> MenuInfoItem::getAction() {
         return action;
+    }
+
+    bool MenuInfoItem::getPersistResult() const {
+        return persistResult;
     }
 } // MenuSystem

@@ -14,32 +14,31 @@
 #include "../../Utils/Read/LineReader.h"
 #include "../../Utils/Read/ReaderOptions.h"
 
-using namespace std;
 using namespace Read;
 
 namespace MenuSystem {
-    typedef function<bool()> MenuPredictor;
+    typedef std::function<bool()> MenuPredictor;
 
     class Menu {
     private:
-        string header;
-        string content;
-        vector<MenuInfoItem> menuMapping;
+        std::string header;
+        std::string content;
+        std::vector<MenuInfoItem> menuMapping;
         bool running;
-        function<void()> onMenuStop;
+        std::function<void()> onMenuStop;
 
         void RunMenu();
         void RunMenu(MenuPredictor menuPredictor);
         void PrintHeaderContent();
         void PrintOptions();
-
+        void ClearResult();
     public:
-        Menu(string header);
-        Menu(string header, string content);
+        Menu(std::string header);
+        Menu(std::string header, std::string content);
 
-        void SetHeader(string header);
-        void SetContent(string content);
-        void SetOnMenuStop(function<void()> onMenuStop);
+        void SetHeader(std::string header);
+        void SetContent(std::string content);
+        void SetOnMenuStop(std::function<void()> onMenuStop);
         void AddMenu(MenuInfoItem menuInfo);
 
         void Start(MenuPredictor menuPredictor);

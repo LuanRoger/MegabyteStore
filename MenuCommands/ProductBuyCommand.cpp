@@ -13,9 +13,9 @@ namespace MenuCommand {
     void ProductBuyCommand::Execute() {
         auto* buyMenu = new MenuSystem::Menu("==Comprar==");
 
-        stringstream contetCreator;
-        contetCreator << "Carrinho: " + to_string(cart.getAmmount()) + "\n";
-        contetCreator << "Total R$: " + to_string(cart.getTotal()) + "\n";
+        std::stringstream contetCreator;
+        contetCreator << "Carrinho: " + std::to_string(cart.getAmmount()) + "\n";
+        contetCreator << "Total R$: " + std::to_string(cart.getTotal()) + "\n";
         buyMenu->SetContent(contetCreator.str());
 
         buyMenu->AddMenu(MenuInfoItem(1, "Mostrar todos os produtos.", [this]() {ShowAllProducts();}));
@@ -45,7 +45,7 @@ namespace MenuCommand {
             bool result = cart.RemoveProduct(productId);
 
             if(!result) {
-                std::cout << "Não foi possivel remover o item " + to_string(productId) + " do carrinho." << std::endl;
+                std::cout << "Não foi possivel remover o item " + std::to_string(productId) + " do carrinho." << std::endl;
                 return;
             }
 
@@ -64,7 +64,8 @@ namespace MenuCommand {
     void ProductBuyCommand::ShowAllProducts() {
         std::cout << "================" << std::endl;
         for (Models::Product* product : productsStorage->getProducts()) {
-            std::cout << product->ToString()  + " x" + to_string(product->getQuantity()) + " R$ " + to_string(product->getValue()) << std::endl;
+            std::cout << product->ToString()  + " x" + std::to_string(product->getQuantity()) +
+            " R$ " + std::to_string(product->getValue()) << std::endl;
         }
         std::cout << "================" << std::endl;
     }
@@ -72,16 +73,17 @@ namespace MenuCommand {
         std::cout << "================" << std::endl;
         for (Models::Order order : cart.getOrders()) {
             Models::Product* product = productsStorage->getById(order.getProductId());
-            std::cout << product->ToString() + " x" + to_string(order.getQuantity()) + " R$ " + to_string(order.getTotal()) << std::endl;
+            std::cout << product->ToString() + " x" + std::to_string(order.getQuantity()) +
+            " R$ " + std::to_string(order.getTotal()) << std::endl;
         }
         std::cout << "================" << std::endl;
     }
 
     void ProductBuyCommand::Checkout() {
         Menu* checkoutMenu = new Menu("Pagamento");
-        checkoutMenu->SetContent("Total a pagar: R$ " + to_string(cart.getTotal()));
+        checkoutMenu->SetContent("Total a pagar: R$ " + std::to_string(cart.getTotal()));
         checkoutMenu->AddMenu(MenuInfoItem(1, "Pix", [this, checkoutMenu]() {
-            cout << QR_CODE_PIX << endl;
+            std::cout << QR_CODE_PIX << std::endl;
 
             finish = true;
             checkoutMenu->Stop();
