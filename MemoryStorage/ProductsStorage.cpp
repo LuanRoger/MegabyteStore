@@ -9,7 +9,19 @@ namespace MemoryStorage {
         products = loadedProducts;
     }
 
+    int ProductsStorage::getHeigherId() {
+        int heigher = 0;
+        for (Product* product : products) {
+            if(product->getId() > heigher)
+                heigher = product->getId();
+        }
+
+        return heigher;
+    }
+
     void ProductsStorage::AddProduct(Product *product) {
+        product->setId(getHeigherId() + 1);
+
         products.push_back(product);
         SaveProducts();
     }

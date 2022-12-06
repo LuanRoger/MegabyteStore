@@ -22,8 +22,8 @@ namespace MemoryStorage {
     private:
         std::list<Product*> products;
 
+        int getHeigherId();
     public:
-        ProductsStorage() = default;
         ProductsStorage(std::list<Product*> loadedProducts);
 
         void AddProduct(Product* product);

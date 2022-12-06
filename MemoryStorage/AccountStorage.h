@@ -20,7 +20,6 @@ private:
     std::vector<Models::Account*> accounts;
 
 public:
-    AccountStorage() = default;
     AccountStorage(std::vector<Models::Account*> loadedAccount);
 
     bool AddAccount(Models::Account* account);

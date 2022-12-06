@@ -6,7 +6,6 @@
 
 namespace MenuCommand {
     Models::CPU *RegisterProductCommand::RegistryCPU() {
-        int id;
         string socket;
         int cores;
         int threads;
@@ -18,8 +17,6 @@ namespace MenuCommand {
         double value;
 
         LineReader lineReader(ReaderOptions("Entre com uma opcao valida.", false));
-
-        id = lineReader.ReadInt("Digite o ID:");
 
         socket = lineReader.ReadString("Digite o socket:");
 
@@ -43,11 +40,10 @@ namespace MenuCommand {
 
         return new Models::CPU(Socket(socket), cores, threads, basicClock,
                                boostMaximumClock, brand, model,
-                               id, quantity, value);
+                               -1, quantity, value);
     }
 
     Models::GPU *RegisterProductCommand::RegistryGPU() {
-        int id;
         string chipset;
         int cudaCores;
         int VRAMCapacity;
@@ -59,8 +55,6 @@ namespace MenuCommand {
         double value;
 
         LineReader lineReader(ReaderOptions("Entre com uma opcao valida.", false));
-
-        id = lineReader.ReadInt("Digite o ID");
 
         chipset = lineReader.ReadString("Digite o CHIPSET: ");
 
@@ -84,11 +78,10 @@ namespace MenuCommand {
 
         return new Models::GPU(chipset, cudaCores, VRAMCapacity, VRAMType,
                                VRAMSpeed, brand, model,
-                               id, quantity, value);
+                               -1, quantity, value);
     }
 
     Models::Motherboard *RegisterProductCommand::RegistryMotherboard() {
-        int id;
         string chipset;
         string memorySupport;
         string socket;
@@ -98,8 +91,6 @@ namespace MenuCommand {
         double value;
 
         LineReader lineReader(ReaderOptions("Entre com uma opcao valida.", false));
-
-        id = lineReader.ReadInt("Digite o ID");
 
         chipset = lineReader.ReadString("Digite o CHIPSET: ");
 
@@ -118,7 +109,7 @@ namespace MenuCommand {
         cout << "OPERACAO REALIZADA COM SUCESSO" << endl;
 
         return new Models::Motherboard(Socket(socket), chipset, memorySupport, brand, model,
-                                       id, quantity, value);
+                                       -1, quantity, value);
     }
 
     Models::PowerSupply *RegisterProductCommand::RegistryPowerSupply() {
@@ -126,17 +117,12 @@ namespace MenuCommand {
         string inputVoltage;
         bool PFC;
         bool eightyPlusCertification;
-        int id;
         string brand;
         string model;
         int quantity;
         double value;
-        bool option1;
-        bool option2;
 
         LineReader lineReader(ReaderOptions("Entre com uma opcao valida.", false));
-
-        id = lineReader.ReadInt("Digite o ID", true);
 
         outputCapacity = lineReader.ReadString("Digite a Capacidade: ");
 
@@ -157,22 +143,19 @@ namespace MenuCommand {
         cout << "OPERACAO REALIZADA COM SUCESSO" << endl;
 
         return new Models::PowerSupply(outputCapacity, inputVoltage, PFC, eightyPlusCertification, brand,
-                                       model, id, quantity, value);
+                                       model, -1, quantity, value);
     }
 
     Models::RAMMemory *RegisterProductCommand::RegistryRAMMemory() {
         string memoryType;
         int frequency;
         int capacity;
-        int id;
         string brand;
         string model;
         int quantity;
         double value;
 
         LineReader lineReader(ReaderOptions("Entre com uma opcao valida.", false));
-
-        id = lineReader.ReadInt("Digite o ID");
 
         memoryType = lineReader.ReadString("Digite o tipo da memoria: ");
 
@@ -191,22 +174,19 @@ namespace MenuCommand {
         cout << "OPERACAO REALIZADA COM SUCESSO" << endl;
 
         return new Models::RAMMemory(memoryType, frequency, capacity, brand,
-                                     model, id, quantity, value);
+                                     model, -1, quantity, value);
     }
 
     Models::StorageUnit *RegisterProductCommand::RegistryStorageUnit() {
         StorageType type;
         int writeSpeed;
         int readSpeed;
-        int id;
         string brand;
         string model;
         int quantity;
         double value;
 
         LineReader lineReader(ReaderOptions("Entre com uma opcao valida.", false));
-
-        id = lineReader.ReadInt("Digite o ID");
 
         type = static_cast<StorageType>(lineReader.ReadInt("Digite o tipo do armazenamento: "));
 
@@ -225,7 +205,7 @@ namespace MenuCommand {
         cout << "OPERACAO REALIZADA COM SUCESSO" << endl;
 
         return new Models::StorageUnit(type, writeSpeed, readSpeed, brand,
-                                       model, id, quantity, value);
+                                       model, -1, quantity, value);
     }
 
 
@@ -233,31 +213,32 @@ namespace MenuCommand {
         Product* newProduct = nullptr;
 
         Menu* registerProductMenu = new Menu("==Cadastrar produto==");
-        registerProductMenu->AddMenu(MenuInfoItem(1, "CPU", [&newProduct]() {
+        registerProductMenu->AddMenu(MenuInfoItem(1, "CPU", [&newProduct]() mutable {
             newProduct = RegistryCPU();
         }));
-        registerProductMenu->AddMenu(MenuInfoItem(2, "GPU", [&newProduct]() {
+        registerProductMenu->AddMenu(MenuInfoItem(2, "GPU", [&newProduct]() mutable {
             newProduct = RegistryGPU();
         }));
-        registerProductMenu->AddMenu(MenuInfoItem(3, "Placa Mãe", [&newProduct]() {
+        registerProductMenu->AddMenu(MenuInfoItem(3, "Placa Mãe", [&newProduct]() mutable {
             newProduct = RegistryMotherboard();
         }));
-        registerProductMenu->AddMenu(MenuInfoItem(4, "Fonte", [&newProduct]() {
+        registerProductMenu->AddMenu(MenuInfoItem(4, "Fonte", [&newProduct]() mutable {
             newProduct = RegistryPowerSupply();
         }));
-        registerProductMenu->AddMenu(MenuInfoItem(5, "Memoria RAM", [&newProduct]() {
+        registerProductMenu->AddMenu(MenuInfoItem(5, "Memoria RAM", [&newProduct]() mutable {
             newProduct = RegistryRAMMemory();
         }));
-        registerProductMenu->AddMenu(MenuInfoItem(6, "Unidade de armazenamento", [&newProduct]() {
+        registerProductMenu->AddMenu(MenuInfoItem(6, "Unidade de armazenamento", [&newProduct]() mutable {
             newProduct = RegistryStorageUnit();
         }));
-        registerProductMenu->AddMenu(MenuInfoItem(0, "Voltar", [registerProductMenu]() {
+        registerProductMenu->AddMenu(MenuInfoItem(0, "Voltar", [&registerProductMenu]() {
             registerProductMenu->Stop();
         }));
 
         registerProductMenu->Start([&newProduct]() {
             return newProduct == nullptr;
         });
+        delete registerProductMenu;
 
         return newProduct;
     }
