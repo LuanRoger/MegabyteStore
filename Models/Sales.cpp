@@ -10,20 +10,20 @@ namespace Models {
         this->profit = profit;
     }
 
-    void Sales::IncrementItems(int quantity) {
-        soldItems += quantity;
-    }
-
-    void Sales::IncrementProfit(double quantity) {
-        profit += quantity;
-    }
-
     int Sales::getSoldItems() {
         return soldItems;
     }
 
     double Sales::getProfit() {
         return profit;
+    }
+
+    void Sales::setSoldItems(int value) {
+        soldItems = value;
+    }
+
+    void Sales::setProfit(double value) {
+        profit = value;
     }
 
     json Sales::ToJson() {

@@ -7,13 +7,15 @@
 #include "MemoryStorage/AccountStorage.h"
 #include "Utils/InfoLoders/AccountsLoader.h"
 #include "Utils/InfoLoders/ProductsLoader.h"
+#include "Utils/InfoLoders/SalesLoader.h"
 #include "MenuCommands/ProductBuyCommand.h"
-#include "Models/Sales.h"
+#include "Controllers/SalesController.h"
 
 using namespace MenuSystem;
 using namespace MenuCommand;
 using namespace MemoryStorage;
 using namespace Loaders;
+using namespace Controllers;
 
 Account* LoginMenu(AccountStorage* accountStorage) {
     Account* currentSessionAccount = nullptr;
@@ -111,8 +113,6 @@ void ShowManageProductsMenu(ProductsStorage* productsStorage) {
     delete manageProducts;
 }
 Menu* BuildAdmMenu(ProductsStorage* productsStorage, Account currentAccount) {
-    Models::Sales sales;
-
     Menu* menu = new Menu("==MegabyteStore==");
     menu->SetContent("Bem-vindo(a), " + currentAccount.getUsername() + ".");
 
@@ -172,6 +172,8 @@ int main() {
 
     vector<Account*> loadedAccounts = AccountsLoader::Load();
     list<Product*> loadedProducts = ProductsLoader::Load();
+    //TODO: Load sales
+    //SalesController salesController(SalesLoader::Load());
 
     auto* productsStorage = new ProductsStorage(loadedProducts);
     auto* accountStorage = new AccountStorage(loadedAccounts);

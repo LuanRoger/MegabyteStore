@@ -21,11 +21,10 @@ namespace Models {
     public:
         Sales(int soldItems, double profit);
 
-        void IncrementItems(int quantity);
-        void IncrementProfit(double quantity);
-
         int getSoldItems();
         double getProfit();
+        void setSoldItems(int value);
+        void setProfit(double value);
 
         json ToJson() override;
         static Sales* FromJson(json jsonObject);
