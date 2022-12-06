@@ -8,6 +8,7 @@
 #include "Utils/InfoLoders/AccountsLoader.h"
 #include "Utils/InfoLoders/ProductsLoader.h"
 #include "MenuCommands/ProductBuyCommand.h"
+#include "Models/Sales.h"
 
 using namespace MenuSystem;
 using namespace MenuCommand;
@@ -110,6 +111,8 @@ void ShowManageProductsMenu(ProductsStorage* productsStorage) {
     delete manageProducts;
 }
 Menu* BuildAdmMenu(ProductsStorage* productsStorage, Account currentAccount) {
+    Models::Sales sales;
+
     Menu* menu = new Menu("==MegabyteStore==");
     menu->SetContent("Bem-vindo(a), " + currentAccount.getUsername() + ".");
 
