@@ -29,6 +29,8 @@ namespace Models {
         void setValue(double newValue);
 
         virtual std::string ToString() = 0;
+        virtual void View() = 0;
+
         json ToJson() override = 0;
     };
 }

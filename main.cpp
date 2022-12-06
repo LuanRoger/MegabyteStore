@@ -48,6 +48,33 @@ Account* LoginMenu(AccountStorage* accountStorage) {
     return currentSessionAccount;
 }
 
+void ShowProductsMenu(ProductsStorage* productsStorage) {
+    Menu* productsMenu = new Menu("==Produtos==");
+    productsMenu->AddMenu(MenuInfoItem(1, "Ver todos os produtos", [productsStorage]() {
+        cout << "------------------------------" << endl;
+        for(Product* product : productsStorage->getProducts()) {
+            cout << product->ToString() + " x" + to_string(product->getQuantity()) +
+                                 " R$ " + to_string(product->getValue()) + "/u" << endl;
+        }
+        cout << "------------------------------" << endl;
+    }));
+    productsMenu->AddMenu(MenuInfoItem(2, "Ver produto detalhado", [productsStorage]() {
+        LineReader lineReader(ReaderOptions("Digite um valor válido.", false));
+        int productId = lineReader.ReadInt("Digite o ID do produto:");
+        Product* product = productsStorage->getById(productId);
+
+        if(product == nullptr) {
+            cout << "Este produto não existe." << endl;
+            return;
+        }
+
+        product->View();
+    }));
+    productsMenu->AddMenu(MenuInfoItem(0, "Voltar.", [&productsMenu]() {  productsMenu->Stop(); }));
+
+    productsMenu->Start();
+    delete productsMenu;
+}
 void ShowManageProductsMenu(ProductsStorage* productsStorage) {
     Menu* manageProducts = new Menu("==Gerenciar produtos==");
     manageProducts->AddMenu(MenuInfoItem(1, "Adicionar ao estoque", [productsStorage]() {
@@ -77,19 +104,10 @@ void ShowManageProductsMenu(ProductsStorage* productsStorage) {
         }
         cout << "Produto removido com sucesso" << endl;
     }));
-    manageProducts->AddMenu(MenuInfoItem(3, "Salvar no arquivo", [&productsStorage]() {
-        FileWriter fileWriter("Relatorio.txt");
-        fileWriter.Start();
-        for (Product* i: productsStorage->getProducts()) {
-            fileWriter.WriteLine("------------------------------");
-            fileWriter.WriteLine(i->ToString() + " x" + to_string(i->getQuantity()) +
-            " R$ " + to_string(i->getValue()) + "/u");
-        }
-        fileWriter.Flush();
-    }));
     manageProducts->AddMenu(MenuInfoItem(0, "Voltar", [manageProducts]() { manageProducts->Stop(); }));
 
     manageProducts->Start();
+    delete manageProducts;
 }
 Menu* BuildAdmMenu(ProductsStorage* productsStorage, Account currentAccount) {
     Menu* menu = new Menu("==MegabyteStore==");
@@ -105,6 +123,19 @@ Menu* BuildAdmMenu(ProductsStorage* productsStorage, Account currentAccount) {
     menu->AddMenu(MenuInfoItem(2,
                                "Gerenciar produtos.", [productsStorage]()
                                { ShowManageProductsMenu(productsStorage); }));
+
+    menu->AddMenu(MenuInfoItem(3, "Visualizar produtos.", [productsStorage]()
+    { ShowProductsMenu(productsStorage); }));
+    menu->AddMenu(MenuInfoItem(4, "Salvar no arquivo", [productsStorage]() {
+        FileWriter fileWriter("Relatorio.txt");
+        fileWriter.Start();
+        for (Product* i: productsStorage->getProducts()) {
+            fileWriter.WriteLine("------------------------------");
+            fileWriter.WriteLine(i->ToString() + " x" + to_string(i->getQuantity()) +
+                                 " R$ " + to_string(i->getValue()) + "/u");
+        }
+        fileWriter.Flush();
+    }));
 
     menu->AddMenu(MenuInfoItem(0, "Sair.", [menu]()
     {
@@ -123,6 +154,8 @@ Menu* BuildClientMenu(ProductsStorage* productsStorage, Account currentAccount) 
         ProductBuyCommand command(productsStorage);
         command.Execute();
     }));
+    menu->AddMenu(MenuInfoItem(2, "Visualizar produtos.", [productsStorage]()
+    { ShowProductsMenu(productsStorage); }));
     menu->AddMenu(MenuInfoItem(0, "Sair.", [menu]()
     {
         menu->Stop();

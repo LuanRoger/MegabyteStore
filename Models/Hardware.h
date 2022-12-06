@@ -24,7 +24,7 @@ namespace Models {
         void setModel(string newModel);
 
         std::string ToString() override;
-        virtual void View();
+        void View() override = 0;
     };
 }
 
