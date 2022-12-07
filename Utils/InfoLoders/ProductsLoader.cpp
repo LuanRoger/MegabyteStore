@@ -13,8 +13,6 @@ namespace Loaders {
         }
 
         std::string jsonText = fileReader.ReadAll();
-
-        nlohmann::json j;
         json productsFile = json::parse(jsonText);
 
         std::list<Models::Product*> products;

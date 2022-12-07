@@ -5,9 +5,10 @@
 #include "ProductBuyCommand.h"
 
 namespace MenuCommand {
-    ProductBuyCommand::ProductBuyCommand(MemoryStorage::ProductsStorage* productsStorage) {
+    ProductBuyCommand::ProductBuyCommand(MemoryStorage::ProductsStorage* productsStorage, SalesController* salesController) {
         this->cart = Models::Cart();
         this->productsStorage = productsStorage;
+        this->salesController = salesController;
     }
 
     void ProductBuyCommand::Execute() {
@@ -98,6 +99,8 @@ namespace MenuCommand {
     void ProductBuyCommand::UpdateStorage() {
         for (Models::Order order : cart.getOrders()) {
             productsStorage->RemoveByOrder(order);
+            salesController->IncrementItems(cart.getAmmount());
+            salesController->IncrementProfit(cart.getTotal());
         }
     }
 } // MenuCommand

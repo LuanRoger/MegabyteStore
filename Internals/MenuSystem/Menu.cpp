@@ -49,8 +49,6 @@ namespace MenuSystem {
 
             menuCommandInfo->getAction()();
 
-            if(menuCommandInfo->getPersistResult())
-                ClearResult();
             running = menuPredictor();
         }
         while (running);
@@ -77,9 +75,6 @@ namespace MenuSystem {
             if(menuCommandInfo == nullptr) continue;
 
             menuCommandInfo->getAction()();
-
-            if(menuCommandInfo->getPersistResult())
-                ClearResult();
         }
     }
 
