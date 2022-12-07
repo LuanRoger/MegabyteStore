@@ -11,6 +11,7 @@
 #include "Enums/AccountType.h"
 #include "../Utils/Json/JsonSerializable.h"
 #include "../Utils/Json/json.hpp"
+#include "../Utils/Cryptography/bcrypt.h"
 
 using namespace std;
 using namespace JsonUtils;

@@ -6,7 +6,7 @@
 
 namespace Loaders {
     std::vector<Models::Account*> AccountsLoader::CreateDefaultAdminAccount() {
-        auto* defaultAccount = new Account("admin", "admin", "admin", AccountType::ADM);
+        auto* defaultAccount = new Account("admin", "admin", bcrypt::generateHash("admin"), AccountType::ADM);
 
         json accounts = json::array();
         accounts.push_back(defaultAccount->ToJson());
