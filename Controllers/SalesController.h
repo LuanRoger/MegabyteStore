@@ -24,6 +24,9 @@ namespace Controllers {
         void IncrementItems(int quantity);
         void IncrementProfit(double quantity);
 
+        int getSoldItems();
+        double getProfit();
+
         void SaveChanges();
     };
 

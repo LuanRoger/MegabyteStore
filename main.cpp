@@ -60,7 +60,7 @@ void ShowProductsMenu(ProductsStorage* productsStorage) {
                                  " R$ " + to_string(product->getValue()) + "/u" << endl;
         }
         cout << "------------------------------" << endl;
-    }, false));
+    }));
     productsMenu->AddMenu(MenuInfoItem(2, "Ver produto detalhado", [productsStorage]() {
         LineReader lineReader(ReaderOptions("Digite um valor válido.", false));
         int productId = lineReader.ReadInt("Digite o ID do produto:");
@@ -72,7 +72,7 @@ void ShowProductsMenu(ProductsStorage* productsStorage) {
         }
 
         product->View();
-    }, false));
+    }));
     productsMenu->AddMenu(MenuInfoItem(0, "Voltar.", [&productsMenu]() {  productsMenu->Stop(); }));
 
     productsMenu->Start();
@@ -112,7 +112,7 @@ void ShowManageProductsMenu(ProductsStorage* productsStorage) {
     manageProducts->Start();
     delete manageProducts;
 }
-Menu* BuildAdmMenu(ProductsStorage* productsStorage, Account currentAccount) {
+Menu* BuildAdmMenu(ProductsStorage* productsStorage, SalesController* salesController, Account currentAccount) {
     Menu* menu = new Menu("==MegabyteStore==");
     menu->SetContent("Bem-vindo(a), " + currentAccount.getUsername() + ".");
 
@@ -129,9 +129,16 @@ Menu* BuildAdmMenu(ProductsStorage* productsStorage, Account currentAccount) {
 
     menu->AddMenu(MenuInfoItem(3, "Visualizar produtos.", [productsStorage]()
     { ShowProductsMenu(productsStorage); }));
-    menu->AddMenu(MenuInfoItem(4, "Salvar no arquivo", [productsStorage]() {
+    menu->AddMenu(MenuInfoItem(4, "Salvar no arquivo", [productsStorage, salesController]() {
         FileWriter fileWriter("Relatorio.txt");
         fileWriter.Start();
+
+        //Sales
+        fileWriter.WriteLine("Vendas------------------------");
+        fileWriter.WriteLine("Item vendidos: " + to_string(salesController->getSoldItems()));
+        fileWriter.WriteLine("Lucro: " + to_string(salesController->getProfit()));
+        fileWriter.WriteLine("------------------------------");
+
         for (Product* i: productsStorage->getProducts()) {
             fileWriter.WriteLine("------------------------------");
             fileWriter.WriteLine(i->ToString() + " x" + to_string(i->getQuantity()) +
@@ -148,13 +155,13 @@ Menu* BuildAdmMenu(ProductsStorage* productsStorage, Account currentAccount) {
     return menu;
 }
 
-Menu* BuildClientMenu(ProductsStorage* productsStorage, Account currentAccount) {
+Menu* BuildClientMenu(ProductsStorage* productsStorage, SalesController* salesController, Account currentAccount) {
     Menu* menu = new Menu("==MegabyteStore==");
     menu->SetContent("Bem-vindo(a), " + currentAccount.getUsername() + ".");
 
     menu->AddMenu(MenuInfoItem(1, "Iniciar compra.",
-                               [productsStorage]() {
-        ProductBuyCommand command(productsStorage);
+                               [productsStorage, salesController]() {
+        ProductBuyCommand command(productsStorage, salesController);
         command.Execute();
     }));
     menu->AddMenu(MenuInfoItem(2, "Visualizar produtos.", [productsStorage]()
@@ -172,16 +179,15 @@ int main() {
 
     vector<Account*> loadedAccounts = AccountsLoader::Load();
     list<Product*> loadedProducts = ProductsLoader::Load();
-    //TODO: Load sales
-    //SalesController salesController(SalesLoader::Load());
+    SalesController salesController(SalesLoader::Load());
 
     auto* productsStorage = new ProductsStorage(loadedProducts);
     auto* accountStorage = new AccountStorage(loadedAccounts);
     Account* currentAccount = LoginMenu(accountStorage);
 
     Menu* mainMenu = currentAccount->getUsername() == "admin" ?
-            BuildAdmMenu(productsStorage, *currentAccount) :
-            BuildClientMenu(productsStorage, *currentAccount);
+            BuildAdmMenu(productsStorage, &salesController, *currentAccount) :
+            BuildClientMenu(productsStorage, &salesController, *currentAccount);
 
     mainMenu->Start();
 

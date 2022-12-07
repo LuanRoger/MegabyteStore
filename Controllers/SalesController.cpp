@@ -15,10 +15,20 @@ namespace Controllers {
 
     void SalesController::IncrementItems(int quantity) {
         sales->setSoldItems(sales->getSoldItems() + quantity);
+        SaveChanges();
     }
 
     void SalesController::IncrementProfit(double quantity) {
         sales->setProfit(sales->getProfit() + quantity);
+        SaveChanges();
+    }
+
+    int SalesController::getSoldItems() {
+        return sales->getSoldItems();
+    }
+
+    double SalesController::getProfit() {
+        return sales->getProfit();
     }
 
     void SalesController::SaveChanges() {

@@ -14,10 +14,12 @@
 #include "../Utils/Read/LineReader.h"
 #include "../Utils/Read/ReaderOptions.h"
 #include "../MemoryStorage/ProductsStorage.h"
+#include "../Controllers/SalesController.h"
 #include "../Consts.h"
 
 using namespace Read;
 using namespace MenuSystem;
+using namespace Controllers;
 
 namespace MenuCommand {
 
@@ -25,6 +27,7 @@ namespace MenuCommand {
     private:
         Models::Cart cart;
         MemoryStorage::ProductsStorage* productsStorage;
+        SalesController* salesController;
         bool finish = false;
 
         void ShowAllProducts();
@@ -32,7 +35,7 @@ namespace MenuCommand {
         void Checkout();
         void UpdateStorage();
     public:
-        ProductBuyCommand(MemoryStorage::ProductsStorage* productsStorage);
+        ProductBuyCommand(MemoryStorage::ProductsStorage* productsStorage, SalesController* salesController);
         void Execute();
 
     };
