@@ -18,6 +18,11 @@ namespace Models {
         this->password = password;
         this->accountType = accountType;
     }
+
+    string Account::getName() {
+        return name;
+    }
+
     string Account::getUsername () {
         return username;
     }

@@ -112,7 +112,8 @@ void ShowManageProductsMenu(ProductsStorage* productsStorage) {
     manageProducts->Start();
     delete manageProducts;
 }
-Menu* BuildAdmMenu(ProductsStorage* productsStorage, SalesController* salesController, Account currentAccount) {
+Menu* BuildAdmMenu(ProductsStorage* productsStorage, SalesController* salesController, Account currentAccount,
+                   AccountStorage* accountStorage) {
     Menu* menu = new Menu("==MegabyteStore==");
     menu->SetContent("Bem-vindo(a), " + currentAccount.getUsername() + ".");
 
@@ -129,12 +130,13 @@ Menu* BuildAdmMenu(ProductsStorage* productsStorage, SalesController* salesContr
 
     menu->AddMenu(MenuInfoItem(3, "Visualizar produtos.", [productsStorage]()
     { ShowProductsMenu(productsStorage); }));
-    menu->AddMenu(MenuInfoItem(4, "Salvar no arquivo", [productsStorage, salesController]() {
-        FileWriter fileWriter("Relatorio.txt");
+    menu->AddMenu(MenuInfoItem(4, "Gerar relatorio de vendas", [productsStorage, salesController]() {
+        FileWriter fileWriter("RelatorioVendas.txt");
         fileWriter.Start();
 
         //Sales
         fileWriter.WriteLine("Vendas------------------------");
+
         fileWriter.WriteLine("Item vendidos: " + to_string(salesController->getSoldItems()));
         fileWriter.WriteLine("Lucro: " + to_string(salesController->getProfit()));
         fileWriter.WriteLine("------------------------------");
@@ -144,6 +146,22 @@ Menu* BuildAdmMenu(ProductsStorage* productsStorage, SalesController* salesContr
             fileWriter.WriteLine(i->ToString() + " x" + to_string(i->getQuantity()) +
                                  " R$ " + to_string(i->getValue()) + "/u");
         }
+
+        fileWriter.Flush();
+    }));
+    menu->AddMenu(MenuInfoItem(5, "Gerar relatorio de usuarios", [accountStorage]() {
+        FileWriter fileWriter("RelatorioUsuarios.txt");
+        fileWriter.Start();
+
+        //Sales
+        fileWriter.WriteLine("Usuarios cadastrados------------------------");
+
+        for (Account* i: accountStorage->getAccounts()) {
+            fileWriter.WriteLine("------------------------------");
+            fileWriter.WriteLine("Nome: " + i->getName());
+            fileWriter.WriteLine("Usuario: " + i->getUsername());
+        }
+
         fileWriter.Flush();
     }));
 
@@ -186,7 +204,7 @@ int main() {
     Account* currentAccount = LoginMenu(accountStorage);
 
     Menu* mainMenu = currentAccount->getUsername() == "admin" ?
-            BuildAdmMenu(productsStorage, &salesController, *currentAccount) :
+            BuildAdmMenu(productsStorage, &salesController, *currentAccount, accountStorage) :
             BuildClientMenu(productsStorage, &salesController, *currentAccount);
 
     mainMenu->Start();
