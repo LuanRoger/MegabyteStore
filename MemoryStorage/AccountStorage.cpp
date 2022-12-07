@@ -22,7 +22,8 @@ bool AccountStorage::AddAccount(Models::Account* account) {
 
 Models::Account* AccountStorage::ValideUser(string username, string password) {
     for (int i = 0; i<accounts.size(); i++) {
-        if(accounts[i]->getUsername() == username && accounts[i]->getPassword() == password) {
+        if(accounts[i]->getUsername() == username &&
+        bcrypt::validatePassword(password, accounts[i]->getPassword())) {
             return accounts[i];
         }
     }

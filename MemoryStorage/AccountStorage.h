@@ -12,6 +12,7 @@
 #include "../Services/IOService/FileWriter.h"
 #include "../Consts.h"
 #include "../Utils/Json/json.hpp"
+#include "../Utils/Cryptography/bcrypt.h"
 
 using namespace IOService;
 

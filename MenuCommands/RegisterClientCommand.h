@@ -9,6 +9,7 @@
 #include <iostream>
 #include "../Utils/Read/LineReader.h"
 #include "../Utils/Read/ReaderOptions.h"
+#include "../Utils/Cryptography/bcrypt.h"
 #include "../MemoryStorage/AccountStorage.h"
 
 using namespace Read;
