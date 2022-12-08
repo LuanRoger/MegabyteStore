@@ -27,6 +27,7 @@ namespace Models {
     public:
         Account ();
         Account (string name, string username, string password, AccountType accountType);
+        string getName();
         string getUsername ();
         string getPassword ();
 
