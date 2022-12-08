@@ -15,6 +15,8 @@ namespace Models {
     public:
         Order(int productId, int quantity, double productBaseValue);
 
+        void IncreaseQuantity(int quantityToIncrease);
+
         int getProductId();
         int getQuantity();
         double getTotal();

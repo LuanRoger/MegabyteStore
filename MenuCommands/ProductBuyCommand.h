@@ -30,6 +30,7 @@ namespace MenuCommand {
         SalesController* salesController;
         bool finish = false;
 
+        void AddProductToCart();
         void ShowAllProducts();
         void ShowCartItems();
         void Checkout();

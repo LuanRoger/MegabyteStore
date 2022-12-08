@@ -11,6 +11,10 @@ namespace Models {
         this->productBaseValue = productBaseValue;
     }
 
+    void Order::IncreaseQuantity(int quantityToIncrease) {
+        quantity += quantityToIncrease;
+    }
+
     int Order::getProductId() {
         return productId;
     }

@@ -14,45 +14,31 @@ namespace MenuCommand {
     void ProductBuyCommand::Execute() {
         auto* buyMenu = new MenuSystem::Menu("==Comprar==");
 
-        std::stringstream contetCreator;
-        contetCreator << "Carrinho: " + std::to_string(cart.getAmmount()) + "\n";
-        contetCreator << "Total R$: " + std::to_string(cart.getTotal()) + "\n";
-        buyMenu->SetContent(contetCreator.str());
-
         buyMenu->AddMenu(MenuInfoItem(1, "Mostrar todos os produtos.", [this]() {ShowAllProducts();}));
         buyMenu->AddMenu(MenuInfoItem(2, "Mostrar carrinho.", [this]() {ShowCartItems();}));
-        buyMenu->AddMenu(MenuInfoItem(3, "Adicionar ao carrinho.", [this]() {
-            LineReader lineReader(ReaderOptions("Entre com um valor valido", false));
-            int productId = lineReader.ReadInt("Digite o ID do produto que deseja adicionar:");
-
-            Models::Product* productResult = productsStorage->getById(productId);
-            if(productResult == nullptr) {
-                std::cout << "Este produto não existe." << std::endl;
-                return;
-            }
-
-            int quantity = lineReader.ReadInt("Digite a quantity:");
-            if(quantity > productResult->getQuantity()) {
-                std::cout << "Não há produtos suficientes em estoque." << std::endl;
-                return;
-            }
-
-            cart.AddOrder(Models::Order(productId, quantity, productResult->getValue()));
-        }));
+        buyMenu->AddMenu(MenuInfoItem(3, "Adicionar ao carrinho.", [this]() { AddProductToCart(); }));
         buyMenu->AddMenu(MenuInfoItem(4, "Remover do carrinho", [this]() {
-            LineReader lineReader(ReaderOptions("Entre com um valor valido", false));
+            LineReader lineReader(ReaderOptions("Entre com um valor válido.", false));
             int productId = lineReader.ReadInt("Digite o ID do produto que deseja remover do carrinho:");
 
             bool result = cart.RemoveProduct(productId);
 
             if(!result) {
-                std::cout << "Não foi possivel remover o item " + std::to_string(productId) + " do carrinho." << std::endl;
+                std::cout << "Não foi possivel remover este item do carrinho."<< std::endl;
                 return;
             }
 
             std::cout << "Produto removido com sucesso." << std::endl;
         }));
-        buyMenu->AddMenu(MenuInfoItem(5, "Fazer checkout", [this]() { Checkout(); }));
+        buyMenu->AddMenu(MenuInfoItem(5, "Limpar carrinho", [this]() {
+            LineReader lineReader(ReaderOptions("Entre com um valor válido.", false));
+            bool clarCartResult = lineReader.ReadBool("Deseja limpar o carrinho (s/n)?");
+
+            if(!clarCartResult) return;
+            cart.Clear();
+            std::cout << "Carrinho limpo." << std::endl;
+        }));
+        buyMenu->AddMenu(MenuInfoItem(6, "Fazer checkout", [this]() { Checkout(); }));
         buyMenu->AddMenu(MenuInfoItem(0, "Cancelar", [this]() {
             finish = true;
         }));
@@ -62,15 +48,38 @@ namespace MenuCommand {
         });
     }
 
+    void ProductBuyCommand::AddProductToCart() {
+        LineReader lineReader(ReaderOptions("Entre com um valor valido", false));
+        int productId = lineReader.ReadInt("Digite o ID do produto que deseja adicionar:");
+
+        Models::Product* productResult = productsStorage->getById(productId);
+        if(productResult == nullptr) {
+            std::cout << "Este produto não existe." << std::endl;
+            return;
+        }
+
+        int quantity = lineReader.ReadInt("Digite a quantity:");
+        int productQuantityInCard = cart.getProductQuantityInCard(productId);
+        if(quantity + productQuantityInCard > productResult->getQuantity()) {
+            std::cout << "Não há produtos suficientes em estoque." << std::endl;
+            return;
+        }
+
+        cart.AddOrder(Models::Order(productId, quantity, productResult->getValue()));
+    }
+
     void ProductBuyCommand::ShowAllProducts() {
         std::cout << "================" << std::endl;
         for (Models::Product* product : productsStorage->getProducts()) {
             std::cout << product->ToString()  + " x" + std::to_string(product->getQuantity()) +
-            " R$ " + std::to_string(product->getValue()) << std::endl;
+            " R$ " + std::to_string(product->getValue()) + "/u" << std::endl;
         }
         std::cout << "================" << std::endl;
     }
     void ProductBuyCommand::ShowCartItems() {
+        std::cout << "Carrinho:" + std::to_string(cart.getAmmount()) << std::endl;
+        std::cout << "Total R$:" + std::to_string(cart.getTotal()) << std::endl;
+
         std::cout << "================" << std::endl;
         for (Models::Order order : cart.getOrders()) {
             Models::Product* product = productsStorage->getById(order.getProductId());
@@ -81,10 +90,17 @@ namespace MenuCommand {
     }
 
     void ProductBuyCommand::Checkout() {
+        if(cart.getTotal() <= 0 || cart.getAmmount() <= 0) {
+            std::cout << "Não há produtos no carrinho." << std::endl;
+            return;
+        }
+
         Menu* checkoutMenu = new Menu("Pagamento");
         checkoutMenu->SetContent("Total a pagar: R$ " + std::to_string(cart.getTotal()));
         checkoutMenu->AddMenu(MenuInfoItem(1, "Pix", [this, checkoutMenu]() {
             std::cout << QR_CODE_PIX << std::endl;
+
+            std::system("pause");
 
             finish = true;
             checkoutMenu->Stop();

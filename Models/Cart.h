@@ -17,11 +17,13 @@ namespace Models {
     public:
         void AddOrder(Models::Order order);
         bool RemoveProduct(int id);
+        void Clear();
 
         double getTotal();
         int getAmmount();
 
-        const std::vector<Models::Order> &getOrders() const;
+        const std::vector<Models::Order>& getOrders() const;
+        int getProductQuantityInCard(int id) const;
     };
 
 } // Models
