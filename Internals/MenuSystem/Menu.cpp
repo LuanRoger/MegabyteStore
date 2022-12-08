@@ -94,9 +94,11 @@ namespace MenuSystem {
     }
 
     void Menu::Start(MenuPredictor menuPredictor) {
+        running = true;
         RunMenu(menuPredictor);
     }
     void Menu::Start() {
+        running = true;
         RunMenu();
     }
 

@@ -16,25 +16,25 @@ namespace Loaders {
         json productsFile = json::parse(jsonText);
 
         std::list<Models::Product*> products;
-        for (const auto& jsonProducts : productsFile) {
-            switch ((int)jsonProducts["type"]) {
+        for (const auto& jsonProduct : productsFile) {
+            switch ((int)jsonProduct["type"]) {
                 case ProductType::CPUTYPE:
-                    products.push_back(CPU::FromJson(jsonProducts));
+                    products.push_back(CPU::FromJson(jsonProduct));
                     break;
                 case ProductType::GPUTYPE:
-                    products.push_back(GPU::FromJson(jsonProducts));
+                    products.push_back(GPU::FromJson(jsonProduct));
                     break;
                 case ProductType::MOTHERBOARDTYPE:
-                    products.push_back(Motherboard::FromJson(jsonProducts));
+                    products.push_back(Motherboard::FromJson(jsonProduct));
                     break;
                 case ProductType::POWERSUPPLYTYPE:
-                    products.push_back(PowerSupply::FromJson(jsonProducts));
+                    products.push_back(PowerSupply::FromJson(jsonProduct));
                     break;
                 case ProductType::RAMMEMORYTYPE:
-                    products.push_back(RAMMemory::FromJson(jsonProducts));
+                    products.push_back(RAMMemory::FromJson(jsonProduct));
                     break;
                 case ProductType::STORAGEUNITTYPE:
-                    products.push_back(StorageUnit::FromJson(jsonProducts));
+                    products.push_back(StorageUnit::FromJson(jsonProduct));
                     break;
             }
         }

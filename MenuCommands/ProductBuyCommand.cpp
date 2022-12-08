@@ -39,8 +39,8 @@ namespace MenuCommand {
             std::cout << "Carrinho limpo." << std::endl;
         }));
         buyMenu->AddMenu(MenuInfoItem(6, "Fazer checkout", [this]() { Checkout(); }));
-        buyMenu->AddMenu(MenuInfoItem(0, "Cancelar", [this]() {
-            finish = true;
+        buyMenu->AddMenu(MenuInfoItem(0, "Cancelar", [buyMenu]() {
+            buyMenu->Stop();
         }));
 
         buyMenu->Start([this]() {

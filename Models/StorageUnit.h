@@ -13,7 +13,7 @@ using namespace std;
 namespace Models {
     class StorageUnit : public Hardware {
     private:
-        StorageType type;
+        StorageType storageType;
         int writeSpeed;
         int readSpeed;
 

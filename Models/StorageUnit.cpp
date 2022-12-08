@@ -5,19 +5,19 @@
 #include "StorageUnit.h"
 
 namespace Models {
-    StorageUnit::StorageUnit(StorageType type, int writeSpeed, int readSpeed, string brand, string model, int id, int quantity, double value) : Hardware(brand, model, id, quantity, value, STORAGEUNITTYPE){
-        setType(type);
+    StorageUnit::StorageUnit(StorageType storageType, int writeSpeed, int readSpeed, string brand, string model, int id, int quantity, double value) : Hardware(brand, model, id, quantity, value, STORAGEUNITTYPE){
+        setType(storageType);
         setWriteSpeed(writeSpeed);
         setReadSpeed(readSpeed);
 
     }
 
     StorageType StorageUnit::getType() {
-        return type;
+        return storageType;
     }
 
     void StorageUnit::setType(StorageType newType) {
-        type = newType;
+        storageType = newType;
     }
 
     int StorageUnit::getWriteSpeed() {
@@ -48,7 +48,7 @@ namespace Models {
     }
 
     string StorageUnit::getString() {
-        switch (type) {
+        switch (storageType) {
             case HDD:
                 return "HDD";
             case SSD:
@@ -68,7 +68,8 @@ namespace Models {
                 {"value", value},
                 {"brand", brand},
                 {"model", model},
-                {"type", type},
+                {"storageType", storageType},
+                {"type", productType},
                 {"write_speed", writeSpeed},
                 {"read_speed", readSpeed},
         };
@@ -76,7 +77,7 @@ namespace Models {
     }
 
     StorageUnit *StorageUnit::FromJson(json jsonObject) {
-        StorageUnit* storageUnit = new StorageUnit(jsonObject["type"],
+        auto* storageUnit = new StorageUnit(jsonObject["storageType"],
                            jsonObject["write_speed"],
                            jsonObject["read_speed"],
                            jsonObject["brand"],

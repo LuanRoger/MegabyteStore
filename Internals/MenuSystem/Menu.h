@@ -24,7 +24,7 @@ namespace MenuSystem {
         std::string header;
         std::string content;
         std::vector<MenuInfoItem> menuMapping;
-        bool running;
+        bool running = false;
         std::function<void()> onMenuStop;
 
         void RunMenu();
