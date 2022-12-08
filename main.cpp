@@ -43,6 +43,9 @@ Account* LoginMenu(AccountStorage* accountStorage) {
 
         currentSessionAccount = tempHolder;
     }));
+    loginMenu->AddMenu(MenuInfoItem(0, "Sair", [loginMenu]() {
+        loginMenu->Stop();
+    }));
 
     loginMenu->Start([&currentSessionAccount]() -> bool {
         return currentSessionAccount == nullptr;
@@ -184,6 +187,7 @@ int main() {
     auto* productsStorage = new ProductsStorage(loadedProducts);
     auto* accountStorage = new AccountStorage(loadedAccounts);
     Account* currentAccount = LoginMenu(accountStorage);
+    if(currentAccount == nullptr) return 0;
 
     Menu* mainMenu = currentAccount->getUsername() == "admin" ?
             BuildAdmMenu(productsStorage, &salesController, *currentAccount) :

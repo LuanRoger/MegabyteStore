@@ -48,6 +48,7 @@ namespace MenuSystem {
             if(menuCommandInfo == nullptr) continue;
 
             menuCommandInfo->getAction()();
+            if(!running) break;
 
             running = menuPredictor();
         }
