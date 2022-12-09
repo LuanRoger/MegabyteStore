@@ -134,7 +134,7 @@ Menu* BuildAdmMenu(ProductsStorage* productsStorage, SalesController* salesContr
     menu->AddMenu(MenuInfoItem(3, "Visualizar produtos.", [productsStorage]()
     { ShowProductsMenu(productsStorage); }));
     menu->AddMenu(MenuInfoItem(4, "Gerar relatorio de vendas", [productsStorage, salesController]() {
-        FileWriter fileWriter("RelatorioVendas.txt");
+        FileWriter fileWriter(SALES_REPORT);
         fileWriter.Start();
 
         //Sales
@@ -153,7 +153,7 @@ Menu* BuildAdmMenu(ProductsStorage* productsStorage, SalesController* salesContr
         fileWriter.Flush();
     }));
     menu->AddMenu(MenuInfoItem(5, "Gerar relatorio de usuarios", [accountStorage]() {
-        FileWriter fileWriter("RelatorioUsuarios.txt");
+        FileWriter fileWriter(USERS_REPORT);
         fileWriter.Start();
 
         //Sales

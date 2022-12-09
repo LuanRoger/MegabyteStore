@@ -10,6 +10,8 @@
 #define PRODUCTS_JSON_FILE "products.json"
 #define ACCOUNTS_JSON_FILE "accounts.json"
 #define SALES_JSON_FILE "sales.json"
+#define SALES_REPORT "RelatorioVendas.txt"
+#define USERS_REPORT "RelatorioUsuarios.txt"
 
 const std::string QR_CODE_PIX = " ▄▄▄▄▄▄▄  ▄  ▄▄▄▄▄▄  ▄▄▄  ▄▄▄▄ ▄ ▄▄▄▄▄▄  ▄ ▄▄▄▄▄▄  \n"
                           " █ ▄▄▄ █ ▄▀▀█▀ ▀▀█  ▀▄█▀  ▀█▄ ▄█▀ █▄▄ ▀▀██ █ ▄▄ █  \n"
